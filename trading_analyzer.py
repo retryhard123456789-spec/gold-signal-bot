@@ -674,7 +674,7 @@ def fmt_signal(s):
 💰 Price: <b>{s['price']}</b>
 
 {bar}
-{"✅" if pct >= 60 else "⚠️"} Success Rate: {pct}% ({s['score']} trades)
+{"✅" if pct >= 60 else "⚠️"} Confidence Score: {pct}% ({s['score']}/14)
 
 ━━━━━━━━━━━━━━━━━
 {arrow}
