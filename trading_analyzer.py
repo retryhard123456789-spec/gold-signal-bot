@@ -351,7 +351,7 @@ def analyze_pair(symbol, cfg, sigs):
 
     # Skip only if a PENDING signal already exists for this pair (wait until it triggers first)
     if any(s["symbol"]==symbol and s["status"]=="pending" for s in sigs):
-        log.info(f"  {symbol}: pending signal exists — skip"); return None
+        log.info(f"  {symbol}: pending signal exists — skip"); return None, None
 
     # Fetch data
     df_m15 = fetch_yf(ticker,"15m","30d")
@@ -359,10 +359,10 @@ def analyze_pair(symbol, cfg, sigs):
     df_1d  = fetch_yf(ticker,"1d","2y")
     df_1wk = fetch_yf(ticker,"1wk","5y")
     if any(d is None or len(d)<50 for d in [df_m15,df_1h,df_1d,df_1wk]):
-        log.warning(f"  {symbol}: insufficient data"); return None
+        log.warning(f"  {symbol}: insufficient data"); return None, None
 
     df_4h = resample_4h(df_1h)
-    if len(df_4h)<50: log.warning(f"  {symbol}: insufficient 4h data"); return None
+    if len(df_4h)<50: log.warning(f"  {symbol}: insufficient 4h data"); return None, None
 
     def cl(df): return df.iloc[:-1] if len(df)>2 else df
     c15=cl(df_m15); c1=cl(df_1h); c4=cl(df_4h); cd=cl(df_1d); cw=cl(df_1wk)
@@ -385,10 +385,12 @@ def analyze_pair(symbol, cfg, sigs):
         _,_,macd_h=calc_macd(c1.close)
         _,_,_,bb_squeeze=calc_bb(c15.close)
     except Exception as e:
-        log.error(f"  {symbol}: indicator error {e}"); return None
+        log.error(f"  {symbol}: indicator error {e}"); return None, None
+
+    def skip(reason): return None, reason
 
     if adx_val<adx_min:
-        log.info(f"  {symbol}: ADX {round(adx_val,1)}<{adx_min} ({session}) — skip"); return None
+        return skip(f"ADX {round(adx_val,1)} too weak (min {adx_min}) — no trend")
 
     # Determine direction
     bull=0; bear=0
@@ -404,38 +406,40 @@ def analyze_pair(symbol, cfg, sigs):
     else: bear+=1
     if st_h1==1: bull+=1
     else: bear+=1
-    if bull==bear: log.info(f"  {symbol}: mixed signals — skip"); return None
+    if bull==bear: return skip("Mixed signals — no clear direction")
     direction="BUY" if bull>bear else "SELL"
 
     # RSI hard block for extremes
-    if direction=="SELL" and rsi_m15<25: log.info(f"  {symbol}: RSI {round(rsi_m15,1)} deeply oversold — skip"); return None
-    if direction=="BUY"  and rsi_m15>75: log.info(f"  {symbol}: RSI {round(rsi_m15,1)} deeply overbought — skip"); return None
+    if direction=="SELL" and rsi_m15<25:
+        return skip(f"RSI {round(rsi_m15,1)} deeply oversold — skip SELL")
+    if direction=="BUY"  and rsi_m15>75:
+        return skip(f"RSI {round(rsi_m15,1)} deeply overbought — skip BUY")
 
     # Cooldowns
-    if sl_cooldown(symbol,direction):  log.info(f"  {symbol}: SL cooldown — skip"); return None
-    if win_cooldown(symbol,direction): log.info(f"  {symbol}: win cooldown — skip"); return None
+    if sl_cooldown(symbol,direction):  return skip(f"SL cooldown active — waiting 2h after last loss")
+    if win_cooldown(symbol,direction): return skip(f"Win cooldown active — waiting 15min after last win")
 
     # H1 counter-trend
     h4_bull=e20h4>e50h4; h4_bear=e20h4<e50h4
     htf_bull=sum([w1_b=="BULLISH",d1_b=="BULLISH",h4_bull])
     htf_bear=sum([w1_b=="BEARISH",d1_b=="BEARISH",h4_bear])
     if direction=="BUY" and e20h1<e50h1:
-        if htf_bull<2: log.info(f"  {symbol}: H1 CT, weak HTF — skip"); return None
+        if htf_bull<2: return skip(f"H1 counter-trend for {direction} — HTF too weak")
     if direction=="SELL" and e20h1>e50h1:
-        if htf_bear<2: log.info(f"  {symbol}: H1 CT, weak HTF — skip"); return None
+        if htf_bear<2: return skip(f"H1 counter-trend for {direction} — HTF too weak")
 
     # Find entry zone: OB first, fall back to FVG
     ob_lo,ob_hi,zone_type=find_ob(c15,direction)
     if not ob_lo:
         ob_lo,ob_hi,zone_type=find_fvg(c15,direction)
     if not ob_lo:
-        log.info(f"  {symbol}: no OB or FVG — skip"); return None
+        return skip(f"No Order Block or FVG found for {direction}")
 
     atr=calc_atr(c15)
     price=round(df_m15.close.iloc[-1],digits)
     ob_edge=ob_hi if direction=="BUY" else ob_lo
     if abs(price-ob_edge)>8.0*atr:
-        log.info(f"  {symbol}: zone too far — skip"); return None
+        return skip(f"Price too far from zone ({direction}) — waiting for retrace")
 
     # Score the setup
     sc=score_setup(w1_b,d1_b,adx_val,pdi,ndi,st_h4,st_h1,st_m15,
@@ -443,7 +447,9 @@ def analyze_pair(symbol, cfg, sigs):
                    rsi_m15,macd_h,bb_squeeze,direction)
     min_score=7
     if sc<min_score:
-        log.info(f"  {symbol}: score {sc}<{min_score} — skip"); return None
+        e_lbl = f"EMA {round(e20m15,1)}/{round(e50m15,1)}"
+        st_lbl = f"ST {st_m15}"
+        return skip(f"M15 not confirmed for {direction} ({e_lbl} {st_lbl}) — score {sc}/{min_score}")
 
     # Entry & SL
     sr=get_sr_levels([c4,c1,cd,cw],digits)
@@ -457,14 +463,14 @@ def analyze_pair(symbol, cfg, sigs):
 
     sl_dist=abs(entry-sl)
     if sl_dist<min_sl or sl_dist<pip:
-        log.info(f"  {symbol}: SL too tight {round(sl_dist,digits)} — skip"); return None
+        return skip(f"SL too tight ({round(sl_dist,digits)}) — widening needed")
 
     tps=calc_tps(entry,direction,sl,sr,digits)
-    if not tps: log.info(f"  {symbol}: no TPs — skip"); return None
+    if not tps: return skip(f"No valid TP levels found for {direction}")
     tp1=tps[0]; tp2=tps[1] if len(tps)>=2 else None; tp3=tps[2] if len(tps)>=3 else None
 
     rr=round(abs(tp1-entry)/sl_dist,1)
-    if rr<cfg.get("min_rr",1.5): log.info(f"  {symbol}: R:R {rr} too low — skip"); return None
+    if rr<cfg.get("min_rr",1.5): return skip(f"R:R 1:{rr} too low (min 1:{cfg.get('min_rr',1.5)})")
 
     # Lot sizing
     risk_d  =cfg.get("risk_dollars",16)
@@ -489,7 +495,7 @@ def analyze_pair(symbol, cfg, sigs):
         "signal_ts":datetime.now(timezone.utc).isoformat(),
         **pivots, **weekly,
     }
-    return sig
+    return sig, None
 
 # ── Main ──────────────────────────────────────────────────────
 def session_header(now_utc):
@@ -523,20 +529,47 @@ def analyze():
     for symbol in PAIRS:
         log.info(f"Scanning {symbol}…")
         try:
-            sig=analyze_pair(symbol,cfg,sigs)
+            sig, reason = analyze_pair(symbol, cfg, sigs)
             if sig:
                 sigs.append(sig)
                 new_sigs.append(sig)
                 send_telegram(fmt_signal(sig))
                 log.info(f"  ✅ Signal: {sig['direction']} @ {sig['entry']}  R:R 1:{sig['rr']}  score {sig['score']}")
+            elif reason:
+                send_telegram(fmt_no_signal(symbol, reason))
+                log.info(f"  ⏭ {symbol}: {reason}")
         except Exception as e:
             log.error(f"  {symbol}: unhandled error {e}")
-        time.sleep(1)  # brief pause between pairs
+        time.sleep(1)
 
     save_signals(sigs)
     log.info(f"Scan complete — {len(new_sigs)} new signal(s)")
 
 # ── Formatting ────────────────────────────────────────────────
+def fmt_no_signal(symbol, reason):
+    r = reason.lower()
+    if "adx" in r and "weak" in r:
+        emoji = "📉"
+    elif "mixed" in r or "direction" in r:
+        emoji = "↔️"
+    elif "m15 not confirmed" in r or "score" in r:
+        emoji = "📭"
+    elif "order block" in r or "fvg" in r or "zone" in r:
+        emoji = "🔍"
+    elif "rsi" in r:
+        emoji = "⚠️"
+    elif "cooldown" in r:
+        emoji = "⏳"
+    elif "r:r" in r:
+        emoji = "📐"
+    elif "sl too tight" in r:
+        emoji = "⚠️"
+    elif "counter-trend" in r:
+        emoji = "↩️"
+    else:
+        emoji = "📭"
+    return f"{emoji} {symbol} — No Signal\n\n{reason}\n\n⏳ Scanning again in 30 minutes."
+
 def success_bar(score, total=14):
     pct = round((score / total) * 100)
     filled = round(score / total * 10)
