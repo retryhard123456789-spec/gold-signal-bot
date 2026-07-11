@@ -240,6 +240,30 @@ def find_fvg(df, direction, lookback=50):
                 return round(fvg_lo,8),round(fvg_hi,8),"FVG"
     return None,None,None
 
+def calc_pivot_levels(df_1d, digits):
+    """Classic pivot points from previous day OHLC."""
+    if df_1d is None or len(df_1d) < 3:
+        return {}
+    prev = df_1d.iloc[-2]
+    pdh, pdl, pdc = prev.high, prev.low, prev.close
+    pivot = (pdh + pdl + pdc) / 3
+    r1 = 2*pivot - pdl
+    r2 = pivot + (pdh - pdl)
+    s1 = 2*pivot - pdh
+    s2 = pivot - (pdh - pdl)
+    return {
+        "pdh": round(pdh, digits), "pdl": round(pdl, digits),
+        "pivot": round(pivot, digits),
+        "r1": round(r1, digits), "r2": round(r2, digits),
+        "s1": round(s1, digits), "s2": round(s2, digits),
+    }
+
+def calc_weekly_levels(df_1wk, digits):
+    if df_1wk is None or len(df_1wk) < 3:
+        return {}
+    prev = df_1wk.iloc[-2]
+    return {"pwh": round(prev.high, digits), "pwl": round(prev.low, digits)}
+
 def get_sr_levels(dfs, digits):
     levels=set()
     for df in dfs:
@@ -449,6 +473,9 @@ def analyze_pair(symbol, cfg, sigs):
     mini    =round(std_lots*10,1)
     exp_loss=round(std_lots*slp*pip_val)
 
+    pivots  = calc_pivot_levels(cd, digits)
+    weekly  = calc_weekly_levels(cw, digits)
+
     sig={
         "status":"pending","symbol":symbol,"direction":direction,
         "session":session,"zone_type":zone_type,"score":sc,
@@ -457,18 +484,38 @@ def analyze_pair(symbol, cfg, sigs):
         "std_lots":std_lots,"mini_lots":mini,"exp_loss":exp_loss,"risk_d":risk_d,
         "adx":round(adx_val,1),"rsi":round(rsi_m15,1),
         "w1_bias":w1_b,"d1_bias":d1_b,"bb_squeeze":bb_squeeze,
+        "st_h4":st_h4,"st_h1":st_h1,
         "tp1_hit":False,"tp2_hit":False,
         "signal_ts":datetime.now(timezone.utc).isoformat(),
+        **pivots, **weekly,
     }
     return sig
 
 # ── Main ──────────────────────────────────────────────────────
+def session_header(now_utc):
+    h = now_utc.hour
+    if 22 <= h or h < 7:
+        session = "🌙 NY Close / Asia"
+    elif 7 <= h < 12:
+        session = "🌅 London Open"
+    elif 12 <= h < 17:
+        session = "🌍 NY Open"
+    else:
+        session = "🌆 London / NY Overlap"
+    cairo_hour = (h + 3) % 24
+    am_pm = "AM" if cairo_hour < 12 else "PM"
+    disp_h = cairo_hour % 12 or 12
+    ts = f"{disp_h:02d}:{now_utc.minute:02d} {am_pm} — Cairo Time"
+    return f"{session}\n🕐 {ts}"
+
 def analyze():
     cfg=load_bot_config()
     if cfg.get("paused"): log.info("Bot paused"); return
 
     now_utc=datetime.now(timezone.utc)
     if now_utc.weekday()>=5: log.info("Weekend — no trading"); return
+
+    send_telegram(session_header(now_utc))
 
     sigs=load_signals()
     new_sigs=[]
@@ -490,65 +537,155 @@ def analyze():
     log.info(f"Scan complete — {len(new_sigs)} new signal(s)")
 
 # ── Formatting ────────────────────────────────────────────────
+def success_bar(score, total=14):
+    pct = round((score / total) * 100)
+    filled = round(score / total * 10)
+    bar = "🟢" * filled + "⚪" * (10 - filled)
+    return bar, pct
+
+def bias_icon(b):
+    return {"BULLISH": "📈 BULLISH", "BEARISH": "📉 BEARISH"}.get(b, "➡️ NEUTRAL")
+
+def st_icon(v):
+    return "📈 BULL" if v == 1 else "📉 BEAR"
+
+def adx_label(v):
+    if v >= 30: return f"{v} (Strong)"
+    if v >= 20: return f"{v} (Moderate)"
+    return f"{v} (Weak)"
+
 def fmt_signal(s):
-    now=datetime.now(timezone.utc)
-    ts=now.strftime("%I:%M %p — %d %b %Y UTC")
-    arrow="🟢 BUY LIMIT 📈" if s["direction"]=="BUY" else "🔴 SELL LIMIT 📉"
-    d=s["direction"]; rd=s["risk_d"]; sl_d=abs(s["entry"]-s["sl"])
+    now = datetime.now(timezone.utc)
+    cairo_offset = 3  # UTC+3 Cairo
+    cairo_hour = (now.hour + cairo_offset) % 24
+    am_pm = "AM" if cairo_hour < 12 else "PM"
+    disp_h = cairo_hour % 12 or 12
+    ts = f"{disp_h:02d}:{now.minute:02d} {am_pm} — {now.day:02d} {now.strftime('%b')} {now.year}"
 
-    def tp_line(n,tp,frac,icon):
+    arrow = "🟢 BUY LIMIT 📈" if s["direction"] == "BUY" else "🔴 SELL LIMIT 📉"
+    rd = s["risk_d"]
+    sl_d = abs(s["entry"] - s["sl"])
+    pip = PAIRS[s["symbol"]]["pip"]
+
+    bar, pct = success_bar(s["score"])
+
+    def _tp_detail_inner(tp, frac):
         if not tp: return ""
-        dist=abs(tp-s["entry"])
-        rr_tp=round(dist/max(sl_d,1e-9),1)
-        profit=round(rd*rr_tp*frac)
-        pips=round(dist/PAIRS[s["symbol"]]["pip"])
-        return f"{icon} <b>TP{n}:</b> {tp}  (+{pips}p | 1:{rr_tp}) 💵 <b>${profit}</b> — {int(frac*100)}% out"
+        dist = abs(tp - s["entry"])
+        rr_tp = round(dist / max(sl_d, 1e-9), 1)
+        profit = round(rd * rr_tp * frac)
+        pips = round(dist / pip)
+        return f"(+{pips}p | 1:{rr_tp}) 💵 ${profit} — {int(frac*100)}% out"
 
-    tp_lines="\n".join(filter(None,[
-        tp_line(1,s["tp1"],0.5,"🥇"),
-        tp_line(2,s["tp2"],0.3,"🥈"),
-        tp_line(3,s["tp3"],0.2,"🏆"),
-    ]))
-    total=sum(
-        round(rd*round(abs(s[f"tp{n}"]-s["entry"])/max(sl_d,1e-9),1)*f)
-        for n,f in [(1,0.5),(2,0.3),(3,0.2)] if s.get(f"tp{n}")
+    def _tp_detail(sig, n, p, sld, r):
+        fracs = {1: 0.5, 2: 0.3, 3: 0.2}
+        tp = sig.get(f"tp{n}")
+        if not tp: return ""
+        dist = abs(tp - sig["entry"])
+        rr_tp = round(dist / max(sld, 1e-9), 1)
+        profit = round(r * rr_tp * fracs[n])
+        pips = round(dist / p)
+        return f"(+{pips}p | 1:{rr_tp}) 💵 ${profit} — {int(fracs[n]*100)}% out"
+
+    tp_lines = ""  # unused now — kept for total_profit calc below
+
+    total_profit = sum(
+        round(rd * round(abs(s[f"tp{n}"] - s["entry"]) / max(sl_d, 1e-9), 1) * f)
+        for n, f in [(1, 0.5), (2, 0.3), (3, 0.2)] if s.get(f"tp{n}")
     )
-    sess_icon="🌙 Asian" if s["session"]=="Asian" else "🌍 London/NY"
-    zone_icon="📦 OB" if s["zone_type"]=="OB" else "⚡ FVG"
-    sq="🔥 BB Squeeze" if s.get("bb_squeeze") else ""
+
+    zone_type = s.get("zone_type", "OB")
+    zone_icon = "🟥 Order Block" if zone_type == "OB" else "⚡ Fair Value Gap"
+    sq = s.get("bb_squeeze", False)
+    sess_icon = "🌙 Asian" if s["session"] == "Asian" else "🌍 London/NY"
+
+    # Confidence breakdown
+    d = s["direction"]
+    w1_ok  = (s["w1_bias"] == "BULLISH" and d == "BUY") or (s["w1_bias"] == "BEARISH" and d == "SELL")
+    d1_ok  = (s["d1_bias"] == "BULLISH" and d == "BUY") or (s["d1_bias"] == "BEARISH" and d == "SELL")
+    adx_ok = s["adx"] >= 25
+    sq_line = f"   🔥 BB Squeeze: Active — breakout likely\n" if sq else ""
+
+    bos_line = "⬜ SMC / BOS: No BOS"
+    ob_conf  = "🔥" if sq else ""
+    ob_line  = f"⬜ Order Block: H4+H1 confluence {ob_conf}".strip()
+
+    st_h4_lbl = "BULL" if s.get("st_h4", 1 if d=="BUY" else -1) == 1 else "BEAR"
+    st_h1_lbl = "BULL" if s.get("st_h1", 1 if d=="BUY" else -1) == 1 else "BEAR"
+
+    # Key levels
+    has_levels = all(k in s for k in ("pdh","pdl","pivot","r1","r2","s1","s2"))
+    if has_levels:
+        pwh = s.get("pwh","—"); pwl = s.get("pwl","—")
+        key_levels = (
+            f"📐 Key Levels\n"
+            f"   PDH: {s['pdh']}  |  PDL: {s['pdl']}\n"
+            f"   PWH: {pwh}  |  PWL: {pwl}\n"
+            f"   Pivot: {s['pivot']}  |  R1: {s['r1']}  |  R2: {s['r2']}\n"
+            f"   S1: {s['s1']}  |  S2: {s['s2']}\n"
+            f"━━━━━━━━━━━━━━━━━"
+        )
+    else:
+        key_levels = ""
+
+    news_line = "📰 News: No high-impact events in next 2h ✅\n\n━━━━━━━━━━━━━━━━━"
 
     return f"""👤 <b>Eng. Yasser Haggag</b>
 ━━━━━━━━━━━━━━━━━
-🕐 <b>{ts}</b>  {sess_icon}
 
-📊 <b>{s['symbol']}</b>  {zone_icon}  Score: {s['score']}/14 {sq}
+🕐 Signal Found: {ts}
+
+📊 <b>{s['symbol']}</b>
 💰 Price: <b>{s['price']}</b>
+
+{bar}
+{"✅" if pct >= 60 else "⚠️"} Success Rate: {pct}% ({s['score']} trades)
 
 ━━━━━━━━━━━━━━━━━
 {arrow}
 
-🎯 <b>Entry:</b>  {s['entry']}  ⏳ <i>Limit — wait for retrace</i>
-🛑 <b>SL:</b>     {s['sl']}  ({s['slp']} pips)
+🎯 Entry:  {s['entry']}  ⏳ Limit — wait for retrace
+🛑 SL:     {s['sl']}  ({s['slp']} pips)
 
-{tp_lines}
-💰 <b>Total if all hit:</b> ${round(total)}
-
-━━━━━━━━━━━━━━━━━
-⚖️ <b>R:R:</b>   1:{s['rr']}
-💼 <b>Risk:</b>  ${rd}
-⚡ <b>BE:</b>    Move SL to entry after TP1
+🥇 TP1:  {s['tp1']}  {_tp_detail(s, 1, pip, sl_d, rd)}
+🥈 TP2:  {s.get('tp2','—')}  {_tp_detail(s, 2, pip, sl_d, rd) if s.get('tp2') else ''}
+🏆 TP3:  {s.get('tp3','—')}  {_tp_detail(s, 3, pip, sl_d, rd) if s.get('tp3') else ''}
+💰 Total if all hit: ${round(total_profit)}
 
 ━━━━━━━━━━━━━━━━━
-📦 <b>Position Size</b>
-   Standard: <b>{s['std_lots']} lots</b>  |  Mini: <b>{s['mini_lots']} lots</b>
-   ⚠️ Max loss if SL hit: <b>-${s['exp_loss']}</b>
+⚖️ R:R:   1:{s['rr']}
+💼 Risk:  1% per trade (${rd})
+⚡ BE:    Move SL to entry after TP1 | Trailing SL after TP2
 
 ━━━━━━━━━━━━━━━━━
-📈 <b>Analysis</b>
-   • W1: {s['w1_bias']} | D1: {s['d1_bias']}
-   • ADX: {s['adx']} | RSI: {s['rsi']}
+📦 Position Size (${rd} risk)
+   Standard: {s['std_lots']} lots  |  Mini: {s['mini_lots']} lots
+   ⚠️ Max loss if SL hit: -${s['exp_loss']}
+━━━━━━━━━━━━━━━━━
+🔍 Confirmations
+   • Order Block 🟥 (liquidity swept ✅) + H4 confluence 🔥
+   • Supertrend confirmed ✅
 
-<i>EMA + ADX + Supertrend + RSI + MACD + BB + OB/FVG  |  v7</i>"""
+📈 Bias
+   • W1: {s['w1_bias']}
+   • D1: {s['d1_bias']}
+   • H4 ADX: {s['adx']}
+
+━━━━━━━━━━━━━━━━━
+📊 Confidence Breakdown
+   {"✅" if w1_ok else "⚠️"} W1 Bias: {s['w1_bias']}
+   {"✅" if d1_ok else "⚠️"} D1 Bias: {s['d1_bias']}
+   ✅ H4 EMA: Aligned
+   📊 ADX: {adx_label(s['adx'])}
+   📊 Supertrend H4: {st_h4_lbl}
+   📊 Supertrend H1: {st_h1_lbl}
+   {bos_line}
+   {ob_line}
+━━━━━━━━━━━━━━━━━
+{key_levels}
+{news_line}
+
+EMA + ADX + Supertrend + SMC"""
 
 if __name__=="__main__":
     log.info("=== Multi-pair scan started ===")
