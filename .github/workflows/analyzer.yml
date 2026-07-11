@@ -1,4 +1,4 @@
-name: Gold Analyzer
+name: Multi-Pair Analyzer
 on:
   schedule:
     - cron: '*/30 * * * 1-5'
@@ -23,11 +23,10 @@ jobs:
           python-version: '3.11'
 
       - name: Install dependencies
-        run: pip install requests pandas
+        run: pip install requests pandas yfinance
 
       - name: Run analyzer
         env:
-          TD_KEY: ${{ secrets.TD_KEY }}
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHAT: ${{ secrets.TG_CHAT }}
         run: python trading_analyzer.py
