@@ -25,22 +25,21 @@ else:
 
 # Pair → yfinance ticker map
 PAIR_TICKERS = {
-    "XAU/USD": "GC=F",
-    "EUR/USD": "EURUSD=X",
-    "GBP/USD": "GBPUSD=X",
-    "USD/JPY": "USDJPY=X",
-    "GBP/JPY": "GBPJPY=X",
-    "AUD/USD": "AUDUSD=X",
-    "USD/CAD": "USDCAD=X",
-    "EUR/JPY": "EURJPY=X",
-    "USD/CHF": "USDCHF=X",
-    "NZD/USD": "NZDUSD=X",
+    "XAU/USD": "GC=F",     "XAG/USD": "SI=F",
+    "EUR/USD": "EURUSD=X", "GBP/USD": "GBPUSD=X",
+    "AUD/USD": "AUDUSD=X", "NZD/USD": "NZDUSD=X",
+    "USD/JPY": "USDJPY=X", "USD/CAD": "USDCAD=X", "USD/CHF": "USDCHF=X",
+    "EUR/GBP": "EURGBP=X", "EUR/JPY": "EURJPY=X", "EUR/AUD": "EURAUD=X",
+    "GBP/JPY": "GBPJPY=X", "GBP/CHF": "GBPCHF=X",
+    "AUD/JPY": "AUDJPY=X", "CAD/JPY": "CADJPY=X",
 }
 PAIR_PIPS = {
-    "XAU/USD": 0.10,  "EUR/USD": 0.0001, "GBP/USD": 0.0001,
-    "USD/JPY": 0.010, "GBP/JPY": 0.010,  "AUD/USD": 0.0001,
-    "USD/CAD": 0.0001,"EUR/JPY": 0.010,  "USD/CHF": 0.0001,
-    "NZD/USD": 0.0001,
+    "XAU/USD": 0.10,  "XAG/USD": 0.010,
+    "EUR/USD": 0.0001,"GBP/USD": 0.0001,"AUD/USD": 0.0001,"NZD/USD": 0.0001,
+    "USD/JPY": 0.010, "USD/CAD": 0.0001,"USD/CHF": 0.0001,
+    "EUR/GBP": 0.0001,"EUR/JPY": 0.010, "EUR/AUD": 0.0001,
+    "GBP/JPY": 0.010, "GBP/CHF": 0.0001,
+    "AUD/JPY": 0.010, "CAD/JPY": 0.010,
 }
 
 logging.basicConfig(
