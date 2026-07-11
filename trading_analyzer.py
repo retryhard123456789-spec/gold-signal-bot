@@ -1,8 +1,9 @@
 """
-Gold & Forex Signal Bot — v7 Multi-Pair
-Pairs: XAU/USD, EUR/USD, GBP/USD, USD/JPY, GBP/JPY, AUD/USD, USD/CAD, EUR/JPY, USD/CHF, NZD/USD
+Gold & Forex Signal Bot — v8 Multi-Pair (16 instruments)
+Pairs: XAU/USD, EUR/USD, GBP/USD, USD/JPY, GBP/JPY, AUD/USD, USD/CAD, EUR/JPY, USD/CHF, NZD/USD,
+       XAG/USD, AUD/JPY, GBP/CHF, EUR/AUD, CAD/JPY, EUR/GBP
 Indicators: EMA + ADX + Supertrend + RSI + MACD + Bollinger Bands + OB + FVG
-Target: 5-6 trades/day across all pairs
+Target: 8-12 trades/day across all pairs
 """
 import json, logging, os, time
 from datetime import datetime, timezone
@@ -38,15 +39,21 @@ log = logging.getLogger(__name__)
 # pip_val = dollar value per pip per standard lot
 PAIRS = {
     "XAU/USD": {"ticker": "GC=F",     "pip": 0.10,   "pip_val": 10.0, "digits": 2, "spread": 0.50,   "min_sl": 5.0},
+    "XAG/USD": {"ticker": "SI=F",     "pip": 0.010,  "pip_val": 50.0, "digits": 3, "spread": 0.030,  "min_sl": 0.15},
     "EUR/USD": {"ticker": "EURUSD=X", "pip": 0.0001, "pip_val": 10.0, "digits": 5, "spread": 0.00015,"min_sl": 0.0010},
     "GBP/USD": {"ticker": "GBPUSD=X", "pip": 0.0001, "pip_val": 10.0, "digits": 5, "spread": 0.00020,"min_sl": 0.0012},
-    "USD/JPY": {"ticker": "USDJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.030,  "min_sl": 0.100},
-    "GBP/JPY": {"ticker": "GBPJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.050,  "min_sl": 0.150},
     "AUD/USD": {"ticker": "AUDUSD=X", "pip": 0.0001, "pip_val": 10.0, "digits": 5, "spread": 0.00020,"min_sl": 0.0008},
-    "USD/CAD": {"ticker": "USDCAD=X", "pip": 0.0001, "pip_val": 7.50, "digits": 5, "spread": 0.00020,"min_sl": 0.0010},
-    "EUR/JPY": {"ticker": "EURJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.040,  "min_sl": 0.130},
-    "USD/CHF": {"ticker": "USDCHF=X", "pip": 0.0001, "pip_val": 11.0, "digits": 5, "spread": 0.00020,"min_sl": 0.0010},
     "NZD/USD": {"ticker": "NZDUSD=X", "pip": 0.0001, "pip_val": 10.0, "digits": 5, "spread": 0.00025,"min_sl": 0.0008},
+    "USD/JPY": {"ticker": "USDJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.030,  "min_sl": 0.100},
+    "USD/CAD": {"ticker": "USDCAD=X", "pip": 0.0001, "pip_val": 7.50, "digits": 5, "spread": 0.00020,"min_sl": 0.0010},
+    "USD/CHF": {"ticker": "USDCHF=X", "pip": 0.0001, "pip_val": 11.0, "digits": 5, "spread": 0.00020,"min_sl": 0.0010},
+    "EUR/GBP": {"ticker": "EURGBP=X", "pip": 0.0001, "pip_val": 12.5, "digits": 5, "spread": 0.00020,"min_sl": 0.0008},
+    "EUR/JPY": {"ticker": "EURJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.040,  "min_sl": 0.130},
+    "EUR/AUD": {"ticker": "EURAUD=X", "pip": 0.0001, "pip_val": 6.50, "digits": 5, "spread": 0.00030,"min_sl": 0.0012},
+    "GBP/JPY": {"ticker": "GBPJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.050,  "min_sl": 0.150},
+    "GBP/CHF": {"ticker": "GBPCHF=X", "pip": 0.0001, "pip_val": 11.0, "digits": 5, "spread": 0.00035,"min_sl": 0.0015},
+    "AUD/JPY": {"ticker": "AUDJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.040,  "min_sl": 0.100},
+    "CAD/JPY": {"ticker": "CADJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.040,  "min_sl": 0.100},
 }
 
 # ── Cooldown state ────────────────────────────────────────────
@@ -196,7 +203,7 @@ def htf_bias(df):
     return "NEUTRAL"
 
 # ── Entry zones ───────────────────────────────────────────────
-def find_ob(df, direction, lookback=70):
+def find_ob(df, direction, lookback=100):
     h,l,c,o=df.high.values,df.low.values,df.close.values,df.open.values
     n=len(c)
     for i in range(n-2,max(n-lookback,1),-1):
@@ -318,9 +325,9 @@ def analyze_pair(symbol, cfg, sigs):
     ticker,pip,pip_val,digits,spread,min_sl = (
         p["ticker"],p["pip"],p["pip_val"],p["digits"],p["spread"],p["min_sl"])
 
-    # Skip if active signal already open for this pair
-    if any(s["symbol"]==symbol and s["status"] in ("active","pending") for s in sigs):
-        log.info(f"  {symbol}: active signal — skip"); return None
+    # Skip only if a PENDING signal already exists for this pair (wait until it triggers first)
+    if any(s["symbol"]==symbol and s["status"]=="pending" for s in sigs):
+        log.info(f"  {symbol}: pending signal exists — skip"); return None
 
     # Fetch data
     df_m15 = fetch_yf(ticker,"15m","30d")
@@ -410,7 +417,7 @@ def analyze_pair(symbol, cfg, sigs):
     sc=score_setup(w1_b,d1_b,adx_val,pdi,ndi,st_h4,st_h1,st_m15,
                    e20h4,e50h4,e200h4,e20h1,e50h1,e20m15,e50m15,
                    rsi_m15,macd_h,bb_squeeze,direction)
-    min_score=8
+    min_score=7
     if sc<min_score:
         log.info(f"  {symbol}: score {sc}<{min_score} — skip"); return None
 
