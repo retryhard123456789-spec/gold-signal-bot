@@ -35,8 +35,7 @@ def gh_get(path):
 def gh_put(path, body: dict):
     data = json.dumps(body).encode()
     req = urllib.request.Request(
-        f"{GH_API}{path}",
-        data=data, method="PUT",
+        f"{GH_API}{path}", data=data, method="PUT",
         headers={"Authorization": f"token {GH_TOKEN}",
                  "User-Agent": "GoldBot", "Content-Type": "application/json",
                  "Accept": "application/vnd.github+json"}
@@ -47,8 +46,7 @@ def gh_put(path, body: dict):
 def gh_post(path, body: dict):
     data = json.dumps(body).encode()
     req = urllib.request.Request(
-        f"{GH_API}{path}",
-        data=data, method="POST",
+        f"{GH_API}{path}", data=data, method="POST",
         headers={"Authorization": f"token {GH_TOKEN}",
                  "User-Agent": "GoldBot", "Content-Type": "application/json",
                  "Accept": "application/vnd.github+json"}
@@ -60,7 +58,6 @@ def gh_post(path, body: dict):
         return e.code
 
 def get_file(filename):
-    """Return (content_dict, sha) of a file in the repo."""
     import base64
     d = gh_get(f"/repos/{REPO}/contents/{filename}")
     content = json.loads(base64.b64decode(d["content"]).decode())
@@ -86,7 +83,8 @@ def tg_send(chat_id, text):
     )
     try:
         with urllib.request.urlopen(req, timeout=10): pass
-    except Exception: pass
+    except Exception:
+        pass
 
 
 # ── Command logic ─────────────────────────────────────────────
@@ -97,12 +95,12 @@ def handle(text: str, chat_id: str):
         tg_send(chat_id, HELP)
 
     elif text == "now":
-        tg_send(chat_id, "⏱ Triggering scan on all 16 pairs…")
+        tg_send(chat_id, "Triggering scan on all 16 pairs...")
         code = dispatch_workflow("analyzer.yml")
         if code in (200, 204):
-            tg_send(chat_id, "✅ Scan started! You'll get signals in ~2 min if setups are found.")
+            tg_send(chat_id, "Scan started! You will get signals in ~2 min if setups are found.")
         else:
-            tg_send(chat_id, f"❌ Dispatch failed (HTTP {code}). Check GitHub Actions.")
+            tg_send(chat_id, f"Dispatch failed (HTTP {code}). Check GitHub Actions.")
 
     elif text.startswith("risk"):
         parts = text.split()
@@ -113,9 +111,9 @@ def handle(text: str, chat_id: str):
                 old = cfg.get("risk_dollars", 16)
                 cfg["risk_dollars"] = val
                 put_file("bot_config.json", cfg, sha, f"risk set to {val}")
-                tg_send(chat_id, f"Risk updated: ${old} → <b>${val}</b> per trade ✅")
+                tg_send(chat_id, f"Risk updated: ${old} to <b>${val}</b> per trade")
             except Exception as e:
-                tg_send(chat_id, f"❌ Could not update risk: {e}")
+                tg_send(chat_id, f"Could not update risk: {e}")
         else:
             tg_send(chat_id, "Usage: <b>risk 20</b>")
 
@@ -124,18 +122,18 @@ def handle(text: str, chat_id: str):
             cfg, sha = get_file("bot_config.json")
             cfg["paused"] = True
             put_file("bot_config.json", cfg, sha, "bot paused")
-            tg_send(chat_id, "⏸ Bot <b>paused</b>. Send <b>resume</b> to restart.")
+            tg_send(chat_id, "Bot <b>paused</b>. Send <b>resume</b> to restart.")
         except Exception as e:
-            tg_send(chat_id, f"❌ Error: {e}")
+            tg_send(chat_id, f"Error: {e}")
 
     elif text == "resume":
         try:
             cfg, sha = get_file("bot_config.json")
             cfg["paused"] = False
             put_file("bot_config.json", cfg, sha, "bot resumed")
-            tg_send(chat_id, "▶️ Bot <b>resumed</b>. Scanning on schedule.")
+            tg_send(chat_id, "Bot <b>resumed</b>. Scanning on schedule.")
         except Exception as e:
-            tg_send(chat_id, f"❌ Error: {e}")
+            tg_send(chat_id, f"Error: {e}")
 
     elif text == "status":
         try:
@@ -144,44 +142,43 @@ def handle(text: str, chat_id: str):
             sigs = json.loads(base64.b64decode(d["content"]).decode())
             active = [s for s in sigs if s.get("status") in ("active", "pending")]
             if not active:
-                tg_send(chat_id, "ℹ️ No active or pending signals right now.")
+                tg_send(chat_id, "No active or pending signals right now.")
                 return
             lines = [f"<b>{len(active)} signal(s) open:</b>"]
             for s in active:
                 lines.append(
-                    f"• {s['symbol']} <b>{s['direction']}</b> [{s['status']}]\n"
+                    f"- {s['symbol']} <b>{s['direction']}</b> [{s['status']}]\n"
                     f"  Entry:{s['entry']} SL:{s['sl']} TP1:{s['tp1']} R:R 1:{s['rr']}"
                 )
             tg_send(chat_id, "\n".join(lines))
         except Exception as e:
-            tg_send(chat_id, f"❌ Could not fetch signals: {e}")
+            tg_send(chat_id, f"Could not fetch signals: {e}")
 
     else:
         tg_send(chat_id, f"Unknown command: <b>{text}</b>\nSend <b>cmd</b> for the list.")
 
 
-# ── Vercel handler ────────────────────────────────────────────
-class handler(BaseHTTPRequestHandler):
-    def do_POST(self):
-        try:
-            n = int(self.headers.get("Content-Length", 0))
-            update = json.loads(self.rfile.read(n))
-            msg     = update.get("message", {})
-            chat_id = str(msg.get("chat", {}).get("id", ""))
-            text    = msg.get("text", "").strip()
-            # Accept messages from our group/channel
-            if chat_id and text and chat_id in str(TG_CHAT):
-                handle(text, chat_id)
-        except Exception:
-            pass
-        self.send_response(200)
-        self.end_headers()
-        self.wfile.write(b"ok")
+# ── Vercel entrypoint (new Python runtime) ────────────────────
+def handler(request):
+    """Vercel Python handler — receives HTTP Request object."""
+    if request.method == "GET":
+        return Response("Gold Bot webhook is running.", status=200)
 
-    def do_GET(self):
-        self.send_response(200)
-        self.end_headers()
-        self.wfile.write(b"Gold Bot webhook is running.")
+    try:
+        body   = request.body
+        update = json.loads(body) if isinstance(body, (str, bytes)) else body
+        msg     = update.get("message", {})
+        chat_id = str(msg.get("chat", {}).get("id", ""))
+        text    = msg.get("text", "").strip()
+        if chat_id and text and chat_id in str(TG_CHAT):
+            handle(text, chat_id)
+    except Exception:
+        pass
 
-    def log_message(self, *_):
-        pass  # suppress Vercel access logs
+    return Response("ok", status=200)
+
+
+class Response:
+    def __init__(self, body="", status=200):
+        self.body   = body
+        self.status = status
