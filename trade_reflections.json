@@ -55,18 +55,121 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "XAUUSD-2026-07-13T09:19",
+      "ts_closed": "2026-07-14T12:41:07.222197+00:00",
+      "ts_signal": "2026-07-13T09:19:44.733152+00:00",
+      "symbol": "XAU/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 11,
+      "adx": 22.7,
+      "rsi": 57.2,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": null,
-    "total_trades": 0,
-    "win_rate": null,
-    "by_pair": {},
-    "by_session": {},
-    "by_score_bucket": {},
-    "by_direction": {},
-    "by_zone_type": {},
+    "last_analysis": "2026-07-14T12:41:07.587782+00:00",
+    "total_trades": 3,
+    "win_rate": 0.0,
+    "wins": 0,
+    "losses": 3,
     "avg_r_won": null,
+    "by_pair": {
+      "USD/CAD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
+      },
+      "XAG/USD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
+      },
+      "XAU/USD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
+      }
+    },
+    "by_session": {
+      "London/NY": {
+        "trades": 3,
+        "win_rate": 0.0
+      }
+    },
+    "by_score_bucket": {
+      "9-10": {
+        "trades": 2,
+        "win_rate": 0.0
+      },
+      "11-12": {
+        "trades": 1,
+        "win_rate": 0.0
+      },
+      "13+": {
+        "trades": 0,
+        "win_rate": null
+      }
+    },
+    "by_direction": {
+      "BUY": {
+        "trades": 1,
+        "win_rate": 0.0
+      },
+      "SELL": {
+        "trades": 2,
+        "win_rate": 0.0
+      }
+    },
+    "by_zone_type": {
+      "OB": {
+        "trades": 3,
+        "win_rate": 0.0
+      }
+    },
+    "common_loss_patterns": [
+      [
+        "low_score",
+        2
+      ],
+      [
+        "weak_htf",
+        2
+      ],
+      [
+        "h4_st_conflict",
+        1
+      ],
+      [
+        "h1_st_conflict",
+        1
+      ],
+      [
+        "low_adx",
+        1
+      ]
+    ],
     "suggestions": [],
     "parameter_history": []
   },
