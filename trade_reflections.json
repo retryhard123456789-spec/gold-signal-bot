@@ -382,14 +382,39 @@
         "Score 11 correctly predicted strong follow-through to TP3.",
         "Order Block entry held well as support/resistance."
       ]
+    },
+    {
+      "id": "XAUUSD-2026-07-13T09:19",
+      "ts_closed": "2026-07-14T15:16:58.992306+00:00",
+      "ts_signal": "2026-07-13T09:19:44.733152+00:00",
+      "symbol": "XAU/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 11,
+      "adx": 22.7,
+      "rsi": 57.2,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-14T14:25:01.878986+00:00",
-    "total_trades": 14,
-    "win_rate": 0.214,
+    "last_analysis": "2026-07-14T15:16:59.186580+00:00",
+    "total_trades": 15,
+    "win_rate": 0.2,
     "wins": 3,
-    "losses": 11,
+    "losses": 12,
     "avg_r_won": 1.71,
     "by_pair": {
       "USD/CAD": {
@@ -407,9 +432,9 @@
         "avg_r": -1.0
       },
       "XAU/USD": {
-        "trades": 2,
+        "trades": 3,
         "wins": 0,
-        "losses": 2,
+        "losses": 3,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -451,7 +476,7 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 8,
+        "trades": 9,
         "win_rate": 0.0
       },
       "Asian": {
@@ -465,8 +490,8 @@
         "win_rate": 0.0
       },
       "11-12": {
-        "trades": 4,
-        "win_rate": 0.75
+        "trades": 5,
+        "win_rate": 0.6
       },
       "13+": {
         "trades": 0,
@@ -479,14 +504,14 @@
         "win_rate": 0.375
       },
       "SELL": {
-        "trades": 6,
+        "trades": 7,
         "win_rate": 0.0
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 14,
-        "win_rate": 0.214
+        "trades": 15,
+        "win_rate": 0.2
       }
     },
     "common_loss_patterns": [
@@ -496,7 +521,7 @@
       ],
       [
         "weak_htf",
-        7
+        8
       ],
       [
         "h4_st_conflict",
@@ -517,7 +542,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 21% across 14 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 20% across 15 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -531,7 +556,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.91,
+        "frequency": 0.83,
         "loss_count": 10,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -539,8 +564,8 @@
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.64,
-        "loss_count": 7,
+        "frequency": 0.67,
+        "loss_count": 8,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
       }
@@ -604,6 +629,12 @@
         "ts": "2026-07-14T14:25:01.878971+00:00",
         "n_trades": 14,
         "win_rate": 0.214,
+        "suggestions_count": 4
+      },
+      {
+        "ts": "2026-07-14T15:16:59.186565+00:00",
+        "n_trades": 15,
+        "win_rate": 0.2,
         "suggestions_count": 4
       }
     ]
