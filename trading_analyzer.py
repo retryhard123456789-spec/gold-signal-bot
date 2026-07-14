@@ -54,6 +54,14 @@ PAIRS = {
     "GBP/CHF": {"ticker": "GBPCHF=X", "pip": 0.0001, "pip_val": 11.0, "digits": 5, "spread": 0.00035,"min_sl": 0.0015},
     "AUD/JPY": {"ticker": "AUDJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.040,  "min_sl": 0.100},
     "CAD/JPY": {"ticker": "CADJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.040,  "min_sl": 0.100},
+    "GBP/AUD": {"ticker": "GBPAUD=X", "pip": 0.0001, "pip_val": 6.50, "digits": 5, "spread": 0.00030,"min_sl": 0.0015},
+    "EUR/CAD": {"ticker": "EURCAD=X", "pip": 0.0001, "pip_val": 7.50, "digits": 5, "spread": 0.00025,"min_sl": 0.0012},
+    "NZD/CAD": {"ticker": "NZDCAD=X", "pip": 0.0001, "pip_val": 7.50, "digits": 5, "spread": 0.00030,"min_sl": 0.0010},
+    "NZD/JPY": {"ticker": "NZDJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.040,  "min_sl": 0.100},
+    "AUD/CAD": {"ticker": "AUDCAD=X", "pip": 0.0001, "pip_val": 7.50, "digits": 5, "spread": 0.00025,"min_sl": 0.0010},
+    "AUD/CHF": {"ticker": "AUDCHF=X", "pip": 0.0001, "pip_val": 11.0, "digits": 5, "spread": 0.00030,"min_sl": 0.0012},
+    "CHF/JPY": {"ticker": "CHFJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.050,  "min_sl": 0.120},
+    "AUD/NZD": {"ticker": "AUDNZD=X", "pip": 0.0001, "pip_val": 6.00, "digits": 5, "spread": 0.00030,"min_sl": 0.0012},
 }
 
 # ── Cooldown state ────────────────────────────────────────────
@@ -63,18 +71,18 @@ _LAST_WIN: dict = {}
 def record_sl(symbol, direction):  _LAST_SL[(symbol,direction)]  = datetime.now(timezone.utc)
 def record_win(symbol, direction): _LAST_WIN[(symbol,direction)] = datetime.now(timezone.utc)
 
-def sl_cooldown(symbol, direction, hours=2.0):
+def sl_cooldown(symbol, direction, hours=1.0):
     k = (symbol, direction)
     return k in _LAST_SL and (datetime.now(timezone.utc)-_LAST_SL[k]).total_seconds()/3600 < hours
 
-def win_cooldown(symbol, direction, mins=15.0):
+def win_cooldown(symbol, direction, mins=5.0):
     k = (symbol, direction)
     return k in _LAST_WIN and (datetime.now(timezone.utc)-_LAST_WIN[k]).total_seconds()/60 < mins
 
 # ── Helpers ───────────────────────────────────────────────────
 def load_bot_config():
     try: return json.loads(BOT_CFG.read_text())
-    except: return {"paused": False, "risk_dollars": 16, "min_rr": 1.5}
+    except: return {"paused": False, "risk_dollars": 16, "min_rr": 1.3}
 
 def load_signals():
     try: return json.loads(SIG_FILE.read_text())
@@ -90,6 +98,58 @@ def send_telegram(text):
             json={"chat_id": TG_CHAT, "text": text, "parse_mode": "HTML"}, timeout=15)
         if not r.ok: log.warning(f"Telegram: {r.text[:200]}")
     except Exception as e: log.error(f"Telegram failed: {e}")
+
+# ── News filter ──────────────────────────────────────────────
+_NEWS_CACHE = {"ts": None, "events": []}
+_COUNTRY_CCY = {
+    "USD": "USD", "EUR": "EUR", "GBP": "GBP", "JPY": "JPY",
+    "AUD": "AUD", "CAD": "CAD", "CHF": "CHF", "NZD": "NZD",
+}
+
+def _fetch_ff_events():
+    now = datetime.now(timezone.utc)
+    if _NEWS_CACHE["ts"] and (now - _NEWS_CACHE["ts"]).total_seconds() < 1800:
+        return _NEWS_CACHE["events"]
+    try:
+        import requests as _req
+        r = _req.get("https://nfs.faireconomy.media/ff_calendar_thisweek.json",
+                     timeout=8, headers={"User-Agent": "Mozilla/5.0"})
+        if r.ok:
+            _NEWS_CACHE["events"] = r.json()
+            _NEWS_CACHE["ts"] = now
+    except Exception as e:
+        log.warning(f"News fetch failed: {e}")
+    return _NEWS_CACHE["events"]
+
+def is_news_blocked(symbol):
+    """Return (blocked, reason) — True if high-impact event within ±30 min for either currency."""
+    parts = symbol.replace("XAU", "GOLD").replace("XAG", "SILVER").split("/")
+    ccys = set()
+    for p in parts:
+        if p in _COUNTRY_CCY: ccys.add(_COUNTRY_CCY[p])
+        elif p == "GOLD":  ccys.add("XAU")
+        elif p == "SILVER": ccys.add("XAG")
+
+    events = _fetch_ff_events()
+    now = datetime.now(timezone.utc)
+    for ev in events:
+        if str(ev.get("impact", "")).lower() != "high":
+            continue
+        country = str(ev.get("country", "")).upper()
+        ccy = _COUNTRY_CCY.get(country)
+        if not ccy or ccy not in ccys:
+            continue
+        try:
+            raw_date = ev.get("date", "")
+            ev_time = datetime.fromisoformat(raw_date.replace("Z", "+00:00"))
+            diff_min = (ev_time - now).total_seconds() / 60
+            if -30 <= diff_min <= 30:
+                title = ev.get("title", "News event")
+                when = "in progress" if abs(diff_min) < 2 else (f"in {int(diff_min)}min" if diff_min > 0 else f"{int(-diff_min)}min ago")
+                return True, f"⚠️ High-impact news: {title} ({country}) {when}"
+        except Exception:
+            continue
+    return False, None
 
 # ── Data fetching ─────────────────────────────────────────────
 def fetch_yf(ticker, interval, period):
@@ -309,7 +369,8 @@ def calc_tps(entry, direction, sl, sr, digits, min_rrs=(1.8,2.8,3.8)):
 # ── Signal scoring ────────────────────────────────────────────
 def score_setup(w1_b,d1_b,adx_val,pdi,ndi,st_h4,st_h1,st_m15,
                 e20h4,e50h4,e200h4,e20h1,e50h1,e20m15,e50m15,
-                rsi_m15,macd_h,bb_squeeze,direction):
+                rsi_m15,macd_h,bb_squeeze,direction,
+                st_m5=0,e20m5=0,e50m5=0):
     """Score 0–14. Need >= 8 to trade."""
     s=0
     # HTF bias (+3)
@@ -341,6 +402,9 @@ def score_setup(w1_b,d1_b,adx_val,pdi,ndi,st_h4,st_h1,st_m15,
     if direction=="SELL" and macd_h<0: s+=1
     # BB squeeze bonus (+1 — breakout imminent)
     if bb_squeeze: s+=1
+    # M5 momentum bonus (+1 — fastest timeframe confirms)
+    if direction=="BUY"  and e20m5>e50m5 and st_m5==1:  s+=1
+    if direction=="SELL" and e20m5<e50m5 and st_m5==-1: s+=1
     return s
 
 # ── Core analysis per pair ────────────────────────────────────
@@ -349,23 +413,20 @@ def analyze_pair(symbol, cfg, sigs):
     ticker,pip,pip_val,digits,spread,min_sl = (
         p["ticker"],p["pip"],p["pip_val"],p["digits"],p["spread"],p["min_sl"])
 
-    # Skip only if a PENDING signal already exists for this pair (wait until it triggers first)
-    if any(s["symbol"]==symbol and s["status"]=="pending" for s in sigs):
-        log.info(f"  {symbol}: pending signal exists — skip"); return None, None
-
     # Fetch data
+    df_m5  = fetch_yf(ticker,"5m","5d")
     df_m15 = fetch_yf(ticker,"15m","30d")
     df_1h  = fetch_yf(ticker,"1h","60d")
     df_1d  = fetch_yf(ticker,"1d","2y")
     df_1wk = fetch_yf(ticker,"1wk","5y")
-    if any(d is None or len(d)<50 for d in [df_m15,df_1h,df_1d,df_1wk]):
+    if any(d is None or len(d)<50 for d in [df_m15,df_1h,df_1d,df_1wk]) or df_m5 is None or len(df_m5)<20:
         log.warning(f"  {symbol}: insufficient data"); return None, None
 
     df_4h = resample_4h(df_1h)
     if len(df_4h)<50: log.warning(f"  {symbol}: insufficient 4h data"); return None, None
 
     def cl(df): return df.iloc[:-1] if len(df)>2 else df
-    c15=cl(df_m15); c1=cl(df_1h); c4=cl(df_4h); cd=cl(df_1d); cw=cl(df_1wk)
+    c5=cl(df_m5); c15=cl(df_m15); c1=cl(df_1h); c4=cl(df_4h); cd=cl(df_1d); cw=cl(df_1wk)
 
     # Session ADX threshold
     now_utc=datetime.now(timezone.utc)
@@ -381,6 +442,8 @@ def analyze_pair(symbol, cfg, sigs):
         e20h4=ema(c4.close,20).iloc[-1]; e50h4=ema(c4.close,50).iloc[-1]; e200h4=ema(c4.close,200).iloc[-1]
         e20h1=ema(c1.close,20).iloc[-1]; e50h1=ema(c1.close,50).iloc[-1]
         e20m15=ema(c15.close,20).iloc[-1]; e50m15=ema(c15.close,50).iloc[-1]
+        e20m5=ema(c5.close,20).iloc[-1];  e50m5=ema(c5.close,50).iloc[-1]
+        st_m5=calc_supertrend(c5)
         rsi_m15=calc_rsi(c15.close)
         _,_,macd_h=calc_macd(c1.close)
         _,_,_,bb_squeeze=calc_bb(c15.close)
@@ -408,6 +471,15 @@ def analyze_pair(symbol, cfg, sigs):
     else: bear+=1
     if bull==bear: return skip("Mixed signals — no clear direction")
     direction="BUY" if bull>bear else "SELL"
+
+    # Skip if same-direction pending already exists (allow opposite direction)
+    if any(s["symbol"]==symbol and s["status"]=="pending" and s["direction"]==direction for s in sigs):
+        log.info(f"  {symbol}: pending {direction} exists — skip"); return None, None
+
+    # News filter — skip 30min before/after high-impact events
+    news_blocked, news_reason = is_news_blocked(symbol)
+    if news_blocked:
+        return skip(news_reason)
 
     # RSI hard block for extremes
     if direction=="SELL" and rsi_m15<25:
@@ -444,8 +516,9 @@ def analyze_pair(symbol, cfg, sigs):
     # Score the setup
     sc=score_setup(w1_b,d1_b,adx_val,pdi,ndi,st_h4,st_h1,st_m15,
                    e20h4,e50h4,e200h4,e20h1,e50h1,e20m15,e50m15,
-                   rsi_m15,macd_h,bb_squeeze,direction)
-    min_score=7
+                   rsi_m15,macd_h,bb_squeeze,direction,
+                   st_m5=st_m5,e20m5=e20m5,e50m5=e50m5)
+    min_score=9
     if sc<min_score:
         e_lbl = f"EMA {round(e20m15,1)}/{round(e50m15,1)}"
         st_lbl = f"ST {st_m15}"
@@ -470,7 +543,7 @@ def analyze_pair(symbol, cfg, sigs):
     tp1=tps[0]; tp2=tps[1] if len(tps)>=2 else None; tp3=tps[2] if len(tps)>=3 else None
 
     rr=round(abs(tp1-entry)/sl_dist,1)
-    if rr<cfg.get("min_rr",1.5): return skip(f"R:R 1:{rr} too low (min 1:{cfg.get('min_rr',1.5)})")
+    if rr<cfg.get("min_rr",1.3): return skip(f"R:R 1:{rr} too low (min 1:{cfg.get('min_rr',1.3)})")
 
     # Lot sizing
     risk_d  =cfg.get("risk_dollars",16)
@@ -493,6 +566,7 @@ def analyze_pair(symbol, cfg, sigs):
         "st_h4":st_h4,"st_h1":st_h1,
         "tp1_hit":False,"tp2_hit":False,
         "signal_ts":datetime.now(timezone.utc).isoformat(),
+        "st_m5":st_m5,
         **pivots, **weekly,
     }
     return sig, None
@@ -663,7 +737,25 @@ def fmt_signal(s):
     else:
         key_levels = ""
 
-    news_line = "📰 News: No high-impact events in next 2h ✅\n\n━━━━━━━━━━━━━━━━━"
+    _news_events = _fetch_ff_events()
+    _sym_parts = s["symbol"].split("/")
+    _ccys = {_COUNTRY_CCY.get(p) for p in _sym_parts if p in _COUNTRY_CCY}
+    _now = datetime.now(timezone.utc)
+    _upcoming = []
+    for _ev in _news_events:
+        if str(_ev.get("impact","")).lower() != "high": continue
+        _c = _COUNTRY_CCY.get(str(_ev.get("country","")).upper())
+        if not _c or _c not in _ccys: continue
+        try:
+            _et = datetime.fromisoformat(_ev["date"].replace("Z","+00:00"))
+            _dm = (_et - _now).total_seconds()/60
+            if 0 < _dm <= 120:
+                _upcoming.append(f"{_ev.get('title','?')} in {int(_dm)}min")
+        except: pass
+    if _upcoming:
+        news_line = f"📰 News: ⚠️ {' | '.join(_upcoming[:2])}\n\n━━━━━━━━━━━━━━━━━"
+    else:
+        news_line = "📰 News: No high-impact events in next 2h ✅\n\n━━━━━━━━━━━━━━━━━"
 
     return f"""👤 <b>Eng. Yasser Haggag</b>
 ━━━━━━━━━━━━━━━━━
