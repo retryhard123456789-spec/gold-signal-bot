@@ -189,14 +189,41 @@
         "h1_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "CHFJPY-2026-07-14T06:10",
+      "ts_closed": "2026-07-14T13:40:31.770982+00:00",
+      "ts_signal": "2026-07-14T06:10:27.051801+00:00",
+      "symbol": "CHF/JPY",
+      "direction": "SELL",
+      "session": "Asian",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 25.6,
+      "rsi": 45.0,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 Asian session loss \u2014 lower liquidity creates more false breakouts on this session.\n  \u2022 HTF bias was not fully aligned (W1:BULLISH, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "asian_session",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-14T13:40:30.721885+00:00",
-    "total_trades": 7,
+    "last_analysis": "2026-07-14T13:40:31.990997+00:00",
+    "total_trades": 8,
     "win_rate": 0.0,
     "wins": 0,
-    "losses": 7,
+    "losses": 8,
     "avg_r_won": null,
     "by_pair": {
       "USD/CAD": {
@@ -219,6 +246,13 @@
         "losses": 2,
         "win_rate": 0.0,
         "avg_r": -1.0
+      },
+      "CHF/JPY": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
       }
     },
     "by_session": {
@@ -227,13 +261,13 @@
         "win_rate": 0.0
       },
       "Asian": {
-        "trades": 2,
+        "trades": 3,
         "win_rate": 0.0
       }
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 6,
+        "trades": 7,
         "win_rate": 0.0
       },
       "11-12": {
@@ -251,24 +285,24 @@
         "win_rate": 0.0
       },
       "SELL": {
-        "trades": 4,
+        "trades": 5,
         "win_rate": 0.0
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 7,
+        "trades": 8,
         "win_rate": 0.0
       }
     },
     "common_loss_patterns": [
       [
         "low_score",
-        6
+        7
       ],
       [
         "weak_htf",
-        4
+        5
       ],
       [
         "h4_st_conflict",
@@ -279,8 +313,8 @@
         3
       ],
       [
-        "low_adx",
-        2
+        "asian_session",
+        3
       ]
     ],
     "suggestions": [
@@ -295,18 +329,18 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.86,
-        "loss_count": 6,
+        "frequency": 0.88,
+        "loss_count": 7,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.57,
-        "loss_count": 4,
+        "frequency": 0.62,
+        "loss_count": 5,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
-        "confidence": "medium"
+        "confidence": "high"
       }
     ],
     "parameter_history": [
@@ -325,6 +359,12 @@
       {
         "ts": "2026-07-14T13:40:30.721870+00:00",
         "n_trades": 7,
+        "win_rate": 0.0,
+        "suggestions_count": 3
+      },
+      {
+        "ts": "2026-07-14T13:40:31.990983+00:00",
+        "n_trades": 8,
         "win_rate": 0.0,
         "suggestions_count": 3
       }
