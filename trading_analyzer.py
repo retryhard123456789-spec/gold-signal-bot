@@ -62,6 +62,14 @@ PAIRS = {
     "AUD/CHF": {"ticker": "AUDCHF=X", "pip": 0.0001, "pip_val": 11.0, "digits": 5, "spread": 0.00030,"min_sl": 0.0012},
     "CHF/JPY": {"ticker": "CHFJPY=X", "pip": 0.010,  "pip_val": 7.00, "digits": 3, "spread": 0.050,  "min_sl": 0.120},
     "AUD/NZD": {"ticker": "AUDNZD=X", "pip": 0.0001, "pip_val": 6.00, "digits": 5, "spread": 0.00030,"min_sl": 0.0012},
+    # Forex crosses
+    "GBP/NZD": {"ticker": "GBPNZD=X", "pip": 0.0001, "pip_val": 6.00, "digits": 5, "spread": 0.00035,"min_sl": 0.0020},
+    "EUR/NZD": {"ticker": "EURNZD=X", "pip": 0.0001, "pip_val": 6.00, "digits": 5, "spread": 0.00030,"min_sl": 0.0018},
+    # Commodities
+    "WTI/USD": {"ticker": "CL=F",     "pip": 0.01,   "pip_val": 10.0, "digits": 2, "spread": 0.05,   "min_sl": 0.50},
+    # Indices — pip_val is indicative (1 point per micro lot); verify with your broker
+    "NAS100":  {"ticker": "NQ=F",     "pip": 1.0,    "pip_val": 2.0,  "digits": 1, "spread": 2.0,    "min_sl": 50.0},
+    "US30":    {"ticker": "YM=F",     "pip": 1.0,    "pip_val": 0.5,  "digits": 1, "spread": 3.0,    "min_sl": 50.0},
 }
 
 # ── Cooldown state ────────────────────────────────────────────
@@ -123,12 +131,16 @@ def _fetch_ff_events():
 
 def is_news_blocked(symbol):
     """Return (blocked, reason) — True if high-impact event within ±30 min for either currency."""
-    parts = symbol.replace("XAU", "GOLD").replace("XAG", "SILVER").split("/")
-    ccys = set()
-    for p in parts:
-        if p in _COUNTRY_CCY: ccys.add(_COUNTRY_CCY[p])
-        elif p == "GOLD":  ccys.add("XAU")
-        elif p == "SILVER": ccys.add("XAG")
+    # Indices and oil are USD-denominated — block on USD news events
+    if symbol in ("NAS100", "US30", "WTI/USD"):
+        ccys = {"USD"}
+    else:
+        parts = symbol.replace("XAU", "GOLD").replace("XAG", "SILVER").split("/")
+        ccys = set()
+        for p in parts:
+            if p in _COUNTRY_CCY: ccys.add(_COUNTRY_CCY[p])
+            elif p == "GOLD":  ccys.add("XAU")
+            elif p == "SILVER": ccys.add("XAG")
 
     events = _fetch_ff_events()
     now = datetime.now(timezone.utc)
@@ -792,6 +804,8 @@ def fmt_signal(s):
     zone_icon = "🟥 Order Block" if zone_type == "OB" else "⚡ Fair Value Gap"
     sq = s.get("bb_squeeze", False)
     sess_icon = "🌙 Asian" if s["session"] == "Asian" else "🌍 London/NY"
+    is_index  = s["symbol"] in ("NAS100", "US30")
+    broker_note = "\n⚠️ <i>Index: pip_val is indicative — verify contract size with your broker.</i>" if is_index else ""
     sweep_line = f"   💧 Liquidity Sweep @ {s['sweep_level']} ✅ (+2)\n" if s.get("sweep_detected") else ""
     zb = s.get("zone_bonus", 0)
     zone_label = {2:"Deep Discount ✅ (+2)", 1:"Discount ✅ (+1)", 0:"Neutral Zone",
@@ -905,7 +919,7 @@ def fmt_signal(s):
 {key_levels}
 {news_line}
 
-EMA + ADX + Supertrend + SMC"""
+EMA + ADX + Supertrend + SMC{broker_note}"""
 
 if __name__=="__main__":
     log.info("=== Multi-pair scan started ===")
