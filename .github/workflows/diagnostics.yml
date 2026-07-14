@@ -1,0 +1,42 @@
+name: Diagnostics
+on:
+  workflow_dispatch:
+
+jobs:
+  diagnostics:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Restore signals
+        uses: actions/cache@v4
+        with:
+          path: signals.json
+          key: signals-${{ github.run_id }}
+          restore-keys: signals-
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests pandas yfinance
+
+      - name: Run diagnostics
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ secrets.TG_CHAT }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: python diagnostics.py
+
+      - name: Commit diagnostics status
+        env:
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: |
+          git config user.name "GoldBot"
+          git config user.email "bot@goldbot.local"
+          git add diagnostics_status.json || true
+          git diff --cached --quiet || git commit -m "diag: update status"
+          git push https://x-access-token:${{ secrets.GH_TOKEN }}@github.com/retryhard123456789-spec/gold-signal-bot.git HEAD:main || true
