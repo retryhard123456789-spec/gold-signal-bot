@@ -43,5 +43,17 @@
     "suggestions": [],
     "parameter_history": []
   },
-  "weekly_summaries": []
+  "weekly_summaries": [
+    {
+      "week": "2026-W29",
+      "generated": "2026-07-14T08:18:23.161892+00:00",
+      "trades_total": 1,
+      "win_rate": null,
+      "avg_r_won": null,
+      "top_pair": "\u2014",
+      "worst_pair": "\u2014",
+      "suggestions_count": 0,
+      "note": "Ready for weekend review with Claude."
+    }
+  ]
 }
