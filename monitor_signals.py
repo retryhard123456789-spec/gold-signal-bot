@@ -106,6 +106,21 @@ def monitor():
         pip    = PAIR_PIPS.get(sym, 0.0001)
         sl_d   = abs(entry - s["sl"])
 
+        # Pending → expired after 48h
+        if s["status"] == "pending":
+            signal_age = (datetime.now(timezone.utc) -
+                          datetime.fromisoformat(s["signal_ts"].replace("Z", "+00:00"))).total_seconds()
+            if signal_age > 172800:  # 48 hours
+                s["status"] = "expired"
+                log.info(f"EXPIRED {sym} {d} — pending 48h without trigger")
+                send_telegram(
+                    f"⌛ <b>Signal Expired</b>  {sym}\n"
+                    f"{d} limit @ <b>{entry}</b> — never triggered in 48h.\n"
+                    f"SL was: {s['sl']}  |  TP1 was: {s['tp1']}"
+                )
+                changed = True
+                continue
+
         # Pending → active
         if s["status"] == "pending":
             triggered = (price <= entry if d == "BUY" else price >= entry)
