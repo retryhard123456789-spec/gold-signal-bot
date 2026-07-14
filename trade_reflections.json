@@ -324,15 +324,44 @@
         "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
         "Order Block entry held well as support/resistance."
       ]
+    },
+    {
+      "id": "US30-2026-07-14T04:26",
+      "ts_closed": "2026-07-14T13:53:52.112512+00:00",
+      "ts_signal": "2026-07-14T04:26:06.355658+00:00",
+      "symbol": "US30",
+      "direction": "BUY",
+      "session": "Asian",
+      "zone_type": "OB",
+      "score": 11,
+      "adx": 25.7,
+      "rsi": 36.5,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP2",
+      "pnl_r": 1.74,
+      "reflection": "Outcome: \ud83e\udd48 TP2\nWhat worked:\n  \u2022 ADX 25.7 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Score 11 correctly predicted strong follow-through to TP2.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 25.7 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Score 11 correctly predicted strong follow-through to TP2.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-14T13:49:33.544343+00:00",
-    "total_trades": 12,
-    "win_rate": 0.083,
-    "wins": 1,
+    "last_analysis": "2026-07-14T13:53:52.336964+00:00",
+    "total_trades": 13,
+    "win_rate": 0.154,
+    "wins": 2,
     "losses": 11,
-    "avg_r_won": 0.9,
+    "avg_r_won": 1.32,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -384,11 +413,11 @@
         "avg_r": -1.0
       },
       "US30": {
-        "trades": 1,
-        "wins": 1,
+        "trades": 2,
+        "wins": 2,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 0.9
+        "avg_r": 1.32
       }
     },
     "by_session": {
@@ -397,8 +426,8 @@
         "win_rate": 0.0
       },
       "Asian": {
-        "trades": 4,
-        "win_rate": 0.25
+        "trades": 5,
+        "win_rate": 0.4
       }
     },
     "by_score_bucket": {
@@ -407,8 +436,8 @@
         "win_rate": 0.0
       },
       "11-12": {
-        "trades": 2,
-        "win_rate": 0.5
+        "trades": 3,
+        "win_rate": 0.667
       },
       "13+": {
         "trades": 0,
@@ -417,8 +446,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 6,
-        "win_rate": 0.167
+        "trades": 7,
+        "win_rate": 0.286
       },
       "SELL": {
         "trades": 6,
@@ -427,8 +456,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 12,
-        "win_rate": 0.083
+        "trades": 13,
+        "win_rate": 0.154
       }
     },
     "common_loss_patterns": [
@@ -459,7 +488,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 8% across 12 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 15% across 13 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -534,6 +563,12 @@
         "ts": "2026-07-14T13:49:33.544328+00:00",
         "n_trades": 12,
         "win_rate": 0.083,
+        "suggestions_count": 4
+      },
+      {
+        "ts": "2026-07-14T13:53:52.336949+00:00",
+        "n_trades": 13,
+        "win_rate": 0.154,
         "suggestions_count": 4
       }
     ]
