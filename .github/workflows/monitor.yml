@@ -30,6 +30,7 @@ jobs:
         env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHAT: ${{ secrets.TG_CHAT }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: |
           END=$((SECONDS + 21300))
           while [ $SECONDS -lt $END ]; do
