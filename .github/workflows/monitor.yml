@@ -23,6 +23,13 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-v1
+          restore-keys: pip-
+
       - name: Install dependencies
         run: pip install requests pandas yfinance
 
