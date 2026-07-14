@@ -9,6 +9,12 @@ from pathlib import Path
 import requests
 import yfinance as yf
 
+try:
+    from reflection import record_trade_reflection
+    _reflect_available = True
+except ImportError:
+    _reflect_available = False
+
 BASE     = Path(__file__).parent
 LOG_DIR  = BASE / "logs"; LOG_DIR.mkdir(exist_ok=True)
 LOG_FILE = LOG_DIR / "monitor.log"
@@ -146,23 +152,33 @@ def monitor():
         # TP1
         if not tp1_hit and hit_tp(tp1):
             s["tp1_hit"] = True; s["eff_sl"] = entry
+            pnl_tp1 = round(0.5*abs(tp1-entry)/max(sl_d,1e-9), 2)
             log.info(f"{sym}: TP1 hit @ {tp1}")
             send_telegram(
                 f"🥇 <b>TP1 Hit!</b>  {sym}\n"
                 f"{d} → TP1: <b>{tp1}</b> ✅  (50% closed)\n"
                 f"🔁 Move SL to entry <b>{entry}</b> — breakeven!"
             )
+            if _reflect_available:
+                try: record_trade_reflection(s, "TP1", pnl_tp1)
+                except Exception as e: log.warning(f"Reflection failed: {e}")
             changed = True; continue
 
         # TP2
         if tp1_hit and tp2 and not tp2_hit and hit_tp(tp2):
             s["tp2_hit"] = True; s["eff_sl"] = tp1
+            r1 = abs(tp1-entry)/max(sl_d,1e-9)
+            r2 = abs(tp2-entry)/max(sl_d,1e-9)
+            pnl_tp2 = round(0.5*r1+0.3*r2, 2)
             log.info(f"{sym}: TP2 hit @ {tp2}")
             send_telegram(
                 f"🥈 <b>TP2 Hit!</b>  {sym}\n"
                 f"{d} → TP2: <b>{tp2}</b> ✅  (30% closed)\n"
                 f"🔁 Trail SL to TP1 <b>{tp1}</b>"
             )
+            if _reflect_available:
+                try: record_trade_reflection(s, "TP2", pnl_tp2)
+                except Exception as e: log.warning(f"Reflection failed: {e}")
             changed = True; continue
 
         # TP3
@@ -178,28 +194,37 @@ def monitor():
                 f"{d} → TP3: <b>{tp3}</b> ✅\n"
                 f"💰 Total: <b>+{pnl}R</b> 🎉"
             )
+            if _reflect_available:
+                try: record_trade_reflection(s, "TP3", pnl)
+                except Exception as e: log.warning(f"Reflection failed: {e}")
             changed = True; continue
 
         # SL / BE / Trail stop
         if hit_sl(eff_sl):
             if eff_sl == entry:
                 pnl = round(0.5*abs(tp1-entry)/max(sl_d,1e-9), 2)
-                s["status"] = "closed"; s["outcome"] = "BE"
+                s["status"] = "closed"; s["outcome"] = "BE"; s["pnl_r"] = pnl
                 log.info(f"{sym}: BE close +{pnl}R")
                 send_telegram(
                     f"⚡ <b>Breakeven Close</b>  {sym}\n"
                     f"50% locked at TP1 → <b>+{pnl}R</b>"
                 )
+                if _reflect_available:
+                    try: record_trade_reflection(s, "BE", pnl)
+                    except Exception as e: log.warning(f"Reflection failed: {e}")
             elif eff_sl == tp1:
                 r1 = abs(tp1-entry)/max(sl_d,1e-9)
                 r2 = abs((tp2 or tp1)-entry)/max(sl_d,1e-9)
                 pnl = round(0.5*r1+0.3*r2, 2)
-                s["status"] = "closed"; s["outcome"] = "TRAIL"
+                s["status"] = "closed"; s["outcome"] = "TRAIL"; s["pnl_r"] = pnl
                 log.info(f"{sym}: Trail close +{pnl}R")
                 send_telegram(
                     f"📉 <b>Trailing Stop Hit</b>  {sym}\n"
                     f"Closed at TP1 trail → <b>+{pnl}R</b>"
                 )
+                if _reflect_available:
+                    try: record_trade_reflection(s, "TRAIL", pnl)
+                    except Exception as e: log.warning(f"Reflection failed: {e}")
             else:
                 s["status"] = "closed"; s["outcome"] = "SL"; s["pnl_r"] = -1.0
                 log.info(f"{sym}: SL hit -1R")
@@ -208,6 +233,9 @@ def monitor():
                     f"{d} @ <b>{eff_sl}</b>\n"
                     f"Loss: <b>-1R (${s.get('risk_d', 16)})</b>"
                 )
+                if _reflect_available:
+                    try: record_trade_reflection(s, "SL", -1.0)
+                    except Exception as e: log.warning(f"Reflection failed: {e}")
             changed = True
 
     if changed:
