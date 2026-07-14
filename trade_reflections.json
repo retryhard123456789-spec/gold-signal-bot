@@ -1,0 +1,19 @@
+{
+  "version": 2,
+  "created": "",
+  "trade_reflections": [],
+  "rl_state": {
+    "last_analysis": null,
+    "total_trades": 0,
+    "win_rate": null,
+    "by_pair": {},
+    "by_session": {},
+    "by_score_bucket": {},
+    "by_direction": {},
+    "by_zone_type": {},
+    "avg_r_won": null,
+    "suggestions": [],
+    "parameter_history": []
+  },
+  "weekly_summaries": []
+}
