@@ -137,7 +137,7 @@ def check_signals_json():
         # Check for stale pending signals (>24h)
         now = datetime.now(timezone.utc)
         stale = [s for s in sigs if s.get("status") == "pending"
-                 and (now - datetime.fromisoformat(s["signal_ts"].replace("Z","+00:00"))).total_seconds() > 86400]
+                 and (now - datetime.fromisoformat(s["signal_ts"].replace("Z","+00:00"))).total_seconds() > 172800]
         if stale:
             for s in stale:
                 s["status"] = "expired"
