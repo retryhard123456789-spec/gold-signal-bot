@@ -43,9 +43,12 @@ PAIR_TICKERS = {
     "AUD/CAD": "AUDCAD=X", "AUD/CHF": "AUDCHF=X",
     "CHF/JPY": "CHFJPY=X", "AUD/NZD": "AUDNZD=X",
     "GBP/NZD": "GBPNZD=X", "EUR/NZD": "EURNZD=X",
+    "GBP/CAD": "GBPCAD=X",
+    "USD/NOK": "USDNOK=X", "USD/SEK": "USDSEK=X",
     "WTI/USD": "CL=F",
-    "NAS100":  "NQ=F",
-    "US30":    "YM=F",
+    "COPPER":  "HG=F",     "XPT/USD": "PL=F",
+    "NAS100":  "NQ=F",     "US30":    "YM=F",
+    "SPX500":  "ES=F",     "DAX40":   "^GDAXI",  "NKY225": "^N225",
 }
 PAIR_PIPS = {
     "XAU/USD": 0.10,   "XAG/USD": 0.010,
@@ -59,9 +62,12 @@ PAIR_PIPS = {
     "AUD/CAD": 0.0001, "AUD/CHF": 0.0001,
     "CHF/JPY": 0.010,  "AUD/NZD": 0.0001,
     "GBP/NZD": 0.0001, "EUR/NZD": 0.0001,
+    "GBP/CAD": 0.0001,
+    "USD/NOK": 0.0001, "USD/SEK": 0.0001,
     "WTI/USD": 0.01,
-    "NAS100":  1.0,
-    "US30":    1.0,
+    "COPPER":  0.001,  "XPT/USD": 0.10,
+    "NAS100":  1.0,    "US30":    1.0,
+    "SPX500":  1.0,    "DAX40":   1.0,    "NKY225": 10.0,
 }
 PAIR_SPREAD = {
     "XAU/USD": 0.50,    "XAG/USD": 0.030,
@@ -75,9 +81,12 @@ PAIR_SPREAD = {
     "AUD/CAD": 0.00025, "AUD/CHF": 0.00030,
     "CHF/JPY": 0.050,   "AUD/NZD": 0.00030,
     "GBP/NZD": 0.00035, "EUR/NZD": 0.00030,
+    "GBP/CAD": 0.00025,
+    "USD/NOK": 0.00050, "USD/SEK": 0.00060,
     "WTI/USD": 0.05,
-    "NAS100":  2.0,
-    "US30":    3.0,
+    "COPPER":  0.0020,  "XPT/USD": 0.50,
+    "NAS100":  2.0,     "US30":    3.0,
+    "SPX500":  0.50,    "DAX40":   1.50,   "NKY225": 30.0,
 }
 PAIR_MIN_SL = {
     "XAU/USD": 5.0,    "XAG/USD": 0.15,
@@ -90,10 +99,13 @@ PAIR_MIN_SL = {
     "NZD/CAD": 0.0010, "NZD/JPY": 0.100,
     "AUD/CAD": 0.0010, "AUD/CHF": 0.0012,
     "CHF/JPY": 0.120,  "AUD/NZD": 0.0012,
-    "GBP/NZD": 0.0020, "EUR/NZD": 0.0018,
+    "GBP/NZD": 0.0020,  "EUR/NZD": 0.0018,
+    "GBP/CAD": 0.0015,
+    "USD/NOK": 0.0030,  "USD/SEK": 0.0030,
     "WTI/USD": 0.50,
-    "NAS100":  50.0,
-    "US30":    50.0,
+    "COPPER":  0.010,   "XPT/USD": 3.0,
+    "NAS100":  50.0,    "US30":    50.0,
+    "SPX500":  20.0,    "DAX40":   50.0,   "NKY225": 200.0,
 }
 
 logging.basicConfig(
