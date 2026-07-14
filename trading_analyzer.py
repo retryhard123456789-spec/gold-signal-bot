@@ -283,6 +283,51 @@ def find_ob(df, direction, lookback=100):
             return ob_lo,ob_hi,"OB"
     return None,None,None
 
+def find_liquidity_sweep(df, direction, lookback=60, recent=8):
+    """
+    Detect if price recently swept a key swing level then reversed — highest-probability SMC entry.
+    BUY: price wick below swing low then closed back above it (sell-side liquidity swept).
+    SELL: price wick above swing high then closed back below it (buy-side liquidity swept).
+    Returns (swept, sweep_level).
+    """
+    h, l, c = df.high.values, df.low.values, df.close.values
+    n = len(c)
+    if n < lookback + recent: return False, None
+    for i in range(n - recent, n - 1):
+        prior = slice(max(0, i - lookback), i)
+        if direction == "BUY":
+            swing_low = min(l[prior])
+            if l[i] < swing_low and c[i] > swing_low:
+                return True, round(swing_low, 8)
+        else:
+            swing_high = max(h[prior])
+            if h[i] > swing_high and c[i] < swing_high:
+                return True, round(swing_high, 8)
+    return False, None
+
+def get_zone_score(df_h4, price, direction):
+    """
+    Score -2 to +2 based on premium/discount zone relative to H4 swing range.
+    BUY should be in discount (lower 50%) — wrong zone penalises score by 2.
+    SELL should be in premium (upper 50%) — wrong zone penalises score by 2.
+    """
+    h = df_h4.high.values[-100:]
+    l = df_h4.low.values[-100:]
+    swing_high, swing_low = max(h), min(l)
+    rng = swing_high - swing_low
+    if rng <= 0: return 0
+    position = (price - swing_low) / rng   # 0.0 = at swing low, 1.0 = at swing high
+    if direction == "BUY":
+        if position <= 0.35: return 2    # deep discount — ideal
+        if position <= 0.50: return 1    # discount
+        if position <= 0.65: return 0    # neutral zone
+        return -2                         # premium — wrong zone for buy
+    else:
+        if position >= 0.65: return 2    # deep premium — ideal
+        if position >= 0.50: return 1    # premium
+        if position >= 0.35: return 0    # neutral zone
+        return -2                         # discount — wrong zone for sell
+
 def find_fvg(df, direction, lookback=50):
     """Fair Value Gap: 3-candle imbalance with gap between c1-high and c3-low."""
     h,l=df.high.values,df.low.values
@@ -513,11 +558,19 @@ def analyze_pair(symbol, cfg, sigs):
     if abs(price-ob_edge)>8.0*atr:
         return skip(f"Price too far from zone ({direction}) — waiting for retrace")
 
+    # Liquidity sweep detection (+2 if swept, 0 if not — bonus only)
+    sweep_detected, sweep_level = find_liquidity_sweep(c15, direction)
+    sweep_bonus = 2 if sweep_detected else 0
+
+    # Premium / Discount zone score (-2 to +2)
+    zone_bonus = get_zone_score(c4, price, direction)
+
     # Score the setup
     sc=score_setup(w1_b,d1_b,adx_val,pdi,ndi,st_h4,st_h1,st_m15,
                    e20h4,e50h4,e200h4,e20h1,e50h1,e20m15,e50m15,
                    rsi_m15,macd_h,bb_squeeze,direction,
                    st_m5=st_m5,e20m5=e20m5,e50m5=e50m5)
+    sc = sc + sweep_bonus + zone_bonus
     min_score=9
     if sc<min_score:
         e_lbl = f"EMA {round(e20m15,1)}/{round(e50m15,1)}"
@@ -545,8 +598,21 @@ def analyze_pair(symbol, cfg, sigs):
     rr=round(abs(tp1-entry)/sl_dist,1)
     if rr<cfg.get("min_rr",1.3): return skip(f"R:R 1:{rr} too low (min 1:{cfg.get('min_rr',1.3)})")
 
-    # Lot sizing
-    risk_d  =cfg.get("risk_dollars",16)
+    # Dynamic risk sizing — bigger bets on cleaner setups
+    base_risk = cfg.get("risk_dollars", 16)
+    if sc >= 15:
+        risk_d = round(base_risk * 1.5, 2)
+        size_label = "1.5x (Elite)"
+    elif sc >= 13:
+        risk_d = round(base_risk * 1.25, 2)
+        size_label = "1.25x (Strong)"
+    elif sc >= 11:
+        risk_d = base_risk
+        size_label = "1x (Standard)"
+    else:
+        risk_d = round(base_risk * 0.5, 2)
+        size_label = "0.5x (Cautious)"
+
     slp     =round(sl_dist/pip)
     std_lots=round(risk_d/(slp*pip_val),2) if slp>0 else 0
     mini    =round(std_lots*10,1)
@@ -567,6 +633,9 @@ def analyze_pair(symbol, cfg, sigs):
         "tp1_hit":False,"tp2_hit":False,
         "signal_ts":datetime.now(timezone.utc).isoformat(),
         "st_m5":st_m5,
+        "sweep_detected":sweep_detected,"sweep_level":sweep_level,
+        "zone_bonus":zone_bonus,"sweep_bonus":sweep_bonus,
+        "size_label":size_label,
         **pivots, **weekly,
     }
     return sig, None
@@ -707,6 +776,13 @@ def fmt_signal(s):
     zone_icon = "🟥 Order Block" if zone_type == "OB" else "⚡ Fair Value Gap"
     sq = s.get("bb_squeeze", False)
     sess_icon = "🌙 Asian" if s["session"] == "Asian" else "🌍 London/NY"
+    sweep_line = f"   💧 Liquidity Sweep @ {s['sweep_level']} ✅ (+2)\n" if s.get("sweep_detected") else ""
+    zb = s.get("zone_bonus", 0)
+    zone_label = {2:"Deep Discount ✅ (+2)", 1:"Discount ✅ (+1)", 0:"Neutral Zone",
+                  -2:"⚠️ Wrong Zone (-2)"}.get(zb, "") if s["direction"]=="BUY" else \
+                 {2:"Deep Premium ✅ (+2)", 1:"Premium ✅ (+1)", 0:"Neutral Zone",
+                  -2:"⚠️ Wrong Zone (-2)"}.get(zb, "")
+    size_label = s.get("size_label", "1x")
 
     # Confidence breakdown
     d = s["direction"]
@@ -785,12 +861,13 @@ def fmt_signal(s):
 ⚡ BE:    Move SL to entry after TP1 | Trailing SL after TP2
 
 ━━━━━━━━━━━━━━━━━
-📦 Position Size (${rd} risk)
+📦 Position Size — {size_label} (${rd} risk)
    Standard: {s['std_lots']} lots  |  Mini: {s['mini_lots']} lots
    ⚠️ Max loss if SL hit: -${s['exp_loss']}
 ━━━━━━━━━━━━━━━━━
 🔍 Confirmations
-   • Order Block 🟥 (liquidity swept ✅) + H4 confluence 🔥
+{sweep_line}   • {zone_icon} — {zone_label}
+   • H4 Zone: {zone_label}
    • Supertrend confirmed ✅
 
 📈 Bias
