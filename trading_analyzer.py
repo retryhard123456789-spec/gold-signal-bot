@@ -473,11 +473,17 @@ def analyze_pair(symbol, cfg, sigs):
     def cl(df): return df.iloc[:-1] if len(df)>2 else df
     c5=cl(df_m5); c15=cl(df_m15); c1=cl(df_1h); c4=cl(df_4h); cd=cl(df_1d); cw=cl(df_1wk)
 
-    # Session ADX threshold
+    # Session ADX threshold — JPY pairs are most liquid during Asian session
     now_utc=datetime.now(timezone.utc)
     utc_h=now_utc.hour+now_utc.minute/60
     is_asian=utc_h<7.0 or utc_h>=22.0
-    adx_min=22 if is_asian else 18
+    is_jpy="JPY" in symbol
+    if is_asian and is_jpy:
+        adx_min=16   # JPY pairs: liquid in Asian, lower bar
+    elif is_asian:
+        adx_min=22   # Non-JPY in Asian: higher bar (less liquid)
+    else:
+        adx_min=18   # London/NY: standard
     session="Asian" if is_asian else "London/NY"
 
     try:
@@ -517,9 +523,12 @@ def analyze_pair(symbol, cfg, sigs):
     if bull==bear: return skip("Mixed signals — no clear direction")
     direction="BUY" if bull>bear else "SELL"
 
-    # Skip if same-direction pending already exists (allow opposite direction)
-    if any(s["symbol"]==symbol and s["status"]=="pending" and s["direction"]==direction for s in sigs):
-        log.info(f"  {symbol}: pending {direction} exists — skip"); return None, None
+    # Allow multiple pending signals in same direction only if entries differ by >20 pips
+    # (catches fresh OBs forming at different levels — genuine new setups)
+    existing_entries = [
+        s["entry"] for s in sigs
+        if s["symbol"]==symbol and s["status"]=="pending" and s["direction"]==direction
+    ]
 
     # News filter — skip 30min before/after high-impact events
     news_blocked, news_reason = is_news_blocked(symbol)
@@ -590,6 +599,13 @@ def analyze_pair(symbol, cfg, sigs):
     sl_dist=abs(entry-sl)
     if sl_dist<min_sl or sl_dist<pip:
         return skip(f"SL too tight ({round(sl_dist,digits)}) — widening needed")
+
+    # Block duplicate: if an existing pending is within 20 pips of this entry, skip
+    min_separation = pip * 20
+    for ex_entry in existing_entries:
+        if abs(entry - ex_entry) < min_separation:
+            log.info(f"  {symbol}: pending {direction} @ {ex_entry} too close to {entry} — skip")
+            return None, None
 
     tps=calc_tps(entry,direction,sl,sr,digits)
     if not tps: return skip(f"No valid TP levels found for {direction}")
