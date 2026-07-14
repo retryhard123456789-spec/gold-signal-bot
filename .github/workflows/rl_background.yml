@@ -1,0 +1,27 @@
+name: Background RL Analysis
+on:
+  schedule:
+    - cron: '0 */6 * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  rl:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests pandas yfinance
+
+      - name: Run RL analysis
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ secrets.TG_CHAT }}
+          GH_TOKEN: ${{ secrets.GH_TOKEN }}
+        run: python reflection.py
