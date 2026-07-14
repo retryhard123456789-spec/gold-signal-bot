@@ -1,7 +1,35 @@
 {
   "version": 2,
   "created": "",
-  "trade_reflections": [],
+  "trade_reflections": [
+    {
+      "id": "USDCAD-2026-07-13T18:53",
+      "ts_closed": "2026-07-14T08:01:26.946648+00:00",
+      "ts_signal": "2026-07-13T18:53:16.325236+00:00",
+      "symbol": "USD/CAD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 7,
+      "adx": 23.6,
+      "rsi": 57.0,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 7/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 H4 Supertrend was not aligned with BUY direction \u2014 entry was against H4 momentum.\n  \u2022 H1 Supertrend conflicted with BUY \u2014 two-timeframe Supertrend misalignment is a red flag.",
+      "warning_tags": [
+        "low_score",
+        "h4_st_conflict",
+        "h1_st_conflict"
+      ],
+      "positive_tags": []
+    }
+  ],
   "rl_state": {
     "last_analysis": null,
     "total_trades": 0,
