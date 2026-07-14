@@ -65,11 +65,19 @@ PAIRS = {
     # Forex crosses
     "GBP/NZD": {"ticker": "GBPNZD=X", "pip": 0.0001, "pip_val": 6.00, "digits": 5, "spread": 0.00035,"min_sl": 0.0020},
     "EUR/NZD": {"ticker": "EURNZD=X", "pip": 0.0001, "pip_val": 6.00, "digits": 5, "spread": 0.00030,"min_sl": 0.0018},
+    "GBP/CAD": {"ticker": "GBPCAD=X", "pip": 0.0001, "pip_val": 7.50, "digits": 5, "spread": 0.00025,"min_sl": 0.0015},
+    "USD/NOK": {"ticker": "USDNOK=X", "pip": 0.0001, "pip_val": 9.50, "digits": 4, "spread": 0.00050,"min_sl": 0.0030},
+    "USD/SEK": {"ticker": "USDSEK=X", "pip": 0.0001, "pip_val": 9.50, "digits": 4, "spread": 0.00060,"min_sl": 0.0030},
     # Commodities
     "WTI/USD": {"ticker": "CL=F",     "pip": 0.01,   "pip_val": 10.0, "digits": 2, "spread": 0.05,   "min_sl": 0.50},
-    # Indices — pip_val is indicative (1 point per micro lot); verify with your broker
+    "COPPER":  {"ticker": "HG=F",     "pip": 0.001,  "pip_val": 2.50, "digits": 3, "spread": 0.0020, "min_sl": 0.010},
+    "XPT/USD": {"ticker": "PL=F",     "pip": 0.10,   "pip_val": 5.00, "digits": 2, "spread": 0.50,   "min_sl": 3.0},
+    # Indices — pip_val is indicative; verify contract size with your broker
     "NAS100":  {"ticker": "NQ=F",     "pip": 1.0,    "pip_val": 2.0,  "digits": 1, "spread": 2.0,    "min_sl": 50.0},
     "US30":    {"ticker": "YM=F",     "pip": 1.0,    "pip_val": 0.5,  "digits": 1, "spread": 3.0,    "min_sl": 50.0},
+    "SPX500":  {"ticker": "ES=F",     "pip": 1.0,    "pip_val": 0.5,  "digits": 1, "spread": 0.50,   "min_sl": 20.0},
+    "DAX40":   {"ticker": "^GDAXI",   "pip": 1.0,    "pip_val": 1.0,  "digits": 1, "spread": 1.50,   "min_sl": 50.0},
+    "NKY225":  {"ticker": "^N225",    "pip": 10.0,   "pip_val": 0.07, "digits": 0, "spread": 30.0,   "min_sl": 200.0},
 }
 
 # ── Cooldown state ────────────────────────────────────────────
@@ -129,11 +137,17 @@ def _fetch_ff_events():
         log.warning(f"News fetch failed: {e}")
     return _NEWS_CACHE["events"]
 
+_INSTRUMENT_CCY = {
+    "NAS100":  {"USD"}, "US30":   {"USD"}, "SPX500": {"USD"},
+    "WTI/USD": {"USD"}, "COPPER": {"USD"}, "XPT/USD":{"USD"},
+    "DAX40":   {"EUR"},
+    "NKY225":  {"JPY"},
+}
+
 def is_news_blocked(symbol):
     """Return (blocked, reason) — True if high-impact event within ±30 min for either currency."""
-    # Indices and oil are USD-denominated — block on USD news events
-    if symbol in ("NAS100", "US30", "WTI/USD"):
-        ccys = {"USD"}
+    if symbol in _INSTRUMENT_CCY:
+        ccys = _INSTRUMENT_CCY[symbol]
     else:
         parts = symbol.replace("XAU", "GOLD").replace("XAG", "SILVER").split("/")
         ccys = set()
@@ -489,7 +503,7 @@ def analyze_pair(symbol, cfg, sigs):
     now_utc=datetime.now(timezone.utc)
     utc_h=now_utc.hour+now_utc.minute/60
     is_asian=utc_h<7.0 or utc_h>=22.0
-    is_jpy="JPY" in symbol
+    is_jpy="JPY" in symbol or symbol=="NKY225"
     if is_asian and is_jpy:
         adx_min=16   # JPY pairs: liquid in Asian, lower bar
     elif is_asian:
@@ -804,8 +818,8 @@ def fmt_signal(s):
     zone_icon = "🟥 Order Block" if zone_type == "OB" else "⚡ Fair Value Gap"
     sq = s.get("bb_squeeze", False)
     sess_icon = "🌙 Asian" if s["session"] == "Asian" else "🌍 London/NY"
-    is_index  = s["symbol"] in ("NAS100", "US30")
-    broker_note = "\n⚠️ <i>Index: pip_val is indicative — verify contract size with your broker.</i>" if is_index else ""
+    _needs_broker_note = s["symbol"] in ("NAS100","US30","SPX500","DAX40","NKY225","COPPER","XPT/USD")
+    broker_note = "\n⚠️ <i>Position size is indicative — verify contract size with your broker.</i>" if _needs_broker_note else ""
     sweep_line = f"   💧 Liquidity Sweep @ {s['sweep_level']} ✅ (+2)\n" if s.get("sweep_detected") else ""
     zb = s.get("zone_bonus", 0)
     zone_label = {2:"Deep Discount ✅ (+2)", 1:"Discount ✅ (+1)", 0:"Neutral Zone",
