@@ -42,6 +42,10 @@ PAIR_TICKERS = {
     "NZD/CAD": "NZDCAD=X", "NZD/JPY": "NZDJPY=X",
     "AUD/CAD": "AUDCAD=X", "AUD/CHF": "AUDCHF=X",
     "CHF/JPY": "CHFJPY=X", "AUD/NZD": "AUDNZD=X",
+    "GBP/NZD": "GBPNZD=X", "EUR/NZD": "EURNZD=X",
+    "WTI/USD": "CL=F",
+    "NAS100":  "NQ=F",
+    "US30":    "YM=F",
 }
 PAIR_PIPS = {
     "XAU/USD": 0.10,   "XAG/USD": 0.010,
@@ -54,6 +58,10 @@ PAIR_PIPS = {
     "NZD/CAD": 0.0001, "NZD/JPY": 0.010,
     "AUD/CAD": 0.0001, "AUD/CHF": 0.0001,
     "CHF/JPY": 0.010,  "AUD/NZD": 0.0001,
+    "GBP/NZD": 0.0001, "EUR/NZD": 0.0001,
+    "WTI/USD": 0.01,
+    "NAS100":  1.0,
+    "US30":    1.0,
 }
 PAIR_SPREAD = {
     "XAU/USD": 0.50,    "XAG/USD": 0.030,
@@ -66,6 +74,10 @@ PAIR_SPREAD = {
     "NZD/CAD": 0.00030, "NZD/JPY": 0.040,
     "AUD/CAD": 0.00025, "AUD/CHF": 0.00030,
     "CHF/JPY": 0.050,   "AUD/NZD": 0.00030,
+    "GBP/NZD": 0.00035, "EUR/NZD": 0.00030,
+    "WTI/USD": 0.05,
+    "NAS100":  2.0,
+    "US30":    3.0,
 }
 PAIR_MIN_SL = {
     "XAU/USD": 5.0,    "XAG/USD": 0.15,
@@ -78,6 +90,10 @@ PAIR_MIN_SL = {
     "NZD/CAD": 0.0010, "NZD/JPY": 0.100,
     "AUD/CAD": 0.0010, "AUD/CHF": 0.0012,
     "CHF/JPY": 0.120,  "AUD/NZD": 0.0012,
+    "GBP/NZD": 0.0020, "EUR/NZD": 0.0018,
+    "WTI/USD": 0.50,
+    "NAS100":  50.0,
+    "US30":    50.0,
 }
 
 logging.basicConfig(
