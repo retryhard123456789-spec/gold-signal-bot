@@ -1,12 +1,13 @@
 name: Multi-Pair Analyzer
 on:
   schedule:
-    - cron: '*/15 * * * 1-5'
+    - cron: '0 */6 * * 1-5'
   workflow_dispatch:
 
 jobs:
   analyze:
     runs-on: ubuntu-latest
+    timeout-minutes: 355
     steps:
       - uses: actions/checkout@v4
 
@@ -22,14 +23,33 @@ jobs:
         with:
           python-version: '3.11'
 
+      - name: Cache pip packages
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/pip
+          key: pip-v1
+          restore-keys: pip-
+
       - name: Install dependencies
         run: pip install requests pandas yfinance
 
-      - name: Run analyzer
+      - name: Run analyzer loop (every 15 min for 5h55m)
         env:
           TG_TOKEN: ${{ secrets.TG_TOKEN }}
           TG_CHAT: ${{ secrets.TG_CHAT }}
-        run: python trading_analyzer.py
+        run: |
+          END=$((SECONDS + 21300))
+          while [ $SECONDS -lt $END ]; do
+            SCAN_START=$SECONDS
+            echo "=== Analyzer scan at $(date -u) ==="
+            python trading_analyzer.py
+            ELAPSED=$((SECONDS - SCAN_START))
+            REMAINING=$((900 - ELAPSED))
+            if [ $REMAINING -gt 60 ]; then
+              echo "=== Next scan in ${REMAINING}s ==="
+              sleep $REMAINING
+            fi
+          done
 
       - name: Save signals
         uses: actions/cache/save@v4
