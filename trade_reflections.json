@@ -645,15 +645,41 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "CADJPY-2026-07-14T10:33",
+      "ts_closed": "2026-07-14T21:03:17.901179+00:00",
+      "ts_signal": "2026-07-14T10:33:55.374140+00:00",
+      "symbol": "CAD/JPY",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 18.3,
+      "rsi": 58.7,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "TP3",
+      "pnl_r": 2.5,
+      "reflection": "Outcome: \ud83c\udfc6 TP3\nWhat worked:\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-14T21:02:52.456324+00:00",
-    "total_trades": 24,
-    "win_rate": 0.208,
-    "wins": 5,
+    "last_analysis": "2026-07-14T21:03:18.344038+00:00",
+    "total_trades": 25,
+    "win_rate": 0.24,
+    "wins": 6,
     "losses": 19,
-    "avg_r_won": 1.56,
+    "avg_r_won": 1.71,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -733,17 +759,17 @@
         "avg_r": -1.0
       },
       "CAD/JPY": {
-        "trades": 2,
-        "wins": 2,
+        "trades": 3,
+        "wins": 3,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.32
+        "avg_r": 1.71
       }
     },
     "by_session": {
       "London/NY": {
-        "trades": 18,
-        "win_rate": 0.111
+        "trades": 19,
+        "win_rate": 0.158
       },
       "Asian": {
         "trades": 6,
@@ -752,8 +778,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 19,
-        "win_rate": 0.105
+        "trades": 20,
+        "win_rate": 0.15
       },
       "11-12": {
         "trades": 5,
@@ -766,8 +792,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 14,
-        "win_rate": 0.357
+        "trades": 15,
+        "win_rate": 0.4
       },
       "SELL": {
         "trades": 10,
@@ -776,8 +802,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 24,
-        "win_rate": 0.208
+        "trades": 25,
+        "win_rate": 0.24
       }
     },
     "common_loss_patterns": [
@@ -808,7 +834,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 21% across 24 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 24% across 25 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -816,7 +842,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 10% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 15% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
       },
       {
@@ -955,6 +981,12 @@
         "ts": "2026-07-14T21:02:52.456310+00:00",
         "n_trades": 24,
         "win_rate": 0.208,
+        "suggestions_count": 4
+      },
+      {
+        "ts": "2026-07-14T21:03:18.344024+00:00",
+        "n_trades": 25,
+        "win_rate": 0.24,
         "suggestions_count": 4
       }
     ]
