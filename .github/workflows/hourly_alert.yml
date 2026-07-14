@@ -1,0 +1,69 @@
+name: Hourly Human Alert
+on:
+  schedule:
+    - cron: '0 * * * 1-5'
+  workflow_dispatch:
+
+jobs:
+  alert:
+    runs-on: ubuntu-latest
+    timeout-minutes: 5
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Send alert if needed
+        env:
+          TG_TOKEN: ${{ secrets.TG_TOKEN }}
+          TG_CHAT: ${{ secrets.TG_CHAT }}
+        run: |
+          python - <<'EOF'
+          import json, os, requests
+          from pathlib import Path
+          from datetime import datetime, timezone
+
+          status_file = Path("diagnostics_status.json")
+          if not status_file.exists():
+              print("No diagnostics_status.json — skipping")
+              exit(0)
+
+          status = json.loads(status_file.read_text())
+          if status.get("all_ok", True):
+              print("All systems OK — no alert needed")
+              exit(0)
+
+          issues = status.get("needs_human", [])
+          if not issues:
+              exit(0)
+
+          TG_TOKEN = os.environ["TG_TOKEN"]
+          TG_CHAT  = os.environ["TG_CHAT"]
+          now = datetime.now(timezone.utc).strftime("%d %b %Y %H:%M UTC")
+          lines = [
+              "🚨 <b>Bot Needs Human Assistance</b>",
+              f"🕐 {now}",
+              "",
+              "The following issues could NOT be auto-fixed:",
+              "",
+          ]
+          for issue in issues:
+              lines.append(f"❌ <b>{issue['check']}</b>: {issue['detail']}")
+          lines += [
+              "",
+              "Please fix these manually, then send <b>diagnostics</b> to clear this alert.",
+              "⏰ This message repeats every hour until resolved.",
+          ]
+          requests.post(
+              f"https://api.telegram.org/bot{TG_TOKEN}/sendMessage",
+              json={"chat_id": TG_CHAT, "text": chr(10).join(lines), "parse_mode": "HTML"},
+              timeout=15,
+          )
+          print(f"Alert sent — {len(issues)} issue(s)")
+          EOF
