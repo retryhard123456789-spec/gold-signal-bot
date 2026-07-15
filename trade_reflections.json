@@ -2629,15 +2629,42 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "EURCAD-2026-07-15T08:39",
+      "ts_closed": "2026-07-15T22:00:15.371525+00:00",
+      "ts_signal": "2026-07-15T08:39:11.431912+00:00",
+      "symbol": "EUR/CAD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 31.6,
+      "rsi": 35.8,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "BE",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \u26a1 Breakeven\nWhat worked:\n  \u2022 ADX 31.6 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 31.6 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T22:00:13.814609+00:00",
-    "total_trades": 98,
-    "win_rate": 0.367,
-    "wins": 36,
+    "last_analysis": "2026-07-15T22:00:15.562403+00:00",
+    "total_trades": 99,
+    "win_rate": 0.374,
+    "wins": 37,
     "losses": 62,
-    "avg_r_won": 1.82,
+    "avg_r_won": 1.79,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -2703,11 +2730,11 @@
         "avg_r": 0.36
       },
       "EUR/CAD": {
-        "trades": 5,
-        "wins": 1,
+        "trades": 6,
+        "wins": 2,
         "losses": 4,
-        "win_rate": 0.2,
-        "avg_r": -0.62
+        "win_rate": 0.333,
+        "avg_r": -0.37
       },
       "NZD/CAD": {
         "trades": 2,
@@ -2789,8 +2816,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 79,
-        "win_rate": 0.316
+        "trades": 80,
+        "win_rate": 0.325
       },
       "Asian": {
         "trades": 19,
@@ -2799,8 +2826,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 92,
-        "win_rate": 0.359
+        "trades": 93,
+        "win_rate": 0.366
       },
       "11-12": {
         "trades": 6,
@@ -2813,8 +2840,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 58,
-        "win_rate": 0.397
+        "trades": 59,
+        "win_rate": 0.407
       },
       "SELL": {
         "trades": 40,
@@ -2823,8 +2850,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 97,
-        "win_rate": 0.361
+        "trades": 98,
+        "win_rate": 0.367
       },
       "FVG": {
         "trades": 1,
@@ -2859,7 +2886,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 37% across 98 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 37% across 99 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2889,9 +2916,9 @@
       {
         "type": "pair_review",
         "param": "EUR/CAD",
-        "win_rate": 0.2,
-        "trades": 5,
-        "reason": "EUR/CAD win rate is 20% over 5 trades \u2014 consider removing or trading only with score \u226511.",
+        "win_rate": 0.333,
+        "trades": 6,
+        "reason": "EUR/CAD win rate is 33% over 6 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "medium"
       },
       {
@@ -2907,7 +2934,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 36% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 37% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
       },
       {
@@ -3490,6 +3517,12 @@
         "ts": "2026-07-15T22:00:13.814600+00:00",
         "n_trades": 98,
         "win_rate": 0.367,
+        "suggestions_count": 9
+      },
+      {
+        "ts": "2026-07-15T22:00:15.562392+00:00",
+        "n_trades": 99,
+        "win_rate": 0.374,
         "suggestions_count": 9
       }
     ]
