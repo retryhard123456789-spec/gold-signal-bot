@@ -723,14 +723,41 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "EURCAD-2026-07-14T08:33",
+      "ts_closed": "2026-07-15T02:21:19.438620+00:00",
+      "ts_signal": "2026-07-14T08:33:59.919026+00:00",
+      "symbol": "EUR/CAD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 28.8,
+      "rsi": 37.9,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 H4 Supertrend was not aligned with BUY direction \u2014 entry was against H4 momentum.\n  \u2022 H1 Supertrend conflicted with BUY \u2014 two-timeframe Supertrend misalignment is a red flag.",
+      "warning_tags": [
+        "low_score",
+        "h4_st_conflict",
+        "h1_st_conflict"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-14T22:00:48.545801+00:00",
-    "total_trades": 27,
-    "win_rate": 0.222,
+    "last_analysis": "2026-07-15T02:21:19.603733+00:00",
+    "total_trades": 28,
+    "win_rate": 0.214,
     "wins": 6,
-    "losses": 21,
+    "losses": 22,
     "avg_r_won": 1.71,
     "by_pair": {
       "USD/CAD": {
@@ -797,9 +824,9 @@
         "avg_r": -1.0
       },
       "EUR/CAD": {
-        "trades": 1,
+        "trades": 2,
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -827,8 +854,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 21,
-        "win_rate": 0.143
+        "trades": 22,
+        "win_rate": 0.136
       },
       "Asian": {
         "trades": 6,
@@ -837,8 +864,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 21,
-        "win_rate": 0.143
+        "trades": 22,
+        "win_rate": 0.136
       },
       "11-12": {
         "trades": 6,
@@ -851,8 +878,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 17,
-        "win_rate": 0.353
+        "trades": 18,
+        "win_rate": 0.333
       },
       "SELL": {
         "trades": 10,
@@ -861,14 +888,14 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 27,
-        "win_rate": 0.222
+        "trades": 28,
+        "win_rate": 0.214
       }
     },
     "common_loss_patterns": [
       [
         "low_score",
-        18
+        19
       ],
       [
         "weak_htf",
@@ -876,11 +903,11 @@
       ],
       [
         "h4_st_conflict",
-        8
+        9
       ],
       [
         "h1_st_conflict",
-        8
+        9
       ],
       [
         "low_adx",
@@ -893,7 +920,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 22% across 27 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 21% across 28 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -908,17 +935,17 @@
         "type": "pattern",
         "tag": "low_score",
         "frequency": 0.86,
-        "loss_count": 18,
+        "loss_count": 19,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.62,
+        "frequency": 0.59,
         "loss_count": 13,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
-        "confidence": "high"
+        "confidence": "medium"
       }
     ],
     "parameter_history": [
@@ -1058,6 +1085,12 @@
         "ts": "2026-07-14T22:00:48.545787+00:00",
         "n_trades": 27,
         "win_rate": 0.222,
+        "suggestions_count": 4
+      },
+      {
+        "ts": "2026-07-15T02:21:19.603721+00:00",
+        "n_trades": 28,
+        "win_rate": 0.214,
         "suggestions_count": 4
       }
     ]
