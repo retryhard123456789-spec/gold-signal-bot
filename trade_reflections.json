@@ -2493,14 +2493,40 @@
         "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
         "Order Block entry held well as support/resistance."
       ]
+    },
+    {
+      "id": "GBPJPY-2026-07-15T11:23",
+      "ts_closed": "2026-07-15T21:00:37.799249+00:00",
+      "ts_signal": "2026-07-15T11:23:52.700305+00:00",
+      "symbol": "GBP/JPY",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 20.4,
+      "rsi": 58.5,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 ADX 20.4 was below 22 \u2014 trend was weak, increasing whipsaw risk.",
+      "warning_tags": [
+        "low_score",
+        "low_adx"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T21:00:14.076975+00:00",
-    "total_trades": 93,
-    "win_rate": 0.355,
+    "last_analysis": "2026-07-15T21:00:37.970228+00:00",
+    "total_trades": 94,
+    "win_rate": 0.351,
     "wins": 33,
-    "losses": 60,
+    "losses": 61,
     "avg_r_won": 1.85,
     "by_pair": {
       "USD/CAD": {
@@ -2637,17 +2663,17 @@
         "avg_r": -1.0
       },
       "GBP/JPY": {
-        "trades": 8,
+        "trades": 9,
         "wins": 8,
-        "losses": 0,
-        "win_rate": 1.0,
-        "avg_r": 3.3
+        "losses": 1,
+        "win_rate": 0.889,
+        "avg_r": 2.82
       }
     },
     "by_session": {
       "London/NY": {
-        "trades": 74,
-        "win_rate": 0.297
+        "trades": 75,
+        "win_rate": 0.293
       },
       "Asian": {
         "trades": 19,
@@ -2656,8 +2682,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 87,
-        "win_rate": 0.345
+        "trades": 88,
+        "win_rate": 0.341
       },
       "11-12": {
         "trades": 6,
@@ -2670,8 +2696,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 55,
-        "win_rate": 0.4
+        "trades": 56,
+        "win_rate": 0.393
       },
       "SELL": {
         "trades": 38,
@@ -2680,8 +2706,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 92,
-        "win_rate": 0.348
+        "trades": 93,
+        "win_rate": 0.344
       },
       "FVG": {
         "trades": 1,
@@ -2691,7 +2717,7 @@
     "common_loss_patterns": [
       [
         "low_score",
-        57
+        58
       ],
       [
         "weak_htf",
@@ -2707,7 +2733,7 @@
       ],
       [
         "low_adx",
-        12
+        13
       ]
     ],
     "suggestions": [
@@ -2716,7 +2742,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 35% across 93 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 35% across 94 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2754,9 +2780,9 @@
       {
         "type": "pair_boost",
         "param": "GBP/JPY",
-        "win_rate": 1.0,
-        "trades": 8,
-        "reason": "GBP/JPY win rate is 100% \u2014 strong performer, consider increasing position size by 50%.",
+        "win_rate": 0.889,
+        "trades": 9,
+        "reason": "GBP/JPY win rate is 89% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
       },
       {
@@ -2771,14 +2797,14 @@
         "type": "pattern",
         "tag": "low_score",
         "frequency": 0.95,
-        "loss_count": 57,
+        "loss_count": 58,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.63,
+        "frequency": 0.62,
         "loss_count": 38,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
@@ -3317,6 +3343,12 @@
         "ts": "2026-07-15T21:00:14.076965+00:00",
         "n_trades": 93,
         "win_rate": 0.355,
+        "suggestions_count": 9
+      },
+      {
+        "ts": "2026-07-15T21:00:37.970220+00:00",
+        "n_trades": 94,
+        "win_rate": 0.351,
         "suggestions_count": 9
       }
     ]
