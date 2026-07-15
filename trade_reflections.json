@@ -1317,7 +1317,7 @@
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T08:14:13.796791+00:00",
+    "last_analysis": "2026-07-15T08:23:54.368768+00:00",
     "total_trades": 49,
     "win_rate": 0.224,
     "wins": 11,
@@ -1832,13 +1832,13 @@
   "weekly_summaries": [
     {
       "week": "2026-W29",
-      "generated": "2026-07-15T02:52:43.093755+00:00",
-      "trades_total": 33,
-      "win_rate": 0.182,
-      "avg_r_won": 1.71,
+      "generated": "2026-07-15T08:23:54.368794+00:00",
+      "trades_total": 49,
+      "win_rate": 0.224,
+      "avg_r_won": 1.57,
       "top_pair": "US30",
       "worst_pair": "USD/CAD",
-      "suggestions_count": 5,
+      "suggestions_count": 6,
       "note": "Ready for weekend review with Claude."
     }
   ]
