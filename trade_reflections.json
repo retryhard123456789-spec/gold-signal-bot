@@ -2066,15 +2066,43 @@
         "ADX 29.5 confirmed a strong trend \u2014 high ADX trades perform well.",
         "BB squeeze was active \u2014 momentum explosion setup worked as expected."
       ]
+    },
+    {
+      "id": "AUDNZD-2026-07-14T08:19",
+      "ts_closed": "2026-07-15T19:08:34.723391+00:00",
+      "ts_signal": "2026-07-14T08:19:24.233752+00:00",
+      "symbol": "AUD/NZD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 54.5,
+      "rsi": 47.9,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP1",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \ud83e\udd47 TP1\nWhat worked:\n  \u2022 ADX 54.5 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 54.5 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T19:07:17.923064+00:00",
-    "total_trades": 77,
-    "win_rate": 0.273,
-    "wins": 21,
+    "last_analysis": "2026-07-15T19:08:34.891268+00:00",
+    "total_trades": 78,
+    "win_rate": 0.282,
+    "wins": 22,
     "losses": 56,
-    "avg_r_won": 1.48,
+    "avg_r_won": 1.45,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -2112,11 +2140,11 @@
         "avg_r": -1.0
       },
       "AUD/NZD": {
-        "trades": 5,
-        "wins": 0,
+        "trades": 6,
+        "wins": 1,
         "losses": 5,
-        "win_rate": 0.0,
-        "avg_r": -1.0
+        "win_rate": 0.167,
+        "avg_r": -0.68
       },
       "GBP/NZD": {
         "trades": 6,
@@ -2212,8 +2240,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 66,
-        "win_rate": 0.273
+        "trades": 67,
+        "win_rate": 0.284
       },
       "Asian": {
         "trades": 11,
@@ -2222,8 +2250,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 71,
-        "win_rate": 0.254
+        "trades": 72,
+        "win_rate": 0.264
       },
       "11-12": {
         "trades": 6,
@@ -2240,14 +2268,14 @@
         "win_rate": 0.273
       },
       "SELL": {
-        "trades": 33,
-        "win_rate": 0.273
+        "trades": 34,
+        "win_rate": 0.294
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 76,
-        "win_rate": 0.263
+        "trades": 77,
+        "win_rate": 0.273
       },
       "FVG": {
         "trades": 1,
@@ -2282,7 +2310,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 27% across 77 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 28% across 78 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2296,9 +2324,9 @@
       {
         "type": "pair_review",
         "param": "AUD/NZD",
-        "win_rate": 0.0,
-        "trades": 5,
-        "reason": "AUD/NZD win rate is 0% over 5 trades \u2014 consider removing or trading only with score \u226511.",
+        "win_rate": 0.167,
+        "trades": 6,
+        "reason": "AUD/NZD win rate is 17% over 6 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "medium"
       },
       {
@@ -2314,7 +2342,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 25% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 26% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
       },
       {
@@ -2778,6 +2806,12 @@
         "ts": "2026-07-15T19:07:17.923050+00:00",
         "n_trades": 77,
         "win_rate": 0.273,
+        "suggestions_count": 8
+      },
+      {
+        "ts": "2026-07-15T19:08:34.891258+00:00",
+        "n_trades": 78,
+        "win_rate": 0.282,
         "suggestions_count": 8
       }
     ]
