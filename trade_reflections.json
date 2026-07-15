@@ -2789,13 +2789,41 @@
         "ADX 46.9 confirmed a strong trend \u2014 high ADX trades perform well.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "GBPNZD-2026-07-14T13:49",
+      "ts_closed": "2026-07-15T23:24:53.654958+00:00",
+      "ts_signal": "2026-07-14T13:49:35.597522+00:00",
+      "symbol": "GBP/NZD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 42.2,
+      "rsi": 41.0,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP2",
+      "pnl_r": 1.98,
+      "reflection": "Outcome: \ud83e\udd48 TP2\nWhat worked:\n  \u2022 ADX 42.2 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 42.2 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T22:02:24.785361+00:00",
-    "total_trades": 104,
-    "win_rate": 0.404,
-    "wins": 42,
+    "last_analysis": "2026-07-15T23:24:53.813613+00:00",
+    "total_trades": 105,
+    "win_rate": 0.41,
+    "wins": 43,
     "losses": 62,
     "avg_r_won": 1.74,
     "by_pair": {
@@ -2842,11 +2870,11 @@
         "avg_r": -0.08
       },
       "GBP/NZD": {
-        "trades": 7,
-        "wins": 1,
+        "trades": 8,
+        "wins": 2,
         "losses": 6,
-        "win_rate": 0.143,
-        "avg_r": -0.73
+        "win_rate": 0.25,
+        "avg_r": -0.39
       },
       "US30": {
         "trades": 5,
@@ -2949,8 +2977,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 85,
-        "win_rate": 0.365
+        "trades": 86,
+        "win_rate": 0.372
       },
       "Asian": {
         "trades": 19,
@@ -2959,8 +2987,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 98,
-        "win_rate": 0.398
+        "trades": 99,
+        "win_rate": 0.404
       },
       "11-12": {
         "trades": 6,
@@ -2973,8 +3001,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 64,
-        "win_rate": 0.453
+        "trades": 65,
+        "win_rate": 0.462
       },
       "SELL": {
         "trades": 40,
@@ -2983,8 +3011,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 101,
-        "win_rate": 0.386
+        "trades": 102,
+        "win_rate": 0.392
       },
       "FVG": {
         "trades": 3,
@@ -3019,7 +3047,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 40% across 104 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 41% across 105 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3033,9 +3061,9 @@
       {
         "type": "pair_review",
         "param": "GBP/NZD",
-        "win_rate": 0.143,
-        "trades": 7,
-        "reason": "GBP/NZD win rate is 14% over 7 trades \u2014 consider removing or trading only with score \u226511.",
+        "win_rate": 0.25,
+        "trades": 8,
+        "reason": "GBP/NZD win rate is 25% over 8 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "medium"
       },
       {
@@ -3694,6 +3722,12 @@
         "ts": "2026-07-15T22:02:24.785349+00:00",
         "n_trades": 104,
         "win_rate": 0.404,
+        "suggestions_count": 10
+      },
+      {
+        "ts": "2026-07-15T23:24:53.813599+00:00",
+        "n_trades": 105,
+        "win_rate": 0.41,
         "suggestions_count": 10
       }
     ]
