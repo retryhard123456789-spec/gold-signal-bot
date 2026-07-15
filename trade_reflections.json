@@ -2040,15 +2040,41 @@
         "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
         "Order Block entry held well as support/resistance."
       ]
+    },
+    {
+      "id": "XAUUSD-2026-07-14T19:27",
+      "ts_closed": "2026-07-15T19:07:17.438136+00:00",
+      "ts_signal": "2026-07-14T19:27:12.357085+00:00",
+      "symbol": "XAU/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "FVG",
+      "score": 9,
+      "adx": 29.5,
+      "rsi": 48.4,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BEARISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "TP1",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \ud83e\udd47 TP1\nWhat worked:\n  \u2022 ADX 29.5 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 29.5 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T18:00:58.975527+00:00",
-    "total_trades": 76,
-    "win_rate": 0.263,
-    "wins": 20,
+    "last_analysis": "2026-07-15T19:07:17.923064+00:00",
+    "total_trades": 77,
+    "win_rate": 0.273,
+    "wins": 21,
     "losses": 56,
-    "avg_r_won": 1.51,
+    "avg_r_won": 1.48,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -2065,11 +2091,11 @@
         "avg_r": 0.16
       },
       "XAU/USD": {
-        "trades": 14,
-        "wins": 3,
+        "trades": 15,
+        "wins": 4,
         "losses": 11,
-        "win_rate": 0.214,
-        "avg_r": -0.42
+        "win_rate": 0.267,
+        "avg_r": -0.33
       },
       "CHF/JPY": {
         "trades": 3,
@@ -2186,8 +2212,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 65,
-        "win_rate": 0.262
+        "trades": 66,
+        "win_rate": 0.273
       },
       "Asian": {
         "trades": 11,
@@ -2196,8 +2222,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 70,
-        "win_rate": 0.243
+        "trades": 71,
+        "win_rate": 0.254
       },
       "11-12": {
         "trades": 6,
@@ -2214,14 +2240,18 @@
         "win_rate": 0.273
       },
       "SELL": {
-        "trades": 32,
-        "win_rate": 0.25
+        "trades": 33,
+        "win_rate": 0.273
       }
     },
     "by_zone_type": {
       "OB": {
         "trades": 76,
         "win_rate": 0.263
+      },
+      "FVG": {
+        "trades": 1,
+        "win_rate": 1.0
       }
     },
     "common_loss_patterns": [
@@ -2252,15 +2282,15 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 26% across 76 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 27% across 77 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
         "type": "pair_review",
         "param": "XAU/USD",
-        "win_rate": 0.214,
-        "trades": 14,
-        "reason": "XAU/USD win rate is 21% over 14 trades \u2014 consider removing or trading only with score \u226511.",
+        "win_rate": 0.267,
+        "trades": 15,
+        "reason": "XAU/USD win rate is 27% over 15 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "high"
       },
       {
@@ -2284,7 +2314,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 24% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 25% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
       },
       {
@@ -2742,6 +2772,12 @@
         "ts": "2026-07-15T18:00:58.975514+00:00",
         "n_trades": 76,
         "win_rate": 0.263,
+        "suggestions_count": 8
+      },
+      {
+        "ts": "2026-07-15T19:07:17.923050+00:00",
+        "n_trades": 77,
+        "win_rate": 0.273,
         "suggestions_count": 8
       }
     ]
