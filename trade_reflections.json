@@ -1823,15 +1823,41 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "XAGUSD-2026-07-13T17:28",
+      "ts_closed": "2026-07-15T15:32:26.560663+00:00",
+      "ts_signal": "2026-07-13T17:28:57.633375+00:00",
+      "symbol": "XAG/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 18.5,
+      "rsi": 37.5,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP2",
+      "pnl_r": 1.74,
+      "reflection": "Outcome: \ud83e\udd48 TP2\nWhat worked:\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T15:23:26.990771+00:00",
-    "total_trades": 68,
-    "win_rate": 0.221,
-    "wins": 15,
+    "last_analysis": "2026-07-15T15:32:26.986826+00:00",
+    "total_trades": 69,
+    "win_rate": 0.232,
+    "wins": 16,
     "losses": 53,
-    "avg_r_won": 1.39,
+    "avg_r_won": 1.41,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -1841,11 +1867,11 @@
         "avg_r": -1.0
       },
       "XAG/USD": {
-        "trades": 5,
-        "wins": 1,
+        "trades": 6,
+        "wins": 2,
         "losses": 4,
-        "win_rate": 0.2,
-        "avg_r": -0.62
+        "win_rate": 0.333,
+        "avg_r": -0.23
       },
       "XAU/USD": {
         "trades": 14,
@@ -1962,8 +1988,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 58,
-        "win_rate": 0.207
+        "trades": 59,
+        "win_rate": 0.22
       },
       "Asian": {
         "trades": 10,
@@ -1972,8 +1998,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 62,
-        "win_rate": 0.194
+        "trades": 63,
+        "win_rate": 0.206
       },
       "11-12": {
         "trades": 6,
@@ -1990,14 +2016,14 @@
         "win_rate": 0.237
       },
       "SELL": {
-        "trades": 30,
-        "win_rate": 0.2
+        "trades": 31,
+        "win_rate": 0.226
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 68,
-        "win_rate": 0.221
+        "trades": 69,
+        "win_rate": 0.232
       }
     },
     "common_loss_patterns": [
@@ -2028,15 +2054,15 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 22% across 68 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 23% across 69 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
         "type": "pair_review",
         "param": "XAG/USD",
-        "win_rate": 0.2,
-        "trades": 5,
-        "reason": "XAG/USD win rate is 20% over 5 trades \u2014 consider removing or trading only with score \u226511.",
+        "win_rate": 0.333,
+        "trades": 6,
+        "reason": "XAG/USD win rate is 33% over 6 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "medium"
       },
       {
@@ -2068,7 +2094,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 19% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 21% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
       },
       {
@@ -2478,6 +2504,12 @@
         "ts": "2026-07-15T15:23:26.990758+00:00",
         "n_trades": 68,
         "win_rate": 0.221,
+        "suggestions_count": 9
+      },
+      {
+        "ts": "2026-07-15T15:32:26.986812+00:00",
+        "n_trades": 69,
+        "win_rate": 0.232,
         "suggestions_count": 9
       }
     ]
