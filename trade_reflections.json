@@ -1207,14 +1207,40 @@
         "h1_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "AUDNZD-2026-07-14T08:49",
+      "ts_closed": "2026-07-15T08:07:28.339843+00:00",
+      "ts_signal": "2026-07-14T08:49:22.687984+00:00",
+      "symbol": "AUD/NZD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 54.5,
+      "rsi": 43.9,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 10/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:BULLISH, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T08:07:27.449244+00:00",
-    "total_trades": 45,
-    "win_rate": 0.244,
+    "last_analysis": "2026-07-15T08:07:28.517062+00:00",
+    "total_trades": 46,
+    "win_rate": 0.239,
     "wins": 11,
-    "losses": 34,
+    "losses": 35,
     "avg_r_won": 1.57,
     "by_pair": {
       "USD/CAD": {
@@ -1253,9 +1279,9 @@
         "avg_r": -1.0
       },
       "AUD/NZD": {
-        "trades": 3,
+        "trades": 4,
         "wins": 0,
-        "losses": 3,
+        "losses": 4,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -1339,8 +1365,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 38,
-        "win_rate": 0.211
+        "trades": 39,
+        "win_rate": 0.205
       },
       "Asian": {
         "trades": 7,
@@ -1349,8 +1375,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 39,
-        "win_rate": 0.205
+        "trades": 40,
+        "win_rate": 0.2
       },
       "11-12": {
         "trades": 6,
@@ -1367,24 +1393,24 @@
         "win_rate": 0.214
       },
       "SELL": {
-        "trades": 17,
-        "win_rate": 0.294
+        "trades": 18,
+        "win_rate": 0.278
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 45,
-        "win_rate": 0.244
+        "trades": 46,
+        "win_rate": 0.239
       }
     },
     "common_loss_patterns": [
       [
         "low_score",
-        31
+        32
       ],
       [
         "weak_htf",
-        18
+        19
       ],
       [
         "h4_st_conflict",
@@ -1405,7 +1431,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 24% across 45 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 24% across 46 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -1420,24 +1446,16 @@
         "type": "pattern",
         "tag": "low_score",
         "frequency": 0.91,
-        "loss_count": 31,
+        "loss_count": 32,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.53,
-        "loss_count": 18,
+        "frequency": 0.54,
+        "loss_count": 19,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
-        "confidence": "medium"
-      },
-      {
-        "type": "pattern",
-        "tag": "h4_st_conflict",
-        "frequency": 0.5,
-        "loss_count": 17,
-        "reason": "H4 Supertrend conflicts recurring in losses \u2014 require H4 ST alignment.",
         "confidence": "medium"
       }
     ],
@@ -1687,6 +1705,12 @@
         "n_trades": 45,
         "win_rate": 0.244,
         "suggestions_count": 5
+      },
+      {
+        "ts": "2026-07-15T08:07:28.517050+00:00",
+        "n_trades": 46,
+        "win_rate": 0.239,
+        "suggestions_count": 4
       }
     ]
   },
