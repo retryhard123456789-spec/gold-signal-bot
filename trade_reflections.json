@@ -1984,14 +1984,42 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "USDCHF-2026-07-15T07:22",
+      "ts_closed": "2026-07-15T17:30:40.285644+00:00",
+      "ts_signal": "2026-07-15T07:22:22.071412+00:00",
+      "symbol": "USD/CHF",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 18.7,
+      "rsi": 49.4,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": 1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 ADX 18.7 was below 22 \u2014 trend was weak, increasing whipsaw risk.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:BULLISH) \u2014 higher timeframe neutrality often means chop.\n  \u2022 H1 Supertrend conflicted with BUY \u2014 two-timeframe Supertrend misalignment is a red flag.",
+      "warning_tags": [
+        "low_score",
+        "low_adx",
+        "weak_htf",
+        "h1_st_conflict"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T16:38:18.325128+00:00",
-    "total_trades": 74,
-    "win_rate": 0.257,
+    "last_analysis": "2026-07-15T17:30:40.724318+00:00",
+    "total_trades": 75,
+    "win_rate": 0.253,
     "wins": 19,
-    "losses": 55,
+    "losses": 56,
     "avg_r_won": 1.54,
     "by_pair": {
       "USD/CAD": {
@@ -2023,9 +2051,9 @@
         "avg_r": -1.0
       },
       "USD/CHF": {
-        "trades": 1,
+        "trades": 2,
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -2130,8 +2158,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 63,
-        "win_rate": 0.254
+        "trades": 64,
+        "win_rate": 0.25
       },
       "Asian": {
         "trades": 11,
@@ -2140,8 +2168,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 68,
-        "win_rate": 0.235
+        "trades": 69,
+        "win_rate": 0.232
       },
       "11-12": {
         "trades": 6,
@@ -2154,8 +2182,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 42,
-        "win_rate": 0.262
+        "trades": 43,
+        "win_rate": 0.256
       },
       "SELL": {
         "trades": 32,
@@ -2164,22 +2192,22 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 74,
-        "win_rate": 0.257
+        "trades": 75,
+        "win_rate": 0.253
       }
     },
     "common_loss_patterns": [
       [
         "low_score",
-        52
+        53
       ],
       [
         "weak_htf",
-        34
+        35
       ],
       [
         "h1_st_conflict",
-        25
+        26
       ],
       [
         "h4_st_conflict",
@@ -2187,7 +2215,7 @@
       ],
       [
         "low_adx",
-        9
+        10
       ]
     ],
     "suggestions": [
@@ -2196,7 +2224,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 26% across 74 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 25% across 75 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2228,7 +2256,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 24% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 23% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
       },
       {
@@ -2242,7 +2270,7 @@
         "type": "pattern",
         "tag": "low_score",
         "frequency": 0.95,
-        "loss_count": 52,
+        "loss_count": 53,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
@@ -2250,7 +2278,7 @@
         "type": "pattern",
         "tag": "weak_htf",
         "frequency": 0.62,
-        "loss_count": 34,
+        "loss_count": 35,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
       }
@@ -2674,6 +2702,12 @@
         "ts": "2026-07-15T16:38:18.325114+00:00",
         "n_trades": 74,
         "win_rate": 0.257,
+        "suggestions_count": 8
+      },
+      {
+        "ts": "2026-07-15T17:30:40.724304+00:00",
+        "n_trades": 75,
+        "win_rate": 0.253,
         "suggestions_count": 8
       }
     ]
