@@ -2012,15 +2012,43 @@
         "h1_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "US30-2026-07-14T19:29",
+      "ts_closed": "2026-07-15T18:00:58.461468+00:00",
+      "ts_signal": "2026-07-14T19:29:12.885801+00:00",
+      "symbol": "US30",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 26.0,
+      "rsi": 55.6,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP1",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \ud83e\udd47 TP1\nWhat worked:\n  \u2022 ADX 26.0 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 26.0 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T17:30:40.724318+00:00",
-    "total_trades": 75,
-    "win_rate": 0.253,
-    "wins": 19,
+    "last_analysis": "2026-07-15T18:00:58.975527+00:00",
+    "total_trades": 76,
+    "win_rate": 0.263,
+    "wins": 20,
     "losses": 56,
-    "avg_r_won": 1.54,
+    "avg_r_won": 1.51,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -2072,11 +2100,11 @@
         "avg_r": -1.0
       },
       "US30": {
-        "trades": 3,
-        "wins": 3,
+        "trades": 4,
+        "wins": 4,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.71
+        "avg_r": 1.51
       },
       "GBP/CAD": {
         "trades": 6,
@@ -2158,8 +2186,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 64,
-        "win_rate": 0.25
+        "trades": 65,
+        "win_rate": 0.262
       },
       "Asian": {
         "trades": 11,
@@ -2168,8 +2196,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 69,
-        "win_rate": 0.232
+        "trades": 70,
+        "win_rate": 0.243
       },
       "11-12": {
         "trades": 6,
@@ -2182,8 +2210,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 43,
-        "win_rate": 0.256
+        "trades": 44,
+        "win_rate": 0.273
       },
       "SELL": {
         "trades": 32,
@@ -2192,8 +2220,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 75,
-        "win_rate": 0.253
+        "trades": 76,
+        "win_rate": 0.263
       }
     },
     "common_loss_patterns": [
@@ -2224,7 +2252,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 25% across 75 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 26% across 76 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2256,7 +2284,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 23% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 24% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
       },
       {
@@ -2708,6 +2736,12 @@
         "ts": "2026-07-15T17:30:40.724304+00:00",
         "n_trades": 75,
         "win_rate": 0.253,
+        "suggestions_count": 8
+      },
+      {
+        "ts": "2026-07-15T18:00:58.975514+00:00",
+        "n_trades": 76,
+        "win_rate": 0.263,
         "suggestions_count": 8
       }
     ]
