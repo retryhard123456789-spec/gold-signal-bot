@@ -2546,15 +2546,42 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "EURCAD-2026-07-15T08:39",
+      "ts_closed": "2026-07-15T21:01:23.376321+00:00",
+      "ts_signal": "2026-07-15T08:39:11.431912+00:00",
+      "symbol": "EUR/CAD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 31.6,
+      "rsi": 35.8,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "TP1",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \ud83e\udd47 TP1\nWhat worked:\n  \u2022 ADX 31.6 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 31.6 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T21:00:39.112254+00:00",
-    "total_trades": 95,
-    "win_rate": 0.347,
-    "wins": 33,
+    "last_analysis": "2026-07-15T21:01:23.568951+00:00",
+    "total_trades": 96,
+    "win_rate": 0.354,
+    "wins": 34,
     "losses": 62,
-    "avg_r_won": 1.85,
+    "avg_r_won": 1.82,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -2620,11 +2647,11 @@
         "avg_r": 0.36
       },
       "EUR/CAD": {
-        "trades": 4,
-        "wins": 0,
+        "trades": 5,
+        "wins": 1,
         "losses": 4,
-        "win_rate": 0.0,
-        "avg_r": -1.0
+        "win_rate": 0.2,
+        "avg_r": -0.62
       },
       "NZD/CAD": {
         "trades": 2,
@@ -2706,8 +2733,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 76,
-        "win_rate": 0.289
+        "trades": 77,
+        "win_rate": 0.299
       },
       "Asian": {
         "trades": 19,
@@ -2716,8 +2743,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 89,
-        "win_rate": 0.337
+        "trades": 90,
+        "win_rate": 0.344
       },
       "11-12": {
         "trades": 6,
@@ -2730,8 +2757,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 57,
-        "win_rate": 0.386
+        "trades": 58,
+        "win_rate": 0.397
       },
       "SELL": {
         "trades": 38,
@@ -2740,8 +2767,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 94,
-        "win_rate": 0.34
+        "trades": 95,
+        "win_rate": 0.347
       },
       "FVG": {
         "trades": 1,
@@ -2776,7 +2803,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 35% across 95 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 35% across 96 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2809,6 +2836,14 @@
         "win_rate": 1.0,
         "trades": 5,
         "reason": "US30 win rate is 100% \u2014 strong performer, consider increasing position size by 50%.",
+        "confidence": "medium"
+      },
+      {
+        "type": "pair_review",
+        "param": "EUR/CAD",
+        "win_rate": 0.2,
+        "trades": 5,
+        "reason": "EUR/CAD win rate is 20% over 5 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "medium"
       },
       {
@@ -3390,6 +3425,12 @@
         "n_trades": 95,
         "win_rate": 0.347,
         "suggestions_count": 9
+      },
+      {
+        "ts": "2026-07-15T21:01:23.568943+00:00",
+        "n_trades": 96,
+        "win_rate": 0.354,
+        "suggestions_count": 10
       }
     ]
   },
