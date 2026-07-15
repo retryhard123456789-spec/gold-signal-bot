@@ -2283,15 +2283,41 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "GBPJPY-2026-07-14T23:27",
+      "ts_closed": "2026-07-15T19:09:52.159781+00:00",
+      "ts_signal": "2026-07-14T23:27:48.047400+00:00",
+      "symbol": "GBP/JPY",
+      "direction": "BUY",
+      "session": "Asian",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 16.2,
+      "rsi": 58.3,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": -1,
+      "outcome": "TP3",
+      "pnl_r": 2.5,
+      "reflection": "Outcome: \ud83c\udfc6 TP3\nWhat worked:\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T19:09:24.038123+00:00",
-    "total_trades": 85,
-    "win_rate": 0.294,
-    "wins": 25,
+    "last_analysis": "2026-07-15T19:09:52.304569+00:00",
+    "total_trades": 86,
+    "win_rate": 0.302,
+    "wins": 26,
     "losses": 60,
-    "avg_r_won": 1.42,
+    "avg_r_won": 1.46,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -2427,11 +2453,11 @@
         "avg_r": -1.0
       },
       "GBP/JPY": {
-        "trades": 2,
-        "wins": 2,
+        "trades": 3,
+        "wins": 3,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.32
+        "avg_r": 1.71
       }
     },
     "by_session": {
@@ -2440,14 +2466,14 @@
         "win_rate": 0.278
       },
       "Asian": {
-        "trades": 13,
-        "win_rate": 0.385
+        "trades": 14,
+        "win_rate": 0.429
       }
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 79,
-        "win_rate": 0.278
+        "trades": 80,
+        "win_rate": 0.287
       },
       "11-12": {
         "trades": 6,
@@ -2460,8 +2486,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 48,
-        "win_rate": 0.312
+        "trades": 49,
+        "win_rate": 0.327
       },
       "SELL": {
         "trades": 37,
@@ -2470,8 +2496,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 84,
-        "win_rate": 0.286
+        "trades": 85,
+        "win_rate": 0.294
       },
       "FVG": {
         "trades": 1,
@@ -2506,7 +2532,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 29% across 85 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 30% across 86 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2538,15 +2564,8 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 28% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 29% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
-      },
-      {
-        "type": "session_filter",
-        "param": "block_asian",
-        "win_rate": 0.385,
-        "reason": "Asian session win rate is 38% over 13 trades \u2014 consider hard-blocking Asian session.",
-        "confidence": "medium"
       },
       {
         "type": "pattern",
@@ -3051,6 +3070,12 @@
         "n_trades": 85,
         "win_rate": 0.294,
         "suggestions_count": 8
+      },
+      {
+        "ts": "2026-07-15T19:09:52.304560+00:00",
+        "n_trades": 86,
+        "win_rate": 0.302,
+        "suggestions_count": 7
       }
     ]
   },
