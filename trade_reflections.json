@@ -1287,14 +1287,41 @@
         "h1_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "USDNOK-2026-07-14T21:28",
+      "ts_closed": "2026-07-15T08:14:13.596342+00:00",
+      "ts_signal": "2026-07-14T21:28:28.466192+00:00",
+      "symbol": "USD/NOK",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 21.3,
+      "rsi": 37.7,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 ADX 21.3 was below 22 \u2014 trend was weak, increasing whipsaw risk.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "low_adx",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T08:07:30.804002+00:00",
-    "total_trades": 48,
-    "win_rate": 0.229,
+    "last_analysis": "2026-07-15T08:14:13.796791+00:00",
+    "total_trades": 49,
+    "win_rate": 0.224,
     "wins": 11,
-    "losses": 37,
+    "losses": 38,
     "avg_r_won": 1.57,
     "by_pair": {
       "USD/CAD": {
@@ -1403,11 +1430,11 @@
         "avg_r": -1.0
       },
       "USD/NOK": {
-        "trades": 2,
+        "trades": 3,
         "wins": 2,
-        "losses": 0,
-        "win_rate": 1.0,
-        "avg_r": 0.9
+        "losses": 1,
+        "win_rate": 0.667,
+        "avg_r": 0.27
       },
       "DAX40": {
         "trades": 3,
@@ -1419,8 +1446,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 41,
-        "win_rate": 0.195
+        "trades": 42,
+        "win_rate": 0.19
       },
       "Asian": {
         "trades": 7,
@@ -1429,8 +1456,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 42,
-        "win_rate": 0.19
+        "trades": 43,
+        "win_rate": 0.186
       },
       "11-12": {
         "trades": 6,
@@ -1447,27 +1474,27 @@
         "win_rate": 0.2
       },
       "SELL": {
-        "trades": 18,
-        "win_rate": 0.278
+        "trades": 19,
+        "win_rate": 0.263
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 48,
-        "win_rate": 0.229
+        "trades": 49,
+        "win_rate": 0.224
       }
     },
     "common_loss_patterns": [
       [
         "low_score",
-        34
-      ],
-      [
-        "h4_st_conflict",
-        19
+        35
       ],
       [
         "weak_htf",
+        20
+      ],
+      [
+        "h4_st_conflict",
         19
       ],
       [
@@ -1476,7 +1503,7 @@
       ],
       [
         "low_adx",
-        5
+        6
       ]
     ],
     "suggestions": [
@@ -1485,7 +1512,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 23% across 48 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 22% across 49 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -1508,24 +1535,24 @@
         "type": "pattern",
         "tag": "low_score",
         "frequency": 0.92,
-        "loss_count": 34,
+        "loss_count": 35,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
-        "tag": "h4_st_conflict",
-        "frequency": 0.51,
-        "loss_count": 19,
-        "reason": "H4 Supertrend conflicts recurring in losses \u2014 require H4 ST alignment.",
+        "tag": "weak_htf",
+        "frequency": 0.53,
+        "loss_count": 20,
+        "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "medium"
       },
       {
         "type": "pattern",
-        "tag": "weak_htf",
-        "frequency": 0.51,
+        "tag": "h4_st_conflict",
+        "frequency": 0.5,
         "loss_count": 19,
-        "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
+        "reason": "H4 Supertrend conflicts recurring in losses \u2014 require H4 ST alignment.",
         "confidence": "medium"
       }
     ],
@@ -1792,6 +1819,12 @@
         "ts": "2026-07-15T08:07:30.803991+00:00",
         "n_trades": 48,
         "win_rate": 0.229,
+        "suggestions_count": 6
+      },
+      {
+        "ts": "2026-07-15T08:14:13.796777+00:00",
+        "n_trades": 49,
+        "win_rate": 0.224,
         "suggestions_count": 6
       }
     ]
