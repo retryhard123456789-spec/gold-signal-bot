@@ -2763,15 +2763,41 @@
         "ADX 46.9 confirmed a strong trend \u2014 high ADX trades perform well.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "NZDJPY-2026-07-15T22:01",
+      "ts_closed": "2026-07-15T22:02:24.625392+00:00",
+      "ts_signal": "2026-07-15T22:01:18.621416+00:00",
+      "symbol": "NZD/JPY",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "FVG",
+      "score": 10,
+      "adx": 46.9,
+      "rsi": 61.5,
+      "rr": 1.3,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "TP2",
+      "pnl_r": 0.79,
+      "reflection": "Outcome: \ud83e\udd48 TP2\nWhat worked:\n  \u2022 ADX 46.9 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 46.9 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-15T22:02:02.742100+00:00",
-    "total_trades": 103,
-    "win_rate": 0.398,
-    "wins": 41,
+    "last_analysis": "2026-07-15T22:02:24.785361+00:00",
+    "total_trades": 104,
+    "win_rate": 0.404,
+    "wins": 42,
     "losses": 62,
-    "avg_r_won": 1.76,
+    "avg_r_won": 1.74,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -2858,11 +2884,11 @@
         "avg_r": 1.71
       },
       "NZD/JPY": {
-        "trades": 5,
-        "wins": 4,
+        "trades": 6,
+        "wins": 5,
         "losses": 1,
-        "win_rate": 0.8,
-        "avg_r": 0.96
+        "win_rate": 0.833,
+        "avg_r": 0.93
       },
       "USD/JPY": {
         "trades": 3,
@@ -2923,8 +2949,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 84,
-        "win_rate": 0.357
+        "trades": 85,
+        "win_rate": 0.365
       },
       "Asian": {
         "trades": 19,
@@ -2933,8 +2959,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 97,
-        "win_rate": 0.392
+        "trades": 98,
+        "win_rate": 0.398
       },
       "11-12": {
         "trades": 6,
@@ -2947,8 +2973,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 63,
-        "win_rate": 0.444
+        "trades": 64,
+        "win_rate": 0.453
       },
       "SELL": {
         "trades": 40,
@@ -2961,7 +2987,7 @@
         "win_rate": 0.386
       },
       "FVG": {
-        "trades": 2,
+        "trades": 3,
         "win_rate": 1.0
       }
     },
@@ -2993,7 +3019,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 40% across 103 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 40% across 104 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3031,9 +3057,9 @@
       {
         "type": "pair_boost",
         "param": "NZD/JPY",
-        "win_rate": 0.8,
-        "trades": 5,
-        "reason": "NZD/JPY win rate is 80% \u2014 strong performer, consider increasing position size by 50%.",
+        "win_rate": 0.833,
+        "trades": 6,
+        "reason": "NZD/JPY win rate is 83% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
       },
       {
@@ -3049,7 +3075,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 11,
-        "reason": "Score 9-10 trades have 39% win rate \u2014 these low-confidence setups are dragging results.",
+        "reason": "Score 9-10 trades have 40% win rate \u2014 these low-confidence setups are dragging results.",
         "confidence": "high"
       },
       {
@@ -3662,6 +3688,12 @@
         "ts": "2026-07-15T22:02:02.742087+00:00",
         "n_trades": 103,
         "win_rate": 0.398,
+        "suggestions_count": 10
+      },
+      {
+        "ts": "2026-07-15T22:02:24.785349+00:00",
+        "n_trades": 104,
+        "win_rate": 0.404,
         "suggestions_count": 10
       }
     ]
