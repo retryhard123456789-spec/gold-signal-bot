@@ -855,14 +855,41 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "XAUUSD-2026-07-15T08:38",
+      "ts_closed": "2026-07-16T08:11:20.862849+00:00",
+      "ts_signal": "2026-07-15T08:38:27.228099+00:00",
+      "symbol": "XAU/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 23.4,
+      "rsi": 35.2,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BEARISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 10/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:BEARISH) \u2014 higher timeframe neutrality often means chop.\n  \u2022 H1 Supertrend conflicted with SELL \u2014 two-timeframe Supertrend misalignment is a red flag.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf",
+        "h1_st_conflict"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T08:11:19.527179+00:00",
-    "total_trades": 32,
-    "win_rate": 0.688,
+    "last_analysis": "2026-07-16T08:11:21.343014+00:00",
+    "total_trades": 33,
+    "win_rate": 0.667,
     "wins": 22,
-    "losses": 10,
+    "losses": 11,
     "avg_r_won": 1.55,
     "by_pair": {
       "XAG/USD": {
@@ -901,9 +928,9 @@
         "avg_r": -1.0
       },
       "XAU/USD": {
-        "trades": 2,
+        "trades": 3,
         "wins": 0,
-        "losses": 2,
+        "losses": 3,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -938,8 +965,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 23,
-        "win_rate": 0.696
+        "trades": 24,
+        "win_rate": 0.667
       },
       "Asian": {
         "trades": 9,
@@ -948,8 +975,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 31,
-        "win_rate": 0.71
+        "trades": 32,
+        "win_rate": 0.688
       },
       "11-12": {
         "trades": 1,
@@ -962,8 +989,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 18,
-        "win_rate": 0.611
+        "trades": 19,
+        "win_rate": 0.579
       },
       "BUY": {
         "trades": 14,
@@ -972,8 +999,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 29,
-        "win_rate": 0.655
+        "trades": 30,
+        "win_rate": 0.633
       },
       "FVG": {
         "trades": 3,
@@ -983,11 +1010,11 @@
     "common_loss_patterns": [
       [
         "low_score",
-        9
+        10
       ],
       [
         "weak_htf",
-        7
+        8
       ],
       [
         "low_adx",
@@ -995,7 +1022,7 @@
       ],
       [
         "h1_st_conflict",
-        3
+        4
       ],
       [
         "asian_session",
@@ -1030,16 +1057,16 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.9,
-        "loss_count": 9,
+        "frequency": 0.91,
+        "loss_count": 10,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.7,
-        "loss_count": 7,
+        "frequency": 0.73,
+        "loss_count": 8,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
       }
@@ -1115,6 +1142,12 @@
         "ts": "2026-07-16T08:11:19.527163+00:00",
         "n_trades": 32,
         "win_rate": 0.688,
+        "suggestions_count": 5
+      },
+      {
+        "ts": "2026-07-16T08:11:21.342998+00:00",
+        "n_trades": 33,
+        "win_rate": 0.667,
         "suggestions_count": 5
       }
     ]
