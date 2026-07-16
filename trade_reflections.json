@@ -55,18 +55,115 @@
         "fvg_entry"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "COPPER-2026-07-14T09:04",
+      "ts_closed": "2026-07-16T03:10:41.640478+00:00",
+      "ts_signal": "2026-07-14T09:04:36.687274+00:00",
+      "symbol": "COPPER",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 22.6,
+      "rsi": 68.2,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:BULLISH, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": null,
-    "total_trades": 0,
-    "win_rate": null,
-    "by_pair": {},
-    "by_session": {},
-    "by_score_bucket": {},
-    "by_direction": {},
-    "by_zone_type": {},
+    "last_analysis": "2026-07-16T03:10:41.786271+00:00",
+    "total_trades": 3,
+    "win_rate": 0.0,
+    "wins": 0,
+    "losses": 3,
     "avg_r_won": null,
+    "by_pair": {
+      "XAU/USD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
+      },
+      "COPPER": {
+        "trades": 2,
+        "wins": 0,
+        "losses": 2,
+        "win_rate": 0.0,
+        "avg_r": -1.0
+      }
+    },
+    "by_session": {
+      "London/NY": {
+        "trades": 3,
+        "win_rate": 0.0
+      }
+    },
+    "by_score_bucket": {
+      "9-10": {
+        "trades": 3,
+        "win_rate": 0.0
+      },
+      "11-12": {
+        "trades": 0,
+        "win_rate": null
+      },
+      "13+": {
+        "trades": 0,
+        "win_rate": null
+      }
+    },
+    "by_direction": {
+      "SELL": {
+        "trades": 1,
+        "win_rate": 0.0
+      },
+      "BUY": {
+        "trades": 2,
+        "win_rate": 0.0
+      }
+    },
+    "by_zone_type": {
+      "OB": {
+        "trades": 2,
+        "win_rate": 0.0
+      },
+      "FVG": {
+        "trades": 1,
+        "win_rate": 0.0
+      }
+    },
+    "common_loss_patterns": [
+      [
+        "low_score",
+        3
+      ],
+      [
+        "weak_htf",
+        3
+      ],
+      [
+        "h1_st_conflict",
+        1
+      ],
+      [
+        "fvg_entry",
+        1
+      ]
+    ],
     "suggestions": [],
     "parameter_history": []
   },
