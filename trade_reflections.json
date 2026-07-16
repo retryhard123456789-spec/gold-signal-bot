@@ -1097,14 +1097,39 @@
         "h1_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "GBPCAD-2026-07-15T19:51",
+      "ts_closed": "2026-07-16T10:29:08.293556+00:00",
+      "ts_signal": "2026-07-15T19:51:02.886630+00:00",
+      "symbol": "GBP/CAD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 30.3,
+      "rsi": 69.0,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.",
+      "warning_tags": [
+        "low_score"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T09:10:18.899632+00:00",
-    "total_trades": 41,
-    "win_rate": 0.537,
+    "last_analysis": "2026-07-16T10:29:08.700657+00:00",
+    "total_trades": 42,
+    "win_rate": 0.524,
     "wins": 22,
-    "losses": 19,
+    "losses": 20,
     "avg_r_won": 1.55,
     "by_pair": {
       "XAG/USD": {
@@ -1176,12 +1201,19 @@
         "losses": 2,
         "win_rate": 0.0,
         "avg_r": -1.0
+      },
+      "GBP/CAD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
       }
     },
     "by_session": {
       "London/NY": {
-        "trades": 28,
-        "win_rate": 0.571
+        "trades": 29,
+        "win_rate": 0.552
       },
       "Asian": {
         "trades": 13,
@@ -1190,8 +1222,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 39,
-        "win_rate": 0.564
+        "trades": 40,
+        "win_rate": 0.55
       },
       "11-12": {
         "trades": 2,
@@ -1208,14 +1240,14 @@
         "win_rate": 0.478
       },
       "BUY": {
-        "trades": 18,
-        "win_rate": 0.611
+        "trades": 19,
+        "win_rate": 0.579
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 38,
-        "win_rate": 0.5
+        "trades": 39,
+        "win_rate": 0.487
       },
       "FVG": {
         "trades": 3,
@@ -1225,7 +1257,7 @@
     "common_loss_patterns": [
       [
         "low_score",
-        17
+        18
       ],
       [
         "weak_htf",
@@ -1272,15 +1304,15 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.89,
-        "loss_count": 17,
+        "frequency": 0.9,
+        "loss_count": 18,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.63,
+        "frequency": 0.6,
         "loss_count": 12,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
@@ -1411,6 +1443,12 @@
         "ts": "2026-07-16T09:10:18.899618+00:00",
         "n_trades": 41,
         "win_rate": 0.537,
+        "suggestions_count": 5
+      },
+      {
+        "ts": "2026-07-16T10:29:08.700641+00:00",
+        "n_trades": 42,
+        "win_rate": 0.524,
         "suggestions_count": 5
       }
     ]
