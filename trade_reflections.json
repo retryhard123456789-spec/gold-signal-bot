@@ -240,14 +240,41 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "XAUUSD-2026-07-15T08:38",
+      "ts_closed": "2026-07-16T04:16:11.647820+00:00",
+      "ts_signal": "2026-07-15T08:38:27.228099+00:00",
+      "symbol": "XAU/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 23.4,
+      "rsi": 35.2,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BEARISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 10/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:BEARISH) \u2014 higher timeframe neutrality often means chop.\n  \u2022 H1 Supertrend conflicted with SELL \u2014 two-timeframe Supertrend misalignment is a red flag.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf",
+        "h1_st_conflict"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T04:16:10.484444+00:00",
-    "total_trades": 9,
-    "win_rate": 0.889,
+    "last_analysis": "2026-07-16T04:16:11.969173+00:00",
+    "total_trades": 10,
+    "win_rate": 0.8,
     "wins": 8,
-    "losses": 1,
+    "losses": 2,
     "avg_r_won": 1.51,
     "by_pair": {
       "XAG/USD": {
@@ -284,12 +311,19 @@
         "losses": 1,
         "win_rate": 0.0,
         "avg_r": -1.0
+      },
+      "XAU/USD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
       }
     },
     "by_session": {
       "London/NY": {
-        "trades": 6,
-        "win_rate": 0.833
+        "trades": 7,
+        "win_rate": 0.714
       },
       "Asian": {
         "trades": 3,
@@ -298,8 +332,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 9,
-        "win_rate": 0.889
+        "trades": 10,
+        "win_rate": 0.8
       },
       "11-12": {
         "trades": 0,
@@ -312,8 +346,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 5,
-        "win_rate": 0.8
+        "trades": 6,
+        "win_rate": 0.667
       },
       "BUY": {
         "trades": 4,
@@ -322,21 +356,25 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 9,
-        "win_rate": 0.889
+        "trades": 10,
+        "win_rate": 0.8
       }
     },
     "common_loss_patterns": [
       [
         "low_score",
-        1
+        2
+      ],
+      [
+        "weak_htf",
+        2
       ],
       [
         "low_adx",
         1
       ],
       [
-        "weak_htf",
+        "h1_st_conflict",
         1
       ]
     ],
