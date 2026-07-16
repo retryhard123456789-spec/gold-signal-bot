@@ -28,6 +28,33 @@
         "h1_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "COPPER-2026-07-15T10:54",
+      "ts_closed": "2026-07-16T03:10:17.158532+00:00",
+      "ts_signal": "2026-07-15T10:54:39.247078+00:00",
+      "symbol": "COPPER",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "FVG",
+      "score": 9,
+      "adx": 31.0,
+      "rsi": 45.2,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:BULLISH, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.\n  \u2022 Entry was from a Fair Value Gap rather than Order Block \u2014 OB entries tend to hold better.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf",
+        "fvg_entry"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
