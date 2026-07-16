@@ -1,9 +1,8 @@
 """
-Gold & Forex Signal Bot — v8 Multi-Pair (16 instruments)
-Pairs: XAU/USD, EUR/USD, GBP/USD, USD/JPY, GBP/JPY, AUD/USD, USD/CAD, EUR/JPY, USD/CHF, NZD/USD,
-       XAG/USD, AUD/JPY, GBP/CHF, EUR/AUD, CAD/JPY, EUR/GBP
+Gold & Forex Signal Bot — Multi-Pair (31 instruments)
+Pairs: 7 majors, 17 crosses, XAU/USD, XAG/USD, XPT/USD, COPPER
 Indicators: EMA + ADX + Supertrend + RSI + MACD + Bollinger Bands + OB + FVG
-Target: 8-12 trades/day across all pairs
+Filters: Score ≥11 | D1 directional | R:R ≥1.3 | News block | FVG -1 penalty
 """
 import json, logging, os, time
 from datetime import datetime, timezone
