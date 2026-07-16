@@ -213,14 +213,41 @@
         "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
         "Order Block entry held well as support/resistance."
       ]
+    },
+    {
+      "id": "GBPAUD-2026-07-15T08:24",
+      "ts_closed": "2026-07-16T04:16:10.186676+00:00",
+      "ts_signal": "2026-07-15T08:24:09.900647+00:00",
+      "symbol": "GBP/AUD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 19.5,
+      "rsi": 39.2,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 10/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 ADX 19.5 was below 22 \u2014 trend was weak, increasing whipsaw risk.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "low_adx",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T04:15:44.710560+00:00",
-    "total_trades": 8,
-    "win_rate": 1.0,
+    "last_analysis": "2026-07-16T04:16:10.484444+00:00",
+    "total_trades": 9,
+    "win_rate": 0.889,
     "wins": 8,
-    "losses": 0,
+    "losses": 1,
     "avg_r_won": 1.51,
     "by_pair": {
       "XAG/USD": {
@@ -250,12 +277,19 @@
         "losses": 0,
         "win_rate": 1.0,
         "avg_r": 1.71
+      },
+      "GBP/AUD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
       }
     },
     "by_session": {
       "London/NY": {
-        "trades": 5,
-        "win_rate": 1.0
+        "trades": 6,
+        "win_rate": 0.833
       },
       "Asian": {
         "trades": 3,
@@ -264,8 +298,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 8,
-        "win_rate": 1.0
+        "trades": 9,
+        "win_rate": 0.889
       },
       "11-12": {
         "trades": 0,
@@ -278,8 +312,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 4,
-        "win_rate": 1.0
+        "trades": 5,
+        "win_rate": 0.8
       },
       "BUY": {
         "trades": 4,
@@ -288,11 +322,24 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 8,
-        "win_rate": 1.0
+        "trades": 9,
+        "win_rate": 0.889
       }
     },
-    "common_loss_patterns": [],
+    "common_loss_patterns": [
+      [
+        "low_score",
+        1
+      ],
+      [
+        "low_adx",
+        1
+      ],
+      [
+        "weak_htf",
+        1
+      ]
+    ],
     "suggestions": [],
     "parameter_history": []
   },
