@@ -3379,15 +3379,43 @@
         "h1_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "GBPNZD-2026-07-14T13:49",
+      "ts_closed": "2026-07-16T02:41:47.242975+00:00",
+      "ts_signal": "2026-07-14T13:49:35.597522+00:00",
+      "symbol": "GBP/NZD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 42.2,
+      "rsi": 41.0,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP3",
+      "pnl_r": 2.74,
+      "reflection": "Outcome: \ud83c\udfc6 TP3\nWhat worked:\n  \u2022 ADX 42.2 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 42.2 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T02:30:20.011613+00:00",
-    "total_trades": 126,
-    "win_rate": 0.444,
-    "wins": 56,
+    "last_analysis": "2026-07-16T02:41:47.392153+00:00",
+    "total_trades": 127,
+    "win_rate": 0.449,
+    "wins": 57,
     "losses": 70,
-    "avg_r_won": 1.8,
+    "avg_r_won": 1.82,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -3432,11 +3460,11 @@
         "avg_r": 0.03
       },
       "GBP/NZD": {
-        "trades": 13,
-        "wins": 7,
+        "trades": 14,
+        "wins": 8,
         "losses": 6,
-        "win_rate": 0.538,
-        "avg_r": 0.84
+        "win_rate": 0.571,
+        "avg_r": 0.97
       },
       "US30": {
         "trades": 5,
@@ -3539,8 +3567,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 101,
-        "win_rate": 0.416
+        "trades": 102,
+        "win_rate": 0.422
       },
       "Asian": {
         "trades": 25,
@@ -3549,8 +3577,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 118,
-        "win_rate": 0.449
+        "trades": 119,
+        "win_rate": 0.454
       },
       "11-12": {
         "trades": 8,
@@ -3563,8 +3591,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 77,
-        "win_rate": 0.506
+        "trades": 78,
+        "win_rate": 0.513
       },
       "SELL": {
         "trades": 49,
@@ -3573,8 +3601,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 122,
-        "win_rate": 0.426
+        "trades": 123,
+        "win_rate": 0.431
       },
       "FVG": {
         "trades": 4,
@@ -3609,7 +3637,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 44% across 126 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 45% across 127 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3659,14 +3687,6 @@
         "trades": 13,
         "reason": "GBP/JPY win rate is 85% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
-      },
-      {
-        "type": "threshold",
-        "param": "min_score",
-        "current": 9,
-        "suggested": 11,
-        "reason": "Score 9-10 trades have 45% win rate \u2014 these low-confidence setups are dragging results.",
-        "confidence": "high"
       },
       {
         "type": "pattern",
@@ -4417,6 +4437,12 @@
         "n_trades": 126,
         "win_rate": 0.444,
         "suggestions_count": 10
+      },
+      {
+        "ts": "2026-07-16T02:41:47.392144+00:00",
+        "n_trades": 127,
+        "win_rate": 0.449,
+        "suggestions_count": 9
       }
     ]
   },
