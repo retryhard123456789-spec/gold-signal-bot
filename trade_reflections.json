@@ -614,22 +614,48 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "XAGUSD-2026-07-13T17:28",
+      "ts_closed": "2026-07-16T08:10:38.884096+00:00",
+      "ts_signal": "2026-07-13T17:28:57.633375+00:00",
+      "symbol": "XAG/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 18.5,
+      "rsi": 37.5,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP2",
+      "pnl_r": 1.74,
+      "reflection": "Outcome: \ud83e\udd48 TP2\nWhat worked:\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T08:10:37.327737+00:00",
-    "total_trades": 23,
-    "win_rate": 0.609,
-    "wins": 14,
+    "last_analysis": "2026-07-16T08:10:39.264119+00:00",
+    "total_trades": 24,
+    "win_rate": 0.625,
+    "wins": 15,
     "losses": 9,
-    "avg_r_won": 1.51,
+    "avg_r_won": 1.53,
     "by_pair": {
       "XAG/USD": {
-        "trades": 4,
-        "wins": 4,
+        "trades": 5,
+        "wins": 5,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.51
+        "avg_r": 1.56
       },
       "AUD/NZD": {
         "trades": 3,
@@ -697,8 +723,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 17,
-        "win_rate": 0.647
+        "trades": 18,
+        "win_rate": 0.667
       },
       "Asian": {
         "trades": 6,
@@ -707,8 +733,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 22,
-        "win_rate": 0.636
+        "trades": 23,
+        "win_rate": 0.652
       },
       "11-12": {
         "trades": 1,
@@ -721,8 +747,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 13,
-        "win_rate": 0.538
+        "trades": 14,
+        "win_rate": 0.571
       },
       "BUY": {
         "trades": 10,
@@ -731,8 +757,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 20,
-        "win_rate": 0.55
+        "trades": 21,
+        "win_rate": 0.571
       },
       "FVG": {
         "trades": 3,
@@ -762,6 +788,14 @@
       ]
     ],
     "suggestions": [
+      {
+        "type": "pair_boost",
+        "param": "XAG/USD",
+        "win_rate": 1.0,
+        "trades": 5,
+        "reason": "XAG/USD win rate is 100% \u2014 strong performer, consider increasing position size by 50%.",
+        "confidence": "medium"
+      },
       {
         "type": "pattern",
         "tag": "low_score",
@@ -809,6 +843,12 @@
         "n_trades": 22,
         "win_rate": 0.591,
         "suggestions_count": 2
+      },
+      {
+        "ts": "2026-07-16T08:10:39.264104+00:00",
+        "n_trades": 24,
+        "win_rate": 0.625,
+        "suggestions_count": 3
       }
     ]
   },
