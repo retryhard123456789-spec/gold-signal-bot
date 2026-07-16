@@ -1330,15 +1330,43 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "AUDNZD-2026-07-14T08:19",
+      "ts_closed": "2026-07-16T14:05:03.389310+00:00",
+      "ts_signal": "2026-07-14T08:19:24.233752+00:00",
+      "symbol": "AUD/NZD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 54.5,
+      "rsi": 47.9,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TRAIL",
+      "pnl_r": 2.1,
+      "reflection": "Outcome: \ud83d\udcc9 Trail Stop\nWhat worked:\n  \u2022 ADX 54.5 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 54.5 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T14:04:57.496050+00:00",
-    "total_trades": 50,
-    "win_rate": 0.52,
-    "wins": 26,
+    "last_analysis": "2026-07-16T14:05:03.870169+00:00",
+    "total_trades": 51,
+    "win_rate": 0.529,
+    "wins": 27,
     "losses": 24,
-    "avg_r_won": 1.5,
+    "avg_r_won": 1.52,
     "by_pair": {
       "XAG/USD": {
         "trades": 6,
@@ -1348,11 +1376,11 @@
         "avg_r": 1.71
       },
       "AUD/NZD": {
-        "trades": 6,
-        "wins": 6,
+        "trades": 7,
+        "wins": 7,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.52
+        "avg_r": 1.6
       },
       "GBP/NZD": {
         "trades": 2,
@@ -1434,8 +1462,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 37,
-        "win_rate": 0.541
+        "trades": 38,
+        "win_rate": 0.553
       },
       "Asian": {
         "trades": 13,
@@ -1444,8 +1472,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 46,
-        "win_rate": 0.565
+        "trades": 47,
+        "win_rate": 0.574
       },
       "11-12": {
         "trades": 4,
@@ -1458,8 +1486,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 25,
-        "win_rate": 0.48
+        "trades": 26,
+        "win_rate": 0.5
       },
       "BUY": {
         "trades": 25,
@@ -1468,8 +1496,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 45,
-        "win_rate": 0.467
+        "trades": 46,
+        "win_rate": 0.478
       },
       "FVG": {
         "trades": 5,
@@ -1511,7 +1539,7 @@
         "type": "pair_boost",
         "param": "AUD/NZD",
         "win_rate": 1.0,
-        "trades": 6,
+        "trades": 7,
         "reason": "AUD/NZD win rate is 100% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
       },
@@ -1713,6 +1741,12 @@
         "ts": "2026-07-16T14:04:55.592963+00:00",
         "n_trades": 49,
         "win_rate": 0.51,
+        "suggestions_count": 5
+      },
+      {
+        "ts": "2026-07-16T14:05:03.870154+00:00",
+        "n_trades": 51,
+        "win_rate": 0.529,
         "suggestions_count": 5
       }
     ]
