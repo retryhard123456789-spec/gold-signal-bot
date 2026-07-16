@@ -1437,14 +1437,40 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "USDNOK-2026-07-15T19:35",
+      "ts_closed": "2026-07-16T17:01:18.217954+00:00",
+      "ts_signal": "2026-07-15T19:35:52.514992+00:00",
+      "symbol": "USD/NOK",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 24.6,
+      "rsi": 36.7,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T16:13:23.842823+00:00",
-    "total_trades": 54,
-    "win_rate": 0.519,
+    "last_analysis": "2026-07-16T17:01:18.690383+00:00",
+    "total_trades": 55,
+    "win_rate": 0.509,
     "wins": 28,
-    "losses": 26,
+    "losses": 27,
     "avg_r_won": 1.51,
     "by_pair": {
       "XAG/USD": {
@@ -1490,9 +1516,9 @@
         "avg_r": -1.0
       },
       "USD/NOK": {
-        "trades": 6,
+        "trades": 7,
         "wins": 0,
-        "losses": 6,
+        "losses": 7,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -1548,8 +1574,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 41,
-        "win_rate": 0.537
+        "trades": 42,
+        "win_rate": 0.524
       },
       "Asian": {
         "trades": 13,
@@ -1558,8 +1584,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 50,
-        "win_rate": 0.56
+        "trades": 51,
+        "win_rate": 0.549
       },
       "11-12": {
         "trades": 4,
@@ -1572,8 +1598,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 27,
-        "win_rate": 0.481
+        "trades": 28,
+        "win_rate": 0.464
       },
       "BUY": {
         "trades": 27,
@@ -1582,8 +1608,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 49,
-        "win_rate": 0.469
+        "trades": 50,
+        "win_rate": 0.46
       },
       "FVG": {
         "trades": 5,
@@ -1593,11 +1619,11 @@
     "common_loss_patterns": [
       [
         "low_score",
-        22
+        23
       ],
       [
         "weak_htf",
-        16
+        17
       ],
       [
         "low_adx",
@@ -1633,23 +1659,23 @@
         "type": "pair_review",
         "param": "USD/NOK",
         "win_rate": 0.0,
-        "trades": 6,
-        "reason": "USD/NOK win rate is 0% over 6 trades \u2014 consider removing or trading only with score \u226511.",
+        "trades": 7,
+        "reason": "USD/NOK win rate is 0% over 7 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "medium"
       },
       {
         "type": "pattern",
         "tag": "low_score",
         "frequency": 0.85,
-        "loss_count": 22,
+        "loss_count": 23,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.62,
-        "loss_count": 16,
+        "frequency": 0.63,
+        "loss_count": 17,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
       }
@@ -1845,6 +1871,12 @@
         "ts": "2026-07-16T16:13:23.842807+00:00",
         "n_trades": 54,
         "win_rate": 0.519,
+        "suggestions_count": 5
+      },
+      {
+        "ts": "2026-07-16T17:01:18.690368+00:00",
+        "n_trades": 55,
+        "win_rate": 0.509,
         "suggestions_count": 5
       }
     ]
