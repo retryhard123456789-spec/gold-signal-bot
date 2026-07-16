@@ -700,8 +700,10 @@ def analyze():
     if cfg.get("paused"): log.info("Bot paused"); return
 
     now_utc=datetime.now(timezone.utc)
+    send_telegram(session_header(now_utc))
 
     if now_utc.weekday()>=5:
+        send_telegram("🚫 Weekend — markets closed. Bot resumes Monday.")
         log.info("Weekend — no trading"); return
 
     sigs=load_signals()
