@@ -71,12 +71,6 @@ PAIRS = {
     # Commodities (WTI/USD removed — too volatile, news-driven, not suitable for SMC scalping)
     "COPPER":  {"ticker": "HG=F",     "pip": 0.001,  "pip_val": 2.50, "digits": 3, "spread": 0.0020, "min_sl": 0.010},
     "XPT/USD": {"ticker": "PL=F",     "pip": 0.10,   "pip_val": 5.00, "digits": 2, "spread": 0.50,   "min_sl": 3.0},
-    # Indices — pip_val is indicative; verify contract size with your broker
-    "NAS100":  {"ticker": "NQ=F",     "pip": 1.0,    "pip_val": 2.0,  "digits": 1, "spread": 2.0,    "min_sl": 50.0},
-    "US30":    {"ticker": "YM=F",     "pip": 1.0,    "pip_val": 0.5,  "digits": 1, "spread": 3.0,    "min_sl": 50.0},
-    "SPX500":  {"ticker": "ES=F",     "pip": 1.0,    "pip_val": 0.5,  "digits": 1, "spread": 0.50,   "min_sl": 20.0},
-    "DAX40":   {"ticker": "^GDAXI",   "pip": 1.0,    "pip_val": 1.0,  "digits": 1, "spread": 1.50,   "min_sl": 50.0},
-    "NKY225":  {"ticker": "^N225",    "pip": 10.0,   "pip_val": 0.07, "digits": 0, "spread": 30.0,   "min_sl": 200.0},
 }
 
 # ── Cooldown state ────────────────────────────────────────────
@@ -137,10 +131,7 @@ def _fetch_ff_events():
     return _NEWS_CACHE["events"]
 
 _INSTRUMENT_CCY = {
-    "NAS100":  {"USD"}, "US30":   {"USD"}, "SPX500": {"USD"},
-    "COPPER": {"USD"}, "XPT/USD":{"USD"},
-    "DAX40":   {"EUR"},
-    "NKY225":  {"JPY"},
+    "COPPER": {"USD"}, "XPT/USD": {"USD"},
 }
 
 def is_news_blocked(symbol):
@@ -502,7 +493,7 @@ def analyze_pair(symbol, cfg, sigs):
     now_utc=datetime.now(timezone.utc)
     utc_h=now_utc.hour+now_utc.minute/60
     is_asian=utc_h<7.0 or utc_h>=22.0
-    is_jpy="JPY" in symbol or symbol=="NKY225"
+    is_jpy="JPY" in symbol
     if is_asian and is_jpy:
         adx_min=16   # JPY pairs: liquid in Asian, lower bar
     elif is_asian:
@@ -821,7 +812,7 @@ def fmt_signal(s):
     zone_icon = "🟥 Order Block" if zone_type == "OB" else "⚡ Fair Value Gap"
     sq = s.get("bb_squeeze", False)
     sess_icon = "🌙 Asian" if s["session"] == "Asian" else "🌍 London/NY"
-    _needs_broker_note = s["symbol"] in ("NAS100","US30","SPX500","DAX40","NKY225","COPPER","XPT/USD")
+    _needs_broker_note = s["symbol"] in ("COPPER","XPT/USD")
     broker_note = "\n⚠️ <i>Position size is indicative — verify contract size with your broker.</i>" if _needs_broker_note else ""
     sweep_line = f"   💧 Liquidity Sweep @ {s['sweep_level']} ✅ (+2)\n" if s.get("sweep_detected") else ""
     zb = s.get("zone_bonus", 0)
