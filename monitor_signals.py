@@ -45,8 +45,6 @@ PAIR_TICKERS = {
     "GBP/CAD": "GBPCAD=X",
     "USD/NOK": "USDNOK=X", "USD/SEK": "USDSEK=X",
     "COPPER":  "HG=F",     "XPT/USD": "PL=F",
-    "NAS100":  "NQ=F",     "US30":    "YM=F",
-    "SPX500":  "ES=F",     "DAX40":   "^GDAXI",  "NKY225": "^N225",
 }
 PAIR_PIPS = {
     "XAU/USD": 0.10,   "XAG/USD": 0.010,
@@ -63,8 +61,6 @@ PAIR_PIPS = {
     "GBP/CAD": 0.0001,
     "USD/NOK": 0.0001, "USD/SEK": 0.0001,
     "COPPER":  0.001,  "XPT/USD": 0.10,
-    "NAS100":  1.0,    "US30":    1.0,
-    "SPX500":  1.0,    "DAX40":   1.0,    "NKY225": 10.0,
 }
 PAIR_SPREAD = {
     "XAU/USD": 0.50,    "XAG/USD": 0.030,
@@ -81,8 +77,6 @@ PAIR_SPREAD = {
     "GBP/CAD": 0.00025,
     "USD/NOK": 0.00050, "USD/SEK": 0.00060,
     "COPPER":  0.0020,  "XPT/USD": 0.50,
-    "NAS100":  2.0,     "US30":    3.0,
-    "SPX500":  0.50,    "DAX40":   1.50,   "NKY225": 30.0,
 }
 PAIR_MIN_SL = {
     "XAU/USD": 5.0,    "XAG/USD": 0.15,
@@ -99,8 +93,6 @@ PAIR_MIN_SL = {
     "GBP/CAD": 0.0015,
     "USD/NOK": 0.0030,  "USD/SEK": 0.0030,
     "COPPER":  0.010,   "XPT/USD": 3.0,
-    "NAS100":  50.0,    "US30":    50.0,
-    "SPX500":  20.0,    "DAX40":   50.0,   "NKY225": 200.0,
 }
 
 logging.basicConfig(
