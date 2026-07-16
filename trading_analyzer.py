@@ -599,7 +599,9 @@ def analyze_pair(symbol, cfg, sigs):
                    e20h4,e50h4,e200h4,e20h1,e50h1,e20m15,e50m15,
                    rsi_m15,macd_h,bb_squeeze,direction,
                    st_m5=st_m5,e20m5=e20m5,e50m5=e50m5)
-    sc = sc + sweep_bonus + zone_bonus
+    # FVG entries are less reliable than OB — apply -1 penalty
+    fvg_penalty = -1 if zone_type == "FVG" else 0
+    sc = sc + sweep_bonus + zone_bonus + fvg_penalty
     min_score=11
     if sc<min_score:
         e_lbl = f"EMA {round(e20m15,1)}/{round(e50m15,1)}"
