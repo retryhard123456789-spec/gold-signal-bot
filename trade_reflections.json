@@ -535,15 +535,41 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "COPPER-2026-07-15T10:54",
+      "ts_closed": "2026-07-16T06:22:29.246383+00:00",
+      "ts_signal": "2026-07-15T10:54:39.247078+00:00",
+      "symbol": "COPPER",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "FVG",
+      "score": 9,
+      "adx": 31.0,
+      "rsi": 45.2,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "TRAIL",
+      "pnl_r": 2.1,
+      "reflection": "Outcome: \ud83d\udcc9 Trail Stop\nWhat worked:\n  \u2022 ADX 31.0 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 31.0 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T05:32:15.178208+00:00",
-    "total_trades": 20,
-    "win_rate": 0.6,
-    "wins": 12,
+    "last_analysis": "2026-07-16T06:22:29.606696+00:00",
+    "total_trades": 21,
+    "win_rate": 0.619,
+    "wins": 13,
     "losses": 8,
-    "avg_r_won": 1.52,
+    "avg_r_won": 1.56,
     "by_pair": {
       "XAG/USD": {
         "trades": 3,
@@ -602,17 +628,17 @@
         "avg_r": -1.0
       },
       "COPPER": {
-        "trades": 2,
-        "wins": 2,
+        "trades": 3,
+        "wins": 3,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.32
+        "avg_r": 1.58
       }
     },
     "by_session": {
       "London/NY": {
-        "trades": 14,
-        "win_rate": 0.643
+        "trades": 15,
+        "win_rate": 0.667
       },
       "Asian": {
         "trades": 6,
@@ -621,8 +647,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 19,
-        "win_rate": 0.632
+        "trades": 20,
+        "win_rate": 0.65
       },
       "11-12": {
         "trades": 1,
@@ -639,8 +665,8 @@
         "win_rate": 0.5
       },
       "BUY": {
-        "trades": 8,
-        "win_rate": 0.75
+        "trades": 9,
+        "win_rate": 0.778
       }
     },
     "by_zone_type": {
@@ -649,7 +675,7 @@
         "win_rate": 0.556
       },
       "FVG": {
-        "trades": 2,
+        "trades": 3,
         "win_rate": 1.0
       }
     },
