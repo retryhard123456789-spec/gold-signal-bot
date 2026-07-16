@@ -53,18 +53,83 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "XAGUSD-2026-07-13T17:28",
+      "ts_closed": "2026-07-16T04:15:36.770712+00:00",
+      "ts_signal": "2026-07-13T17:28:57.633375+00:00",
+      "symbol": "XAG/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 18.5,
+      "rsi": 37.5,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP3",
+      "pnl_r": 2.5,
+      "reflection": "Outcome: \ud83c\udfc6 TP3\nWhat worked:\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": null,
-    "total_trades": 0,
-    "win_rate": null,
-    "by_pair": {},
-    "by_session": {},
-    "by_score_bucket": {},
-    "by_direction": {},
-    "by_zone_type": {},
-    "avg_r_won": null,
+    "last_analysis": "2026-07-16T04:15:37.023029+00:00",
+    "total_trades": 3,
+    "win_rate": 1.0,
+    "wins": 3,
+    "losses": 0,
+    "avg_r_won": 1.71,
+    "by_pair": {
+      "XAG/USD": {
+        "trades": 3,
+        "wins": 3,
+        "losses": 0,
+        "win_rate": 1.0,
+        "avg_r": 1.71
+      }
+    },
+    "by_session": {
+      "London/NY": {
+        "trades": 3,
+        "win_rate": 1.0
+      }
+    },
+    "by_score_bucket": {
+      "9-10": {
+        "trades": 3,
+        "win_rate": 1.0
+      },
+      "11-12": {
+        "trades": 0,
+        "win_rate": null
+      },
+      "13+": {
+        "trades": 0,
+        "win_rate": null
+      }
+    },
+    "by_direction": {
+      "SELL": {
+        "trades": 3,
+        "win_rate": 1.0
+      }
+    },
+    "by_zone_type": {
+      "OB": {
+        "trades": 3,
+        "win_rate": 1.0
+      }
+    },
+    "common_loss_patterns": [],
     "suggestions": [],
     "parameter_history": []
   },
