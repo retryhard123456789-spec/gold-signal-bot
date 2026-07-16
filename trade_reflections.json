@@ -722,15 +722,43 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "GBPNZD-2026-07-14T13:49",
+      "ts_closed": "2026-07-16T08:10:46.312047+00:00",
+      "ts_signal": "2026-07-14T13:49:35.597522+00:00",
+      "symbol": "GBP/NZD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 42.2,
+      "rsi": 41.0,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP1",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \ud83e\udd47 TP1\nWhat worked:\n  \u2022 ADX 42.2 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 42.2 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T08:10:44.959312+00:00",
-    "total_trades": 27,
-    "win_rate": 0.667,
-    "wins": 18,
+    "last_analysis": "2026-07-16T08:10:46.716564+00:00",
+    "total_trades": 28,
+    "win_rate": 0.679,
+    "wins": 19,
     "losses": 9,
-    "avg_r_won": 1.56,
+    "avg_r_won": 1.53,
     "by_pair": {
       "XAG/USD": {
         "trades": 6,
@@ -747,8 +775,8 @@
         "avg_r": 1.4
       },
       "GBP/NZD": {
-        "trades": 1,
-        "wins": 1,
+        "trades": 2,
+        "wins": 2,
         "losses": 0,
         "win_rate": 1.0,
         "avg_r": 0.9
@@ -805,8 +833,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 21,
-        "win_rate": 0.714
+        "trades": 22,
+        "win_rate": 0.727
       },
       "Asian": {
         "trades": 6,
@@ -815,8 +843,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 26,
-        "win_rate": 0.692
+        "trades": 27,
+        "win_rate": 0.704
       },
       "11-12": {
         "trades": 1,
@@ -833,14 +861,14 @@
         "win_rate": 0.647
       },
       "BUY": {
-        "trades": 10,
-        "win_rate": 0.7
+        "trades": 11,
+        "win_rate": 0.727
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 24,
-        "win_rate": 0.625
+        "trades": 25,
+        "win_rate": 0.64
       },
       "FVG": {
         "trades": 3,
