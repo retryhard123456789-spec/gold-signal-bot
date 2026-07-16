@@ -1224,15 +1224,41 @@
         "low_score"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "COPPER-2026-07-15T10:54",
+      "ts_closed": "2026-07-16T13:51:07.141427+00:00",
+      "ts_signal": "2026-07-15T10:54:39.247078+00:00",
+      "symbol": "COPPER",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "FVG",
+      "score": 9,
+      "adx": 31.0,
+      "rsi": 45.2,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "BE",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \u26a1 Breakeven\nWhat worked:\n  \u2022 ADX 31.0 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 31.0 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T13:46:56.644161+00:00",
-    "total_trades": 46,
-    "win_rate": 0.5,
-    "wins": 23,
+    "last_analysis": "2026-07-16T13:51:07.596856+00:00",
+    "total_trades": 47,
+    "win_rate": 0.511,
+    "wins": 24,
     "losses": 23,
-    "avg_r_won": 1.52,
+    "avg_r_won": 1.5,
     "by_pair": {
       "XAG/USD": {
         "trades": 6,
@@ -1291,11 +1317,11 @@
         "avg_r": -1.0
       },
       "COPPER": {
-        "trades": 5,
-        "wins": 4,
+        "trades": 6,
+        "wins": 5,
         "losses": 1,
-        "win_rate": 0.8,
-        "avg_r": 0.93
+        "win_rate": 0.833,
+        "avg_r": 0.92
       },
       "AUD/CAD": {
         "trades": 2,
@@ -1321,8 +1347,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 33,
-        "win_rate": 0.515
+        "trades": 34,
+        "win_rate": 0.529
       },
       "Asian": {
         "trades": 13,
@@ -1331,8 +1357,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 43,
-        "win_rate": 0.535
+        "trades": 44,
+        "win_rate": 0.545
       },
       "11-12": {
         "trades": 3,
@@ -1349,8 +1375,8 @@
         "win_rate": 0.458
       },
       "BUY": {
-        "trades": 22,
-        "win_rate": 0.545
+        "trades": 23,
+        "win_rate": 0.565
       }
     },
     "by_zone_type": {
@@ -1359,7 +1385,7 @@
         "win_rate": 0.452
       },
       "FVG": {
-        "trades": 4,
+        "trades": 5,
         "win_rate": 1.0
       }
     },
@@ -1413,9 +1439,9 @@
       {
         "type": "pair_boost",
         "param": "COPPER",
-        "win_rate": 0.8,
-        "trades": 5,
-        "reason": "COPPER win rate is 80% \u2014 strong performer, consider increasing position size by 50%.",
+        "win_rate": 0.833,
+        "trades": 6,
+        "reason": "COPPER win rate is 83% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
       },
       {
@@ -1590,6 +1616,12 @@
         "ts": "2026-07-16T13:46:56.644144+00:00",
         "n_trades": 46,
         "win_rate": 0.5,
+        "suggestions_count": 6
+      },
+      {
+        "ts": "2026-07-16T13:51:07.596839+00:00",
+        "n_trades": 47,
+        "win_rate": 0.511,
         "suggestions_count": 6
       }
     ]
