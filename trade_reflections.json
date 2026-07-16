@@ -293,14 +293,41 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "USDNOK-2026-07-15T23:20",
+      "ts_closed": "2026-07-16T04:16:14.632491+00:00",
+      "ts_signal": "2026-07-15T23:20:47.188399+00:00",
+      "symbol": "USD/NOK",
+      "direction": "SELL",
+      "session": "Asian",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 25.3,
+      "rsi": 36.5,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 Asian session loss \u2014 lower liquidity creates more false breakouts on this session.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "asian_session",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T04:16:13.464060+00:00",
-    "total_trades": 11,
-    "win_rate": 0.727,
+    "last_analysis": "2026-07-16T04:16:14.921727+00:00",
+    "total_trades": 12,
+    "win_rate": 0.667,
     "wins": 8,
-    "losses": 3,
+    "losses": 4,
     "avg_r_won": 1.51,
     "by_pair": {
       "XAG/USD": {
@@ -346,9 +373,9 @@
         "avg_r": -1.0
       },
       "USD/NOK": {
-        "trades": 1,
+        "trades": 2,
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "win_rate": 0.0,
         "avg_r": -1.0
       }
@@ -359,14 +386,14 @@
         "win_rate": 0.625
       },
       "Asian": {
-        "trades": 3,
-        "win_rate": 1.0
+        "trades": 4,
+        "win_rate": 0.75
       }
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 11,
-        "win_rate": 0.727
+        "trades": 12,
+        "win_rate": 0.667
       },
       "11-12": {
         "trades": 0,
@@ -379,8 +406,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 7,
-        "win_rate": 0.571
+        "trades": 8,
+        "win_rate": 0.5
       },
       "BUY": {
         "trades": 4,
@@ -389,18 +416,18 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 11,
-        "win_rate": 0.727
+        "trades": 12,
+        "win_rate": 0.667
       }
     },
     "common_loss_patterns": [
       [
         "low_score",
-        3
+        4
       ],
       [
         "weak_htf",
-        3
+        4
       ],
       [
         "low_adx",
@@ -408,6 +435,10 @@
       ],
       [
         "h1_st_conflict",
+        1
+      ],
+      [
+        "asian_session",
         1
       ]
     ],
