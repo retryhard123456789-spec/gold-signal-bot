@@ -3194,14 +3194,40 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "USDNOK-2026-07-15T21:05",
+      "ts_closed": "2026-07-16T02:28:59.813241+00:00",
+      "ts_signal": "2026-07-15T21:05:53.937927+00:00",
+      "symbol": "USD/NOK",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 24.6,
+      "rsi": 36.0,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 9/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T02:28:58.767766+00:00",
-    "total_trades": 119,
-    "win_rate": 0.454,
+    "last_analysis": "2026-07-16T02:28:59.973129+00:00",
+    "total_trades": 120,
+    "win_rate": 0.45,
     "wins": 54,
-    "losses": 65,
+    "losses": 66,
     "avg_r_won": 1.78,
     "by_pair": {
       "USD/CAD": {
@@ -3310,11 +3336,11 @@
         "avg_r": -1.0
       },
       "USD/NOK": {
-        "trades": 4,
+        "trades": 5,
         "wins": 2,
-        "losses": 2,
-        "win_rate": 0.5,
-        "avg_r": -0.05
+        "losses": 3,
+        "win_rate": 0.4,
+        "avg_r": -0.24
       },
       "DAX40": {
         "trades": 5,
@@ -3354,8 +3380,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 98,
-        "win_rate": 0.418
+        "trades": 99,
+        "win_rate": 0.414
       },
       "Asian": {
         "trades": 21,
@@ -3364,8 +3390,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 112,
-        "win_rate": 0.455
+        "trades": 113,
+        "win_rate": 0.451
       },
       "11-12": {
         "trades": 7,
@@ -3382,14 +3408,14 @@
         "win_rate": 0.514
       },
       "SELL": {
-        "trades": 45,
-        "win_rate": 0.356
+        "trades": 46,
+        "win_rate": 0.348
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 115,
-        "win_rate": 0.435
+        "trades": 116,
+        "win_rate": 0.431
       },
       "FVG": {
         "trades": 4,
@@ -3399,11 +3425,11 @@
     "common_loss_patterns": [
       [
         "low_score",
-        61
+        62
       ],
       [
         "weak_htf",
-        42
+        43
       ],
       [
         "h1_st_conflict",
@@ -3424,7 +3450,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 45% across 119 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 45% across 120 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3471,7 +3497,7 @@
         "type": "pattern",
         "tag": "low_score",
         "frequency": 0.94,
-        "loss_count": 61,
+        "loss_count": 62,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
@@ -3479,7 +3505,7 @@
         "type": "pattern",
         "tag": "weak_htf",
         "frequency": 0.65,
-        "loss_count": 42,
+        "loss_count": 43,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
       }
@@ -4173,6 +4199,12 @@
         "ts": "2026-07-16T02:28:58.767749+00:00",
         "n_trades": 119,
         "win_rate": 0.454,
+        "suggestions_count": 8
+      },
+      {
+        "ts": "2026-07-16T02:28:59.973121+00:00",
+        "n_trades": 120,
+        "win_rate": 0.45,
         "suggestions_count": 8
       }
     ]
