@@ -68,8 +68,7 @@ PAIRS = {
     "GBP/CAD": {"ticker": "GBPCAD=X", "pip": 0.0001, "pip_val": 7.50, "digits": 5, "spread": 0.00025,"min_sl": 0.0015},
     "USD/NOK": {"ticker": "USDNOK=X", "pip": 0.0001, "pip_val": 9.50, "digits": 4, "spread": 0.00050,"min_sl": 0.0030},
     "USD/SEK": {"ticker": "USDSEK=X", "pip": 0.0001, "pip_val": 9.50, "digits": 4, "spread": 0.00060,"min_sl": 0.0030},
-    # Commodities
-    "WTI/USD": {"ticker": "CL=F",     "pip": 0.01,   "pip_val": 10.0, "digits": 2, "spread": 0.05,   "min_sl": 0.50},
+    # Commodities (WTI/USD removed — too volatile, news-driven, not suitable for SMC scalping)
     "COPPER":  {"ticker": "HG=F",     "pip": 0.001,  "pip_val": 2.50, "digits": 3, "spread": 0.0020, "min_sl": 0.010},
     "XPT/USD": {"ticker": "PL=F",     "pip": 0.10,   "pip_val": 5.00, "digits": 2, "spread": 0.50,   "min_sl": 3.0},
     # Indices — pip_val is indicative; verify contract size with your broker
@@ -139,7 +138,7 @@ def _fetch_ff_events():
 
 _INSTRUMENT_CCY = {
     "NAS100":  {"USD"}, "US30":   {"USD"}, "SPX500": {"USD"},
-    "WTI/USD": {"USD"}, "COPPER": {"USD"}, "XPT/USD":{"USD"},
+    "COPPER": {"USD"}, "XPT/USD":{"USD"},
     "DAX40":   {"EUR"},
     "NKY225":  {"JPY"},
 }
@@ -532,6 +531,10 @@ def analyze_pair(symbol, cfg, sigs):
     if adx_val<adx_min:
         return skip(f"ADX {round(adx_val,1)} too weak (min {adx_min}) — no trend")
 
+    # Require D1 to be directional — neutral D1 = choppy market, skip it
+    if d1_b == "NEUTRAL":
+        return skip("D1 bias is NEUTRAL — no clear daily trend, skipping to avoid chop")
+
     # Determine direction
     bull=0; bear=0
     if w1_b=="BULLISH": bull+=2
@@ -606,7 +609,7 @@ def analyze_pair(symbol, cfg, sigs):
                    rsi_m15,macd_h,bb_squeeze,direction,
                    st_m5=st_m5,e20m5=e20m5,e50m5=e50m5)
     sc = sc + sweep_bonus + zone_bonus
-    min_score=9
+    min_score=11
     if sc<min_score:
         e_lbl = f"EMA {round(e20m15,1)}/{round(e50m15,1)}"
         st_lbl = f"ST {st_m15}"
