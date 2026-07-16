@@ -1148,14 +1148,39 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "COPPER-2026-07-15T13:09",
+      "ts_closed": "2026-07-16T12:59:16.301028+00:00",
+      "ts_signal": "2026-07-15T13:09:36.834956+00:00",
+      "symbol": "COPPER",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 11,
+      "adx": 31.6,
+      "rsi": 59.8,
+      "rr": 2.6,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 HTF bias was not fully aligned (W1:BULLISH, D1:NEUTRAL) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T11:26:44.954654+00:00",
-    "total_trades": 43,
-    "win_rate": 0.512,
+    "last_analysis": "2026-07-16T12:59:16.688943+00:00",
+    "total_trades": 44,
+    "win_rate": 0.5,
     "wins": 22,
-    "losses": 21,
+    "losses": 22,
     "avg_r_won": 1.55,
     "by_pair": {
       "XAG/USD": {
@@ -1215,11 +1240,11 @@
         "avg_r": -1.0
       },
       "COPPER": {
-        "trades": 3,
+        "trades": 4,
         "wins": 3,
-        "losses": 0,
-        "win_rate": 1.0,
-        "avg_r": 1.58
+        "losses": 1,
+        "win_rate": 0.75,
+        "avg_r": 0.94
       },
       "AUD/CAD": {
         "trades": 2,
@@ -1245,8 +1270,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 30,
-        "win_rate": 0.533
+        "trades": 31,
+        "win_rate": 0.516
       },
       "Asian": {
         "trades": 13,
@@ -1259,7 +1284,7 @@
         "win_rate": 0.537
       },
       "11-12": {
-        "trades": 2,
+        "trades": 3,
         "win_rate": 0.0
       },
       "13+": {
@@ -1273,14 +1298,14 @@
         "win_rate": 0.458
       },
       "BUY": {
-        "trades": 19,
-        "win_rate": 0.579
+        "trades": 20,
+        "win_rate": 0.55
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 40,
-        "win_rate": 0.475
+        "trades": 41,
+        "win_rate": 0.463
       },
       "FVG": {
         "trades": 3,
@@ -1294,7 +1319,7 @@
       ],
       [
         "weak_htf",
-        13
+        14
       ],
       [
         "low_adx",
@@ -1337,7 +1362,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.9,
+        "frequency": 0.86,
         "loss_count": 19,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -1345,8 +1370,8 @@
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.62,
-        "loss_count": 13,
+        "frequency": 0.64,
+        "loss_count": 14,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
       }
@@ -1488,6 +1513,12 @@
         "ts": "2026-07-16T11:26:44.954639+00:00",
         "n_trades": 43,
         "win_rate": 0.512,
+        "suggestions_count": 5
+      },
+      {
+        "ts": "2026-07-16T12:59:16.688927+00:00",
+        "n_trades": 44,
+        "win_rate": 0.5,
         "suggestions_count": 5
       }
     ]
