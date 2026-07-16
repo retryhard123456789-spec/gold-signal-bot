@@ -3035,13 +3035,39 @@
         "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
         "Order Block entry held well as support/resistance."
       ]
+    },
+    {
+      "id": "XAGUSD-2026-07-13T17:28",
+      "ts_closed": "2026-07-16T02:28:45.095485+00:00",
+      "ts_signal": "2026-07-13T17:28:57.633375+00:00",
+      "symbol": "XAG/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 18.5,
+      "rsi": 37.5,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP2",
+      "pnl_r": 1.74,
+      "reflection": "Outcome: \ud83e\udd48 TP2\nWhat worked:\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T02:28:01.294012+00:00",
-    "total_trades": 113,
-    "win_rate": 0.451,
-    "wins": 51,
+    "last_analysis": "2026-07-16T02:28:45.254614+00:00",
+    "total_trades": 114,
+    "win_rate": 0.456,
+    "wins": 52,
     "losses": 62,
     "avg_r_won": 1.77,
     "by_pair": {
@@ -3053,11 +3079,11 @@
         "avg_r": -1.0
       },
       "XAG/USD": {
-        "trades": 9,
-        "wins": 5,
+        "trades": 10,
+        "wins": 6,
         "losses": 4,
-        "win_rate": 0.556,
-        "avg_r": 0.33
+        "win_rate": 0.6,
+        "avg_r": 0.47
       },
       "XAU/USD": {
         "trades": 17,
@@ -3195,8 +3221,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 93,
-        "win_rate": 0.419
+        "trades": 94,
+        "win_rate": 0.426
       },
       "Asian": {
         "trades": 20,
@@ -3205,8 +3231,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 107,
-        "win_rate": 0.449
+        "trades": 108,
+        "win_rate": 0.454
       },
       "11-12": {
         "trades": 6,
@@ -3223,14 +3249,14 @@
         "win_rate": 0.507
       },
       "SELL": {
-        "trades": 42,
-        "win_rate": 0.357
+        "trades": 43,
+        "win_rate": 0.372
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 109,
-        "win_rate": 0.431
+        "trades": 110,
+        "win_rate": 0.436
       },
       "FVG": {
         "trades": 4,
@@ -3265,7 +3291,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 45% across 113 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 46% across 114 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3307,14 +3333,6 @@
         "trades": 10,
         "reason": "GBP/JPY win rate is 90% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
-      },
-      {
-        "type": "threshold",
-        "param": "min_score",
-        "current": 9,
-        "suggested": 11,
-        "reason": "Score 9-10 trades have 45% win rate \u2014 these low-confidence setups are dragging results.",
-        "confidence": "high"
       },
       {
         "type": "pattern",
@@ -3987,6 +4005,12 @@
         "n_trades": 113,
         "win_rate": 0.451,
         "suggestions_count": 9
+      },
+      {
+        "ts": "2026-07-16T02:28:45.254606+00:00",
+        "n_trades": 114,
+        "win_rate": 0.456,
+        "suggestions_count": 8
       }
     ]
   },
