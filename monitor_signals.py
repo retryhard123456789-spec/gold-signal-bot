@@ -29,7 +29,6 @@ else:
     TG_TOKEN = _cfg["telegram_token"]
     TG_CHAT  = _cfg["telegram_chat_id"]
 
-# Full pair map including new pairs
 PAIR_TICKERS = {
     "XAU/USD": "GC=F",     "XAG/USD": "SI=F",
     "EUR/USD": "EURUSD=X", "GBP/USD": "GBPUSD=X",
@@ -123,17 +122,63 @@ def send_telegram(text):
         if not r.ok: log.warning(f"Telegram: {r.text[:120]}")
     except Exception as e: log.error(f"Telegram failed: {e}")
 
-def get_price(symbol):
-    ticker = PAIR_TICKERS.get(symbol)
-    if not ticker: return None
+def get_prices_ohlc(symbols):
+    """
+    Batch-fetch the latest 1m candle OHLC for all symbols in one API call.
+    Returns:
+      prices: {sym: last_close}
+      ranges: {sym: (candle_low, candle_high)}  ← used for TP/SL detection
+    Uses candle high/low so intra-bar TP/SL touches aren't missed.
+    Falls back to fast_info (close only) if batch download fails.
+    """
+    if not symbols:
+        return {}, {}
+
+    tickers = {s: PAIR_TICKERS[s] for s in symbols if s in PAIR_TICKERS}
+    if not tickers:
+        return {}, {}
+
+    ticker_list   = list(tickers.values())
+    sym_by_ticker = {v: k for k, v in tickers.items()}
+    prices, ranges = {}, {}
+
     try:
-        return float(yf.Ticker(ticker).fast_info.last_price)
-    except Exception:
-        try:
-            df = yf.download(ticker, period="1d", interval="1m", progress=False, auto_adjust=True)
-            if not df.empty: return float(df["Close"].iloc[-1])
-        except: pass
-    return None
+        raw = yf.download(
+            ticker_list, period="1d", interval="1m",
+            progress=False, auto_adjust=True, threads=True,
+            group_by="ticker",
+        )
+        if raw.empty:
+            raise ValueError("empty dataframe")
+
+        for ticker, sym in sym_by_ticker.items():
+            try:
+                sub = raw[ticker].dropna(how="all") if len(ticker_list) > 1 else raw.dropna(how="all")
+                if sub.empty:
+                    continue
+                last  = sub.iloc[-1]
+                close = float(last["Close"])
+                high  = float(last["High"])
+                low   = float(last["Low"])
+                if close > 0:
+                    prices[sym] = close
+                    ranges[sym] = (low, high)
+            except Exception as e:
+                log.debug(f"Extract failed {sym}/{ticker}: {e}")
+
+    except Exception as e:
+        log.warning(f"Batch OHLC fetch failed ({e}) — falling back to fast_info")
+        for sym, ticker in tickers.items():
+            try:
+                val = float(yf.Ticker(ticker).fast_info.last_price)
+                if val and val > 0:
+                    prices[sym] = val
+                    ranges[sym] = (val, val)
+            except Exception:
+                pass
+
+    log.info(f"Prices: {len(prices)}/{len(symbols)} — {({k: round(v,5) for k,v in prices.items()})}")
+    return prices, ranges
 
 def load_signals():
     try: return json.loads(SIG_FILE.read_text())
@@ -144,14 +189,9 @@ def save_signals(sigs):
 
 # ── Re-entry scanner ──────────────────────────────────────────
 def check_reentry(s, sigs):
-    """
-    After TP1 hit: look for a fresh OB/FVG in same direction on M15.
-    If found, generate a continuation signal targeting TP2 and TP3.
-    Returns (message, signal_dict) or (None, None).
-    """
     try:
         from trading_analyzer import (PAIRS, fetch_yf, find_ob, find_fvg,
-                                      calc_atr, get_sr_levels, snap_entry)
+                                      calc_atr, snap_entry)
     except ImportError:
         log.warning("trading_analyzer not importable — re-entry skipped")
         return None, None
@@ -162,7 +202,7 @@ def check_reentry(s, sigs):
     tp3       = s.get("tp3")
 
     if not tp2:
-        return None, None  # No targets left to aim for
+        return None, None
 
     p = PAIRS.get(symbol)
     if not p: return None, None
@@ -174,7 +214,6 @@ def check_reentry(s, sigs):
     min_sl   = p["min_sl"]
     ticker   = p["ticker"]
 
-    # Don't re-enter if already a re-entry pending in same direction
     if any(sig.get("is_reentry") and sig["symbol"] == symbol
            and sig["direction"] == direction
            and sig["status"] == "pending" for sig in sigs):
@@ -197,7 +236,7 @@ def check_reentry(s, sigs):
         current_price = round(df_m15.close.iloc[-1], digits)
         ob_edge = ob_hi if direction == "BUY" else ob_lo
         if abs(current_price - ob_edge) > 5.0 * atr:
-            return None, None  # Too far from zone
+            return None, None
 
         if direction == "BUY":
             new_entry = round(ob_hi + spread, digits)
@@ -269,15 +308,10 @@ def monitor():
         log.info("No active signals"); return
 
     symbols_needed = list({s["symbol"] for s in active})
-    prices = {}
-    for sym in symbols_needed:
-        p = get_price(sym)
-        if p: prices[sym] = p
-        time.sleep(0.4)
+    prices, ranges = get_prices_ohlc(symbols_needed)
 
-    log.info(f"Prices: { {k: round(v, 5) for k, v in prices.items()} }")
-    changed      = False
-    new_signals  = []
+    changed     = False
+    new_signals = []
 
     for s in sigs:
         if s["status"] not in ("active", "pending"): continue
@@ -286,10 +320,18 @@ def monitor():
         if price is None:
             log.warning(f"  No price for {sym}"); continue
 
-        d      = s["direction"]
-        entry  = s["entry"]
-        pip    = PAIR_PIPS.get(sym, 0.0001)
-        sl_d   = abs(entry - s["sl"])
+        bar_lo, bar_hi = ranges.get(sym, (price, price))
+        d     = s["direction"]
+        entry = s["entry"]
+        sl_d  = abs(entry - s["sl"])
+
+        # Use candle high/low for TP detection, low/high for SL detection
+        # This catches intra-bar touches that close price would miss
+        def hit_tp(lvl):
+            return (bar_hi >= lvl) if d == "BUY" else (bar_lo <= lvl)
+
+        def hit_sl(lvl):
+            return (bar_lo <= lvl) if d == "BUY" else (bar_hi >= lvl)
 
         # ── Pending → expired (48h) ───────────────────────────
         if s["status"] == "pending":
@@ -305,9 +347,9 @@ def monitor():
                 )
                 changed = True; continue
 
-        # ── Pending → active ──────────────────────────────────
+        # ── Pending → active (use candle range so intra-bar touches work) ──
         if s["status"] == "pending":
-            triggered = (price <= entry if d == "BUY" else price >= entry)
+            triggered = (bar_lo <= entry) if d == "BUY" else (bar_hi >= entry)
             if triggered:
                 s["status"]   = "active"
                 s["entry_ts"] = datetime.now(timezone.utc).isoformat()
@@ -321,79 +363,13 @@ def monitor():
                 changed = True
             continue
 
+        # ── Active signal: read state ─────────────────────────
         eff_sl  = s.get("eff_sl", s["sl"])
         tp1     = s["tp1"]; tp2 = s.get("tp2"); tp3 = s.get("tp3")
         tp1_hit = s.get("tp1_hit", False); tp2_hit = s.get("tp2_hit", False)
 
-        def hit_tp(lvl): return (price >= lvl) if d == "BUY" else (price <= lvl)
-        def hit_sl(lvl): return (price <= lvl) if d == "BUY" else (price >= lvl)
-
-        # ── TP1 ───────────────────────────────────────────────
-        if not tp1_hit and hit_tp(tp1):
-            s["tp1_hit"] = True; s["eff_sl"] = entry
-            pnl_tp1 = round(0.5 * abs(tp1 - entry) / max(sl_d, 1e-9), 2)
-            log.info(f"{sym}: TP1 hit @ {tp1}")
-            send_telegram(
-                f"🥇 <b>TP1 Hit!</b>  {sym}\n"
-                f"━━━━━━━━━━━━━━━━━\n"
-                f"{'🟢' if d=='BUY' else '🔴'} {d} → TP1: <b>{tp1}</b> ✅  (50% closed)\n\n"
-                f"⚡ <b>ACTION NOW:</b>\n"
-                f"🔁 Move SL: <b>{s['sl']}</b> → <b>{entry}</b> (Breakeven)\n"
-                f"   50% position secured 🔒  |  Remaining 50% runs free."
-            )
-            if _reflect_available:
-                try: record_trade_reflection(s, "TP1", pnl_tp1)
-                except Exception as e: log.warning(f"Reflection failed: {e}")
-
-            # Re-entry scan
-            re_msg, re_sig = check_reentry(s, sigs + new_signals)
-            if re_sig:
-                send_telegram(re_msg)
-                new_signals.append(re_sig)
-                log.info(f"Re-entry signal queued: {sym} {d}")
-
-            changed = True; continue
-
-        # ── TP2 ───────────────────────────────────────────────
-        if tp1_hit and tp2 and not tp2_hit and hit_tp(tp2):
-            s["tp2_hit"] = True; s["eff_sl"] = tp1
-            r1 = abs(tp1 - entry) / max(sl_d, 1e-9)
-            r2 = abs(tp2 - entry) / max(sl_d, 1e-9)
-            pnl_tp2 = round(0.5 * r1 + 0.3 * r2, 2)
-            log.info(f"{sym}: TP2 hit @ {tp2}")
-            send_telegram(
-                f"🥈 <b>TP2 Hit!</b>  {sym}\n"
-                f"━━━━━━━━━━━━━━━━━\n"
-                f"{'🟢' if d=='BUY' else '🔴'} {d} → TP2: <b>{tp2}</b> ✅  (30% closed)\n\n"
-                f"⚡ <b>ACTION NOW:</b>\n"
-                f"🔁 Trail SL: <b>{entry}</b> → <b>{tp1}</b>\n"
-                f"   80% position closed profitably 🔒  |  Last 20% runs to TP3."
-            )
-            if _reflect_available:
-                try: record_trade_reflection(s, "TP2", pnl_tp2)
-                except Exception as e: log.warning(f"Reflection failed: {e}")
-            changed = True; continue
-
-        # ── TP3 ───────────────────────────────────────────────
-        if tp2_hit and tp3 and hit_tp(tp3):
-            r1  = abs(tp1 - entry) / max(sl_d, 1e-9)
-            r2  = abs(tp2 - entry) / max(sl_d, 1e-9) if tp2 else r1
-            r3  = abs(tp3 - entry) / max(sl_d, 1e-9)
-            pnl = round(0.5 * r1 + 0.3 * r2 + 0.2 * r3, 2)
-            s["status"] = "closed"; s["outcome"] = "TP3"; s["pnl_r"] = pnl
-            log.info(f"{sym}: TP3 full close +{pnl}R")
-            send_telegram(
-                f"🏆 <b>TP3 Hit — Full Close!</b>  {sym}\n"
-                f"━━━━━━━━━━━━━━━━━\n"
-                f"{'🟢' if d=='BUY' else '🔴'} {d} → TP3: <b>{tp3}</b> ✅\n"
-                f"💰 Total P&L: <b>+{pnl}R</b> 🎉"
-            )
-            if _reflect_available:
-                try: record_trade_reflection(s, "TP3", pnl)
-                except Exception as e: log.warning(f"Reflection failed: {e}")
-            changed = True; continue
-
-        # ── SL / BE / Trail ───────────────────────────────────
+        # ── SL / BE / Trail — check before TPs so a stop-out
+        #    isn't masked by a simultaneous TP touch on the same bar ──────
         if hit_sl(eff_sl):
             if eff_sl == entry:
                 pnl = round(0.5 * abs(tp1 - entry) / max(sl_d, 1e-9), 2)
@@ -401,7 +377,7 @@ def monitor():
                 log.info(f"{sym}: BE close +{pnl}R")
                 send_telegram(
                     f"⚡ <b>Breakeven Close</b>  {sym}\n"
-                    f"SL @ entry <b>{entry}</b> hit — 50% locked at TP1\n"
+                    f"SL moved to entry <b>{entry}</b> hit — 50% locked at TP1 ✅\n"
                     f"P&L: <b>+{pnl}R</b> (no loss on capital)"
                 )
                 if _reflect_available:
@@ -411,12 +387,13 @@ def monitor():
             elif eff_sl == tp1:
                 r1  = abs(tp1 - entry) / max(sl_d, 1e-9)
                 r2  = abs((tp2 or tp1) - entry) / max(sl_d, 1e-9)
-                pnl = round(0.5 * r1 + 0.3 * r2, 2)
+                # 50% at TP1 + 30% at TP2 + 20% trailing back to TP1
+                pnl = round(0.5 * r1 + 0.3 * r2 + 0.2 * r1, 2)
                 s["status"] = "closed"; s["outcome"] = "TRAIL"; s["pnl_r"] = pnl
                 log.info(f"{sym}: Trail close +{pnl}R")
                 send_telegram(
                     f"📉 <b>Trailing Stop Hit</b>  {sym}\n"
-                    f"SL @ TP1 <b>{tp1}</b> hit after TP2 ✅\n"
+                    f"SL trailed to TP1 <b>{tp1}</b> triggered after TP2 ✅\n"
                     f"P&L: <b>+{pnl}R</b>"
                 )
                 if _reflect_available:
@@ -434,6 +411,79 @@ def monitor():
                 if _reflect_available:
                     try: record_trade_reflection(s, "SL", -1.0)
                     except Exception as e: log.warning(f"Reflection failed: {e}")
+
+            changed = True; continue
+
+        # ── TP checks — fall through so multiple levels can fire in one
+        #    cycle when price gaps (e.g. TP1 + TP2 in same 1m bar) ───────
+
+        # ── TP1 ──────────────────────────────────────────────
+        if not tp1_hit and hit_tp(tp1):
+            s["tp1_hit"] = True; s["eff_sl"] = entry
+            tp1_hit = True   # update local so TP2 check below can fire same cycle
+            pnl_tp1 = round(0.5 * abs(tp1 - entry) / max(sl_d, 1e-9), 2)
+            log.info(f"{sym}: TP1 hit @ {tp1}")
+            send_telegram(
+                f"🥇 <b>TP1 Hit!</b>  {sym}\n"
+                f"━━━━━━━━━━━━━━━━━\n"
+                f"{'🟢' if d=='BUY' else '🔴'} {d} → TP1: <b>{tp1}</b> ✅  (50% closed)\n\n"
+                f"⚡ <b>ACTION NOW:</b>\n"
+                f"🔁 Move SL: <b>{s['sl']}</b> → <b>{entry}</b> (Breakeven)\n"
+                f"   50% position secured 🔒  |  Remaining 50% runs free."
+            )
+            if _reflect_available:
+                try: record_trade_reflection(s, "TP1", pnl_tp1)
+                except Exception as e: log.warning(f"Reflection failed: {e}")
+
+            re_msg, re_sig = check_reentry(s, sigs + new_signals)
+            if re_sig:
+                send_telegram(re_msg)
+                new_signals.append(re_sig)
+                log.info(f"Re-entry signal queued: {sym} {d}")
+
+            changed = True
+            # fall through — check TP2 immediately if also hit this bar
+
+        # ── TP2 ──────────────────────────────────────────────
+        if tp1_hit and tp2 and not tp2_hit and hit_tp(tp2):
+            s["tp2_hit"] = True; s["eff_sl"] = tp1
+            tp2_hit = True   # update local so TP3 check below can fire same cycle
+            r1 = abs(tp1 - entry) / max(sl_d, 1e-9)
+            r2 = abs(tp2 - entry) / max(sl_d, 1e-9)
+            pnl_tp2 = round(0.5 * r1 + 0.3 * r2, 2)
+            log.info(f"{sym}: TP2 hit @ {tp2}")
+            send_telegram(
+                f"🥈 <b>TP2 Hit!</b>  {sym}\n"
+                f"━━━━━━━━━━━━━━━━━\n"
+                f"{'🟢' if d=='BUY' else '🔴'} {d} → TP2: <b>{tp2}</b> ✅  (30% closed)\n\n"
+                f"⚡ <b>ACTION NOW:</b>\n"
+                f"🔁 Trail SL: <b>{entry}</b> → <b>{tp1}</b>\n"
+                f"   80% position closed profitably 🔒  |  Last 20% runs to TP3."
+            )
+            if _reflect_available:
+                try: record_trade_reflection(s, "TP2", pnl_tp2)
+                except Exception as e: log.warning(f"Reflection failed: {e}")
+
+            changed = True
+            # fall through — check TP3 immediately if also hit this bar
+
+        # ── TP3 ──────────────────────────────────────────────
+        if tp2_hit and tp3 and hit_tp(tp3):
+            r1  = abs(tp1 - entry) / max(sl_d, 1e-9)
+            r2  = abs(tp2 - entry) / max(sl_d, 1e-9) if tp2 else r1
+            r3  = abs(tp3 - entry) / max(sl_d, 1e-9)
+            pnl = round(0.5 * r1 + 0.3 * r2 + 0.2 * r3, 2)
+            s["status"] = "closed"; s["outcome"] = "TP3"; s["pnl_r"] = pnl
+            log.info(f"{sym}: TP3 full close +{pnl}R")
+            send_telegram(
+                f"🏆 <b>TP3 Hit — Full Close!</b>  {sym}\n"
+                f"━━━━━━━━━━━━━━━━━\n"
+                f"{'🟢' if d=='BUY' else '🔴'} {d} → TP3: <b>{tp3}</b> ✅\n"
+                f"💰 Total P&L: <b>+{pnl}R</b> 🎉"
+            )
+            if _reflect_available:
+                try: record_trade_reflection(s, "TP3", pnl)
+                except Exception as e: log.warning(f"Reflection failed: {e}")
             changed = True
 
     if new_signals:
