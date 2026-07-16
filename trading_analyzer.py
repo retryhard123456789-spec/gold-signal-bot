@@ -700,14 +700,13 @@ def analyze():
     if cfg.get("paused"): log.info("Bot paused"); return
 
     now_utc=datetime.now(timezone.utc)
-    send_telegram(session_header(now_utc))
 
     if now_utc.weekday()>=5:
-        send_telegram("🚫 Weekend — markets closed. Bot resumes Monday.")
         log.info("Weekend — no trading"); return
 
     sigs=load_signals()
     new_sigs=[]
+    errors=[]
 
     for symbol in PAIRS:
         log.info(f"Scanning {symbol}…")
@@ -718,15 +717,47 @@ def analyze():
                 new_sigs.append(sig)
                 send_telegram(fmt_signal(sig))
                 log.info(f"  ✅ Signal: {sig['direction']} @ {sig['entry']}  R:R 1:{sig['rr']}  score {sig['score']}")
-            elif reason:
-                send_telegram(fmt_no_signal(symbol, reason))
+            else:
                 log.info(f"  ⏭ {symbol}: {reason}")
         except Exception as e:
             log.error(f"  {symbol}: unhandled error {e}")
+            errors.append((symbol, str(e)))
         time.sleep(1)
 
     save_signals(sigs)
-    log.info(f"Scan complete — {len(new_sigs)} new signal(s)")
+    log.info(f"Scan complete — {len(new_sigs)} new signal(s), {len(errors)} error(s)")
+
+    # Only message the group if signals were found, or if there were errors
+    if not new_sigs and not errors:
+        now_cairo = now_utc.hour + 2  # UTC+2 Cairo
+        send_telegram(
+            f"🔍 <b>Scan Complete</b> — {now_utc.strftime('%H:%M')} UTC\n"
+            f"━━━━━━━━━━━━━━━━━\n"
+            f"✅ All {len(PAIRS)} pairs scanned — no qualifying setups.\n"
+            f"<i>Filters: Score ≥11 | D1 directional | R:R ≥1.3 | No news</i>"
+        )
+    elif errors:
+        error_lines = "\n".join(f"  • {sym}: {err[:60]}" for sym, err in errors)
+        send_telegram(
+            f"⚠️ <b>Scan Issue Detected</b> — {now_utc.strftime('%H:%M')} UTC\n"
+            f"━━━━━━━━━━━━━━━━━\n"
+            f"{len(errors)} pair(s) failed during scan:\n{error_lines}\n\n"
+            f"🔧 Running auto-diagnostics now..."
+        )
+        # Trigger diagnostics automatically
+        try:
+            gh_token = os.environ.get("GH_TOKEN", "")
+            if gh_token:
+                import requests as _req
+                _req.post(
+                    "https://api.github.com/repos/retryhard123456789-spec/gold-signal-bot"
+                    "/actions/workflows/diagnostics.yml/dispatches",
+                    headers={"Authorization": f"token {gh_token}", "User-Agent": "GoldBot"},
+                    json={"ref": "main"}, timeout=15
+                )
+                log.info("Auto-diagnostics triggered")
+        except Exception as de:
+            log.warning(f"Auto-diagnostics dispatch failed: {de}")
 
 # ── Formatting ────────────────────────────────────────────────
 def fmt_no_signal(symbol, reason):
