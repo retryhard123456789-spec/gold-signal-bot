@@ -3274,14 +3274,39 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "GBPJPY-2026-07-16T00:35",
+      "ts_closed": "2026-07-16T02:29:03.083720+00:00",
+      "ts_signal": "2026-07-16T00:35:06.941701+00:00",
+      "symbol": "GBP/JPY",
+      "direction": "BUY",
+      "session": "Asian",
+      "zone_type": "OB",
+      "score": 12,
+      "adx": 29.9,
+      "rsi": 71.8,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Asian session loss \u2014 lower liquidity creates more false breakouts on this session.",
+      "warning_tags": [
+        "asian_session"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T02:29:02.141384+00:00",
-    "total_trades": 122,
-    "win_rate": 0.443,
+    "last_analysis": "2026-07-16T02:29:03.232326+00:00",
+    "total_trades": 123,
+    "win_rate": 0.439,
     "wins": 54,
-    "losses": 68,
+    "losses": 69,
     "avg_r_won": 1.78,
     "by_pair": {
       "USD/CAD": {
@@ -3418,11 +3443,11 @@
         "avg_r": -1.0
       },
       "GBP/JPY": {
-        "trades": 11,
+        "trades": 12,
         "wins": 10,
-        "losses": 1,
-        "win_rate": 0.909,
-        "avg_r": 2.55
+        "losses": 2,
+        "win_rate": 0.833,
+        "avg_r": 2.25
       },
       "AUD/JPY": {
         "trades": 1,
@@ -3438,8 +3463,8 @@
         "win_rate": 0.414
       },
       "Asian": {
-        "trades": 23,
-        "win_rate": 0.565
+        "trades": 24,
+        "win_rate": 0.542
       }
     },
     "by_score_bucket": {
@@ -3448,8 +3473,8 @@
         "win_rate": 0.443
       },
       "11-12": {
-        "trades": 7,
-        "win_rate": 0.429
+        "trades": 8,
+        "win_rate": 0.375
       },
       "13+": {
         "trades": 0,
@@ -3458,8 +3483,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 74,
-        "win_rate": 0.514
+        "trades": 75,
+        "win_rate": 0.507
       },
       "SELL": {
         "trades": 48,
@@ -3468,8 +3493,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 118,
-        "win_rate": 0.424
+        "trades": 119,
+        "win_rate": 0.42
       },
       "FVG": {
         "trades": 4,
@@ -3504,7 +3529,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 44% across 122 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 44% across 123 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3550,9 +3575,9 @@
       {
         "type": "pair_boost",
         "param": "GBP/JPY",
-        "win_rate": 0.909,
-        "trades": 11,
-        "reason": "GBP/JPY win rate is 91% \u2014 strong performer, consider increasing position size by 50%.",
+        "win_rate": 0.833,
+        "trades": 12,
+        "reason": "GBP/JPY win rate is 83% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
       },
       {
@@ -3566,7 +3591,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.94,
+        "frequency": 0.93,
         "loss_count": 64,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -3574,7 +3599,7 @@
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.66,
+        "frequency": 0.65,
         "loss_count": 45,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
@@ -4287,6 +4312,12 @@
         "ts": "2026-07-16T02:29:02.141376+00:00",
         "n_trades": 122,
         "win_rate": 0.443,
+        "suggestions_count": 10
+      },
+      {
+        "ts": "2026-07-16T02:29:03.232318+00:00",
+        "n_trades": 123,
+        "win_rate": 0.439,
         "suggestions_count": 10
       }
     ]
