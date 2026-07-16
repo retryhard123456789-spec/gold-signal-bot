@@ -1,7 +1,35 @@
 {
   "version": 2,
   "created": "",
-  "trade_reflections": [],
+  "trade_reflections": [
+    {
+      "id": "XAUUSD-2026-07-15T08:23",
+      "ts_closed": "2026-07-16T03:10:16.174010+00:00",
+      "ts_signal": "2026-07-15T08:23:27.894185+00:00",
+      "symbol": "XAU/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 23.4,
+      "rsi": 40.6,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BEARISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 10/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:BEARISH) \u2014 higher timeframe neutrality often means chop.\n  \u2022 H1 Supertrend conflicted with SELL \u2014 two-timeframe Supertrend misalignment is a red flag.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf",
+        "h1_st_conflict"
+      ],
+      "positive_tags": []
+    }
+  ],
   "rl_state": {
     "last_analysis": null,
     "total_trades": 0,
