@@ -962,14 +962,39 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "GBPJPY-2026-07-16T00:35",
+      "ts_closed": "2026-07-16T08:11:27.706492+00:00",
+      "ts_signal": "2026-07-16T00:35:06.941701+00:00",
+      "symbol": "GBP/JPY",
+      "direction": "BUY",
+      "session": "Asian",
+      "zone_type": "OB",
+      "score": 12,
+      "adx": 29.9,
+      "rsi": 71.8,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Asian session loss \u2014 lower liquidity creates more false breakouts on this session.",
+      "warning_tags": [
+        "asian_session"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T08:11:26.468076+00:00",
-    "total_trades": 36,
-    "win_rate": 0.611,
+    "last_analysis": "2026-07-16T08:11:28.152625+00:00",
+    "total_trades": 37,
+    "win_rate": 0.595,
     "wins": 22,
-    "losses": 14,
+    "losses": 15,
     "avg_r_won": 1.55,
     "by_pair": {
       "XAG/USD": {
@@ -994,11 +1019,11 @@
         "avg_r": 0.9
       },
       "GBP/JPY": {
-        "trades": 7,
+        "trades": 8,
         "wins": 6,
-        "losses": 1,
-        "win_rate": 0.857,
-        "avg_r": 1.33
+        "losses": 2,
+        "win_rate": 0.75,
+        "avg_r": 1.04
       },
       "GBP/AUD": {
         "trades": 2,
@@ -1049,8 +1074,8 @@
         "win_rate": 0.64
       },
       "Asian": {
-        "trades": 11,
-        "win_rate": 0.545
+        "trades": 12,
+        "win_rate": 0.5
       }
     },
     "by_score_bucket": {
@@ -1059,7 +1084,7 @@
         "win_rate": 0.629
       },
       "11-12": {
-        "trades": 1,
+        "trades": 2,
         "win_rate": 0.0
       },
       "13+": {
@@ -1073,14 +1098,14 @@
         "win_rate": 0.5
       },
       "BUY": {
-        "trades": 14,
-        "win_rate": 0.786
+        "trades": 15,
+        "win_rate": 0.733
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 33,
-        "win_rate": 0.576
+        "trades": 34,
+        "win_rate": 0.559
       },
       "FVG": {
         "trades": 3,
@@ -1098,7 +1123,7 @@
       ],
       [
         "asian_session",
-        5
+        6
       ],
       [
         "low_adx",
@@ -1129,9 +1154,9 @@
       {
         "type": "pair_boost",
         "param": "GBP/JPY",
-        "win_rate": 0.857,
-        "trades": 7,
-        "reason": "GBP/JPY win rate is 86% \u2014 strong performer, consider increasing position size by 50%.",
+        "win_rate": 0.75,
+        "trades": 8,
+        "reason": "GBP/JPY win rate is 75% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
       },
       {
@@ -1145,7 +1170,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.93,
+        "frequency": 0.87,
         "loss_count": 13,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -1153,7 +1178,7 @@
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.79,
+        "frequency": 0.73,
         "loss_count": 11,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
@@ -1254,6 +1279,12 @@
         "ts": "2026-07-16T08:11:26.468060+00:00",
         "n_trades": 36,
         "win_rate": 0.611,
+        "suggestions_count": 6
+      },
+      {
+        "ts": "2026-07-16T08:11:28.152610+00:00",
+        "n_trades": 37,
+        "win_rate": 0.595,
         "suggestions_count": 6
       }
     ]
