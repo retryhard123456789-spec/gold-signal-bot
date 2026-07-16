@@ -187,15 +187,41 @@
         "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
         "Order Block entry held well as support/resistance."
       ]
+    },
+    {
+      "id": "GBPJPY-2026-07-14T23:27",
+      "ts_closed": "2026-07-16T04:15:44.424924+00:00",
+      "ts_signal": "2026-07-14T23:27:48.047400+00:00",
+      "symbol": "GBP/JPY",
+      "direction": "BUY",
+      "session": "Asian",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 16.2,
+      "rsi": 58.3,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": -1,
+      "outcome": "TP3",
+      "pnl_r": 2.5,
+      "reflection": "Outcome: \ud83c\udfc6 TP3\nWhat worked:\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T04:15:43.318298+00:00",
-    "total_trades": 7,
+    "last_analysis": "2026-07-16T04:15:44.710560+00:00",
+    "total_trades": 8,
     "win_rate": 1.0,
-    "wins": 7,
+    "wins": 8,
     "losses": 0,
-    "avg_r_won": 1.37,
+    "avg_r_won": 1.51,
     "by_pair": {
       "XAG/USD": {
         "trades": 3,
@@ -219,11 +245,11 @@
         "avg_r": 0.9
       },
       "GBP/JPY": {
-        "trades": 2,
-        "wins": 2,
+        "trades": 3,
+        "wins": 3,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.32
+        "avg_r": 1.71
       }
     },
     "by_session": {
@@ -232,13 +258,13 @@
         "win_rate": 1.0
       },
       "Asian": {
-        "trades": 2,
+        "trades": 3,
         "win_rate": 1.0
       }
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 7,
+        "trades": 8,
         "win_rate": 1.0
       },
       "11-12": {
@@ -256,13 +282,13 @@
         "win_rate": 1.0
       },
       "BUY": {
-        "trades": 3,
+        "trades": 4,
         "win_rate": 1.0
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 7,
+        "trades": 8,
         "win_rate": 1.0
       }
     },
