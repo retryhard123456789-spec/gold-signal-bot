@@ -372,14 +372,41 @@
         "asian_session"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "XAUUSD-2026-07-15T08:23",
+      "ts_closed": "2026-07-16T04:24:16.604734+00:00",
+      "ts_signal": "2026-07-15T08:23:27.894185+00:00",
+      "symbol": "XAU/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 23.4,
+      "rsi": 40.6,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BEARISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 10/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:BEARISH) \u2014 higher timeframe neutrality often means chop.\n  \u2022 H1 Supertrend conflicted with SELL \u2014 two-timeframe Supertrend misalignment is a red flag.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf",
+        "h1_st_conflict"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T04:19:37.286255+00:00",
-    "total_trades": 14,
-    "win_rate": 0.571,
+    "last_analysis": "2026-07-16T04:24:16.877890+00:00",
+    "total_trades": 15,
+    "win_rate": 0.533,
     "wins": 8,
-    "losses": 6,
+    "losses": 7,
     "avg_r_won": 1.51,
     "by_pair": {
       "XAG/USD": {
@@ -418,9 +445,9 @@
         "avg_r": -1.0
       },
       "XAU/USD": {
-        "trades": 1,
+        "trades": 2,
         "wins": 0,
-        "losses": 1,
+        "losses": 2,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -434,8 +461,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 8,
-        "win_rate": 0.625
+        "trades": 9,
+        "win_rate": 0.556
       },
       "Asian": {
         "trades": 6,
@@ -444,8 +471,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 13,
-        "win_rate": 0.615
+        "trades": 14,
+        "win_rate": 0.571
       },
       "11-12": {
         "trades": 1,
@@ -458,8 +485,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 9,
-        "win_rate": 0.444
+        "trades": 10,
+        "win_rate": 0.4
       },
       "BUY": {
         "trades": 5,
@@ -468,29 +495,29 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 14,
-        "win_rate": 0.571
+        "trades": 15,
+        "win_rate": 0.533
       }
     },
     "common_loss_patterns": [
       [
         "low_score",
-        5
+        6
       ],
       [
         "weak_htf",
-        5
+        6
       ],
       [
         "asian_session",
         3
       ],
       [
-        "low_adx",
-        1
+        "h1_st_conflict",
+        2
       ],
       [
-        "h1_st_conflict",
+        "low_adx",
         1
       ]
     ],
@@ -498,26 +525,18 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.83,
-        "loss_count": 5,
+        "frequency": 0.86,
+        "loss_count": 6,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.83,
-        "loss_count": 5,
+        "frequency": 0.86,
+        "loss_count": 6,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
-      },
-      {
-        "type": "pattern",
-        "tag": "asian_session",
-        "frequency": 0.5,
-        "loss_count": 3,
-        "reason": "Asian session losses are recurring \u2014 strongly consider session filter.",
-        "confidence": "medium"
       }
     ],
     "parameter_history": [
@@ -532,6 +551,12 @@
         "n_trades": 14,
         "win_rate": 0.571,
         "suggestions_count": 3
+      },
+      {
+        "ts": "2026-07-16T04:24:16.877875+00:00",
+        "n_trades": 15,
+        "win_rate": 0.533,
+        "suggestions_count": 2
       }
     ]
   },
