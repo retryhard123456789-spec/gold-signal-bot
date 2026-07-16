@@ -3325,15 +3325,41 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "GBPJPY-2026-07-14T23:27",
+      "ts_closed": "2026-07-16T02:29:30.253163+00:00",
+      "ts_signal": "2026-07-14T23:27:48.047400+00:00",
+      "symbol": "GBP/JPY",
+      "direction": "BUY",
+      "session": "Asian",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 16.2,
+      "rsi": 58.3,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": 1,
+      "st_h1": -1,
+      "outcome": "TP3",
+      "pnl_r": 2.5,
+      "reflection": "Outcome: \ud83c\udfc6 TP3\nWhat worked:\n  \u2022 Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.\n  \u2022 Order Block entry held well as support/resistance.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Both HTF timeframes aligned (BULLISH / BULLISH) \u2014 clean multi-timeframe confluence.",
+        "Order Block entry held well as support/resistance."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T02:29:29.132312+00:00",
-    "total_trades": 124,
-    "win_rate": 0.444,
-    "wins": 55,
+    "last_analysis": "2026-07-16T02:29:30.416410+00:00",
+    "total_trades": 125,
+    "win_rate": 0.448,
+    "wins": 56,
     "losses": 69,
-    "avg_r_won": 1.79,
+    "avg_r_won": 1.8,
     "by_pair": {
       "USD/CAD": {
         "trades": 3,
@@ -3469,11 +3495,11 @@
         "avg_r": -1.0
       },
       "GBP/JPY": {
-        "trades": 12,
-        "wins": 10,
+        "trades": 13,
+        "wins": 11,
         "losses": 2,
-        "win_rate": 0.833,
-        "avg_r": 2.25
+        "win_rate": 0.846,
+        "avg_r": 2.27
       },
       "AUD/JPY": {
         "trades": 1,
@@ -3489,14 +3515,14 @@
         "win_rate": 0.42
       },
       "Asian": {
-        "trades": 24,
-        "win_rate": 0.542
+        "trades": 25,
+        "win_rate": 0.56
       }
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 116,
-        "win_rate": 0.448
+        "trades": 117,
+        "win_rate": 0.453
       },
       "11-12": {
         "trades": 8,
@@ -3509,8 +3535,8 @@
     },
     "by_direction": {
       "BUY": {
-        "trades": 75,
-        "win_rate": 0.507
+        "trades": 76,
+        "win_rate": 0.513
       },
       "SELL": {
         "trades": 49,
@@ -3519,8 +3545,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 120,
-        "win_rate": 0.425
+        "trades": 121,
+        "win_rate": 0.43
       },
       "FVG": {
         "trades": 4,
@@ -3555,7 +3581,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 44% across 124 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 45% across 125 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3601,18 +3627,10 @@
       {
         "type": "pair_boost",
         "param": "GBP/JPY",
-        "win_rate": 0.833,
-        "trades": 12,
-        "reason": "GBP/JPY win rate is 83% \u2014 strong performer, consider increasing position size by 50%.",
+        "win_rate": 0.846,
+        "trades": 13,
+        "reason": "GBP/JPY win rate is 85% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
-      },
-      {
-        "type": "threshold",
-        "param": "min_score",
-        "current": 9,
-        "suggested": 11,
-        "reason": "Score 9-10 trades have 45% win rate \u2014 these low-confidence setups are dragging results.",
-        "confidence": "high"
       },
       {
         "type": "pattern",
@@ -4351,6 +4369,12 @@
         "n_trades": 124,
         "win_rate": 0.444,
         "suggestions_count": 10
+      },
+      {
+        "ts": "2026-07-16T02:29:30.416402+00:00",
+        "n_trades": 125,
+        "win_rate": 0.448,
+        "suggestions_count": 9
       }
     ]
   },
