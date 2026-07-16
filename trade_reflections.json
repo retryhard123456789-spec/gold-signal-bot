@@ -1,7 +1,34 @@
 {
   "version": 2,
   "created": "",
-  "trade_reflections": [],
+  "trade_reflections": [
+    {
+      "id": "XAGUSD-2026-07-13T17:28",
+      "ts_closed": "2026-07-16T04:15:33.879841+00:00",
+      "ts_signal": "2026-07-13T17:28:57.633375+00:00",
+      "symbol": "XAG/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 18.5,
+      "rsi": 37.5,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP1",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \ud83e\udd47 TP1\nWhat worked:\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
+    }
+  ],
   "rl_state": {
     "last_analysis": null,
     "total_trades": 0,
