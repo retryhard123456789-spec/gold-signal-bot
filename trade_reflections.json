@@ -588,22 +588,48 @@
         "h4_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "XAGUSD-2026-07-13T17:28",
+      "ts_closed": "2026-07-16T08:10:36.965506+00:00",
+      "ts_signal": "2026-07-13T17:28:57.633375+00:00",
+      "symbol": "XAG/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 18.5,
+      "rsi": 37.5,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP1",
+      "pnl_r": 0.9,
+      "reflection": "Outcome: \ud83e\udd47 TP1\nWhat worked:\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T07:12:02.505935+00:00",
-    "total_trades": 22,
-    "win_rate": 0.591,
-    "wins": 13,
+    "last_analysis": "2026-07-16T08:10:37.327737+00:00",
+    "total_trades": 23,
+    "win_rate": 0.609,
+    "wins": 14,
     "losses": 9,
-    "avg_r_won": 1.56,
+    "avg_r_won": 1.51,
     "by_pair": {
       "XAG/USD": {
-        "trades": 3,
-        "wins": 3,
+        "trades": 4,
+        "wins": 4,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.71
+        "avg_r": 1.51
       },
       "AUD/NZD": {
         "trades": 3,
@@ -671,8 +697,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 16,
-        "win_rate": 0.625
+        "trades": 17,
+        "win_rate": 0.647
       },
       "Asian": {
         "trades": 6,
@@ -681,8 +707,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 21,
-        "win_rate": 0.619
+        "trades": 22,
+        "win_rate": 0.636
       },
       "11-12": {
         "trades": 1,
@@ -695,8 +721,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 12,
-        "win_rate": 0.5
+        "trades": 13,
+        "win_rate": 0.538
       },
       "BUY": {
         "trades": 10,
@@ -705,8 +731,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 19,
-        "win_rate": 0.526
+        "trades": 20,
+        "win_rate": 0.55
       },
       "FVG": {
         "trades": 3,
