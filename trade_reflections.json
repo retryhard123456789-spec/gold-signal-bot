@@ -1749,14 +1749,39 @@
         "h1_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "GBPNZD-2026-07-15T19:20",
+      "ts_closed": "2026-07-17T08:00:57.296531+00:00",
+      "ts_signal": "2026-07-15T19:20:45.943953+00:00",
+      "symbol": "GBP/NZD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 12,
+      "adx": 48.6,
+      "rsi": 57.5,
+      "rr": 2.3,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 H4 Supertrend was not aligned with BUY direction \u2014 entry was against H4 momentum.",
+      "warning_tags": [
+        "h4_st_conflict"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-17T06:58:01.143674+00:00",
-    "total_trades": 66,
-    "win_rate": 0.439,
+    "last_analysis": "2026-07-17T08:00:57.448222+00:00",
+    "total_trades": 67,
+    "win_rate": 0.433,
     "wins": 29,
-    "losses": 37,
+    "losses": 38,
     "avg_r_won": 1.53,
     "by_pair": {
       "XAG/USD": {
@@ -1774,11 +1799,11 @@
         "avg_r": 1.67
       },
       "GBP/NZD": {
-        "trades": 3,
+        "trades": 4,
         "wins": 2,
-        "losses": 1,
-        "win_rate": 0.667,
-        "avg_r": 0.27
+        "losses": 2,
+        "win_rate": 0.5,
+        "avg_r": -0.05
       },
       "GBP/JPY": {
         "trades": 9,
@@ -1867,8 +1892,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 53,
-        "win_rate": 0.434
+        "trades": 54,
+        "win_rate": 0.426
       },
       "Asian": {
         "trades": 13,
@@ -1881,7 +1906,7 @@
         "win_rate": 0.492
       },
       "11-12": {
-        "trades": 7,
+        "trades": 8,
         "win_rate": 0.0
       },
       "13+": {
@@ -1895,14 +1920,14 @@
         "win_rate": 0.412
       },
       "BUY": {
-        "trades": 32,
-        "win_rate": 0.469
+        "trades": 33,
+        "win_rate": 0.455
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 61,
-        "win_rate": 0.393
+        "trades": 62,
+        "win_rate": 0.387
       },
       "FVG": {
         "trades": 5,
@@ -1927,8 +1952,8 @@
         8
       ],
       [
-        "asian_session",
-        7
+        "h4_st_conflict",
+        8
       ]
     ],
     "suggestions": [
@@ -1937,7 +1962,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 44% across 66 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 43% across 67 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -1975,7 +2000,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.81,
+        "frequency": 0.79,
         "loss_count": 30,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -1983,7 +2008,7 @@
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.62,
+        "frequency": 0.61,
         "loss_count": 23,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
@@ -2252,6 +2277,12 @@
         "ts": "2026-07-17T06:58:01.143660+00:00",
         "n_trades": 66,
         "win_rate": 0.439,
+        "suggestions_count": 7
+      },
+      {
+        "ts": "2026-07-17T08:00:57.448208+00:00",
+        "n_trades": 67,
+        "win_rate": 0.433,
         "suggestions_count": 7
       }
     ]
