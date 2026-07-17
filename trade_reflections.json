@@ -2084,14 +2084,40 @@
         "h4_st_conflict"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "XAUUSD-2026-07-16T20:50",
+      "ts_closed": "2026-07-17T13:49:07.558956+00:00",
+      "ts_signal": "2026-07-16T20:50:55.330203+00:00",
+      "symbol": "XAU/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 11,
+      "adx": 19.8,
+      "rsi": 36.1,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BEARISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 ADX 19.8 was below 22 \u2014 trend was weak, increasing whipsaw risk.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:BEARISH) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_adx",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-17T13:29:02.120954+00:00",
-    "total_trades": 79,
-    "win_rate": 0.367,
+    "last_analysis": "2026-07-17T13:49:07.870563+00:00",
+    "total_trades": 80,
+    "win_rate": 0.362,
     "wins": 29,
-    "losses": 50,
+    "losses": 51,
     "avg_r_won": 1.53,
     "by_pair": {
       "XAG/USD": {
@@ -2130,9 +2156,9 @@
         "avg_r": -1.0
       },
       "XAU/USD": {
-        "trades": 6,
+        "trades": 7,
         "wins": 0,
-        "losses": 6,
+        "losses": 7,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -2202,8 +2228,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 66,
-        "win_rate": 0.348
+        "trades": 67,
+        "win_rate": 0.343
       },
       "Asian": {
         "trades": 13,
@@ -2216,7 +2242,7 @@
         "win_rate": 0.439
       },
       "11-12": {
-        "trades": 13,
+        "trades": 14,
         "win_rate": 0.0
       },
       "13+": {
@@ -2226,8 +2252,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 37,
-        "win_rate": 0.378
+        "trades": 38,
+        "win_rate": 0.368
       },
       "BUY": {
         "trades": 42,
@@ -2236,8 +2262,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 74,
-        "win_rate": 0.324
+        "trades": 75,
+        "win_rate": 0.32
       },
       "FVG": {
         "trades": 5,
@@ -2251,15 +2277,15 @@
       ],
       [
         "weak_htf",
-        28
+        29
+      ],
+      [
+        "low_adx",
+        13
       ],
       [
         "h4_st_conflict",
         13
-      ],
-      [
-        "low_adx",
-        12
       ],
       [
         "h1_st_conflict",
@@ -2272,7 +2298,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 37% across 79 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 36% across 80 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2303,8 +2329,8 @@
         "type": "pair_review",
         "param": "XAU/USD",
         "win_rate": 0.0,
-        "trades": 6,
-        "reason": "XAU/USD win rate is 0% over 6 trades \u2014 consider removing or trading only with score \u226511.",
+        "trades": 7,
+        "reason": "XAU/USD win rate is 0% over 7 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "medium"
       },
       {
@@ -2342,7 +2368,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.74,
+        "frequency": 0.73,
         "loss_count": 37,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -2350,8 +2376,8 @@
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.56,
-        "loss_count": 28,
+        "frequency": 0.57,
+        "loss_count": 29,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "medium"
       }
@@ -2697,6 +2723,12 @@
         "ts": "2026-07-17T13:29:02.120943+00:00",
         "n_trades": 79,
         "win_rate": 0.367,
+        "suggestions_count": 11
+      },
+      {
+        "ts": "2026-07-17T13:49:07.870548+00:00",
+        "n_trades": 80,
+        "win_rate": 0.362,
         "suggestions_count": 11
       }
     ]
