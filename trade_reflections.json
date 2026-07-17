@@ -1593,14 +1593,40 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "EURGBP-2026-07-15T19:20",
+      "ts_closed": "2026-07-17T02:31:09.102959+00:00",
+      "ts_signal": "2026-07-15T19:20:05.795897+00:00",
+      "symbol": "EUR/GBP",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 27.4,
+      "rsi": 36.4,
+      "rr": 2.7,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BEARISH",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Score was 10/14 \u2014 barely passed threshold. Borderline setups lose more often.\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:BEARISH) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "low_score",
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-16T21:11:05.742536+00:00",
-    "total_trades": 60,
-    "win_rate": 0.483,
+    "last_analysis": "2026-07-17T02:31:09.292182+00:00",
+    "total_trades": 61,
+    "win_rate": 0.475,
     "wins": 29,
-    "losses": 31,
+    "losses": 32,
     "avg_r_won": 1.53,
     "by_pair": {
       "XAG/USD": {
@@ -1681,9 +1707,9 @@
         "avg_r": -1.0
       },
       "EUR/GBP": {
-        "trades": 3,
+        "trades": 4,
         "wins": 0,
-        "losses": 3,
+        "losses": 4,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -1704,8 +1730,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 47,
-        "win_rate": 0.489
+        "trades": 48,
+        "win_rate": 0.479
       },
       "Asian": {
         "trades": 13,
@@ -1714,8 +1740,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 55,
-        "win_rate": 0.527
+        "trades": 56,
+        "win_rate": 0.518
       },
       "11-12": {
         "trades": 5,
@@ -1728,8 +1754,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 31,
-        "win_rate": 0.452
+        "trades": 32,
+        "win_rate": 0.438
       },
       "BUY": {
         "trades": 29,
@@ -1738,8 +1764,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 55,
-        "win_rate": 0.436
+        "trades": 56,
+        "win_rate": 0.429
       },
       "FVG": {
         "trades": 5,
@@ -1749,11 +1775,11 @@
     "common_loss_patterns": [
       [
         "low_score",
-        26
+        27
       ],
       [
         "weak_htf",
-        19
+        20
       ],
       [
         "low_adx",
@@ -1774,7 +1800,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 48% across 60 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 48% across 61 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -1805,15 +1831,15 @@
         "type": "pattern",
         "tag": "low_score",
         "frequency": 0.84,
-        "loss_count": 26,
+        "loss_count": 27,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
       },
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.61,
-        "loss_count": 19,
+        "frequency": 0.62,
+        "loss_count": 20,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
       }
@@ -2045,6 +2071,12 @@
         "ts": "2026-07-16T21:11:05.742522+00:00",
         "n_trades": 60,
         "win_rate": 0.483,
+        "suggestions_count": 6
+      },
+      {
+        "ts": "2026-07-17T02:31:09.292169+00:00",
+        "n_trades": 61,
+        "win_rate": 0.475,
         "suggestions_count": 6
       }
     ]
