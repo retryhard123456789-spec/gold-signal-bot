@@ -1906,7 +1906,7 @@
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-17T08:17:07.399713+00:00",
+    "last_analysis": "2026-07-17T08:19:27.141078+00:00",
     "total_trades": 72,
     "win_rate": 0.403,
     "wins": 29,
@@ -2465,13 +2465,13 @@
   "weekly_summaries": [
     {
       "week": "2026-W29",
-      "generated": "2026-07-17T03:16:54.221493+00:00",
-      "trades_total": 64,
-      "win_rate": 0.453,
+      "generated": "2026-07-17T08:19:27.141104+00:00",
+      "trades_total": 72,
+      "win_rate": 0.403,
       "avg_r_won": 1.53,
       "top_pair": "XAG/USD",
       "worst_pair": "XAU/USD",
-      "suggestions_count": 6,
+      "suggestions_count": 9,
       "note": "Ready for weekend review with Claude."
     }
   ]
