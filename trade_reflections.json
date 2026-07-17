@@ -1723,14 +1723,40 @@
         "weak_htf"
       ],
       "positive_tags": []
+    },
+    {
+      "id": "USDCAD-2026-07-16T19:21",
+      "ts_closed": "2026-07-17T06:58:00.960902+00:00",
+      "ts_signal": "2026-07-16T19:21:13.204003+00:00",
+      "symbol": "USD/CAD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 12,
+      "adx": 45.8,
+      "rsi": 58.2,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 H4 Supertrend was not aligned with BUY direction \u2014 entry was against H4 momentum.\n  \u2022 H1 Supertrend conflicted with BUY \u2014 two-timeframe Supertrend misalignment is a red flag.",
+      "warning_tags": [
+        "h4_st_conflict",
+        "h1_st_conflict"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-17T03:17:17.545862+00:00",
-    "total_trades": 65,
-    "win_rate": 0.446,
+    "last_analysis": "2026-07-17T06:58:01.143674+00:00",
+    "total_trades": 66,
+    "win_rate": 0.439,
     "wins": 29,
-    "losses": 36,
+    "losses": 37,
     "avg_r_won": 1.53,
     "by_pair": {
       "XAG/USD": {
@@ -1830,12 +1856,19 @@
         "losses": 1,
         "win_rate": 0.0,
         "avg_r": -1.0
+      },
+      "USD/CAD": {
+        "trades": 1,
+        "wins": 0,
+        "losses": 1,
+        "win_rate": 0.0,
+        "avg_r": -1.0
       }
     },
     "by_session": {
       "London/NY": {
-        "trades": 52,
-        "win_rate": 0.442
+        "trades": 53,
+        "win_rate": 0.434
       },
       "Asian": {
         "trades": 13,
@@ -1848,7 +1881,7 @@
         "win_rate": 0.492
       },
       "11-12": {
-        "trades": 6,
+        "trades": 7,
         "win_rate": 0.0
       },
       "13+": {
@@ -1862,14 +1895,14 @@
         "win_rate": 0.412
       },
       "BUY": {
-        "trades": 31,
-        "win_rate": 0.484
+        "trades": 32,
+        "win_rate": 0.469
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 60,
-        "win_rate": 0.4
+        "trades": 61,
+        "win_rate": 0.393
       },
       "FVG": {
         "trades": 5,
@@ -1891,7 +1924,7 @@
       ],
       [
         "h1_st_conflict",
-        7
+        8
       ],
       [
         "asian_session",
@@ -1904,7 +1937,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 45% across 65 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 44% across 66 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -1942,7 +1975,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.83,
+        "frequency": 0.81,
         "loss_count": 30,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -1950,7 +1983,7 @@
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.64,
+        "frequency": 0.62,
         "loss_count": 23,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "high"
@@ -2213,6 +2246,12 @@
         "ts": "2026-07-17T03:17:17.545849+00:00",
         "n_trades": 65,
         "win_rate": 0.446,
+        "suggestions_count": 7
+      },
+      {
+        "ts": "2026-07-17T06:58:01.143660+00:00",
+        "n_trades": 66,
+        "win_rate": 0.439,
         "suggestions_count": 7
       }
     ]
