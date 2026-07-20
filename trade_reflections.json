@@ -2618,15 +2618,43 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "AUDNZD-2026-07-14T08:19",
+      "ts_closed": "2026-07-20T14:02:19.040714+00:00",
+      "ts_signal": "2026-07-14T08:19:24.233752+00:00",
+      "symbol": "AUD/NZD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 10,
+      "adx": 54.5,
+      "rsi": 47.9,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TRAIL",
+      "pnl_r": 2.1,
+      "reflection": "Outcome: \ud83d\udcc9 Trail Stop\nWhat worked:\n  \u2022 ADX 54.5 confirmed a strong trend \u2014 high ADX trades perform well.\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "ADX 54.5 confirmed a strong trend \u2014 high ADX trades perform well.",
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-20T13:39:46.018491+00:00",
-    "total_trades": 99,
-    "win_rate": 0.404,
-    "wins": 40,
+    "last_analysis": "2026-07-20T14:02:19.412873+00:00",
+    "total_trades": 100,
+    "win_rate": 0.41,
+    "wins": 41,
     "losses": 59,
-    "avg_r_won": 1.54,
+    "avg_r_won": 1.55,
     "by_pair": {
       "XAG/USD": {
         "trades": 6,
@@ -2636,11 +2664,11 @@
         "avg_r": 1.71
       },
       "AUD/NZD": {
-        "trades": 11,
-        "wins": 11,
+        "trades": 12,
+        "wins": 12,
         "losses": 0,
         "win_rate": 1.0,
-        "avg_r": 1.86
+        "avg_r": 1.88
       },
       "GBP/NZD": {
         "trades": 7,
@@ -2743,8 +2771,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 86,
-        "win_rate": 0.395
+        "trades": 87,
+        "win_rate": 0.402
       },
       "Asian": {
         "trades": 13,
@@ -2753,8 +2781,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 81,
-        "win_rate": 0.494
+        "trades": 82,
+        "win_rate": 0.5
       },
       "11-12": {
         "trades": 18,
@@ -2767,8 +2795,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 51,
-        "win_rate": 0.471
+        "trades": 52,
+        "win_rate": 0.481
       },
       "BUY": {
         "trades": 48,
@@ -2777,8 +2805,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 94,
-        "win_rate": 0.372
+        "trades": 95,
+        "win_rate": 0.379
       },
       "FVG": {
         "trades": 5,
@@ -2813,7 +2841,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 40% across 99 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 41% across 100 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2828,7 +2856,7 @@
         "type": "pair_boost",
         "param": "AUD/NZD",
         "win_rate": 1.0,
-        "trades": 11,
+        "trades": 12,
         "reason": "AUD/NZD win rate is 100% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
       },
@@ -3342,6 +3370,12 @@
         "ts": "2026-07-20T13:39:46.018473+00:00",
         "n_trades": 99,
         "win_rate": 0.404,
+        "suggestions_count": 9
+      },
+      {
+        "ts": "2026-07-20T14:02:19.412858+00:00",
+        "n_trades": 100,
+        "win_rate": 0.41,
         "suggestions_count": 9
       }
     ]
