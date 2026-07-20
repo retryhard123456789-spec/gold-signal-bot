@@ -2935,14 +2935,39 @@
       "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 Setup passed all filters yet SL hit \u2014 could be news spike, manipulation, or genuine stop hunt. Review chart manually.",
       "warning_tags": [],
       "positive_tags": []
+    },
+    {
+      "id": "XPTUSD-2026-07-20T13:56",
+      "ts_closed": "2026-07-20T19:42:44.772546+00:00",
+      "ts_signal": "2026-07-20T13:56:26.076087+00:00",
+      "symbol": "XPT/USD",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 11,
+      "adx": 23.3,
+      "rsi": 44.6,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "BEARISH",
+      "bb_squeeze": false,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 HTF bias was not fully aligned (W1:NEUTRAL, D1:BEARISH) \u2014 higher timeframe neutrality often means chop.",
+      "warning_tags": [
+        "weak_htf"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-20T19:42:43.907450+00:00",
-    "total_trades": 111,
-    "win_rate": 0.441,
+    "last_analysis": "2026-07-20T19:42:44.933173+00:00",
+    "total_trades": 112,
+    "win_rate": 0.438,
     "wins": 49,
-    "losses": 62,
+    "losses": 63,
     "avg_r_won": 1.53,
     "by_pair": {
       "XAG/USD": {
@@ -3058,17 +3083,17 @@
         "avg_r": -1.0
       },
       "XPT/USD": {
-        "trades": 3,
+        "trades": 4,
         "wins": 2,
-        "losses": 1,
-        "win_rate": 0.667,
-        "avg_r": 0.27
+        "losses": 2,
+        "win_rate": 0.5,
+        "avg_r": -0.05
       }
     },
     "by_session": {
       "London/NY": {
-        "trades": 98,
-        "win_rate": 0.439
+        "trades": 99,
+        "win_rate": 0.434
       },
       "Asian": {
         "trades": 13,
@@ -3081,8 +3106,8 @@
         "win_rate": 0.528
       },
       "11-12": {
-        "trades": 22,
-        "win_rate": 0.091
+        "trades": 23,
+        "win_rate": 0.087
       },
       "13+": {
         "trades": 0,
@@ -3091,8 +3116,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 57,
-        "win_rate": 0.491
+        "trades": 58,
+        "win_rate": 0.483
       },
       "BUY": {
         "trades": 54,
@@ -3101,8 +3126,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 106,
-        "win_rate": 0.415
+        "trades": 107,
+        "win_rate": 0.411
       },
       "FVG": {
         "trades": 5,
@@ -3116,7 +3141,7 @@
       ],
       [
         "weak_htf",
-        36
+        37
       ],
       [
         "low_adx",
@@ -3137,7 +3162,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 44% across 111 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 44% across 112 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3191,7 +3216,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.68,
+        "frequency": 0.67,
         "loss_count": 42,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -3199,8 +3224,8 @@
       {
         "type": "pattern",
         "tag": "weak_htf",
-        "frequency": 0.58,
-        "loss_count": 36,
+        "frequency": 0.59,
+        "loss_count": 37,
         "reason": "HTF misalignment in losses \u2014 require both W1 and D1 to be non-NEUTRAL.",
         "confidence": "medium"
       }
@@ -3738,6 +3763,12 @@
         "ts": "2026-07-20T19:42:43.907440+00:00",
         "n_trades": 111,
         "win_rate": 0.441,
+        "suggestions_count": 9
+      },
+      {
+        "ts": "2026-07-20T19:42:44.933165+00:00",
+        "n_trades": 112,
+        "win_rate": 0.438,
         "suggestions_count": 9
       }
     ]
