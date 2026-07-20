@@ -2429,13 +2429,40 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "USDNOK-2026-07-15T19:35",
+      "ts_closed": "2026-07-20T07:06:01.138693+00:00",
+      "ts_signal": "2026-07-15T19:35:52.514992+00:00",
+      "symbol": "USD/NOK",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 24.6,
+      "rsi": 36.7,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TP2",
+      "pnl_r": 1.74,
+      "reflection": "Outcome: \ud83e\udd48 TP2\nWhat worked:\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-20T03:39:39.246442+00:00",
-    "total_trades": 92,
-    "win_rate": 0.37,
-    "wins": 34,
+    "last_analysis": "2026-07-20T07:06:01.337005+00:00",
+    "total_trades": 93,
+    "win_rate": 0.376,
+    "wins": 35,
     "losses": 58,
     "avg_r_won": 1.53,
     "by_pair": {
@@ -2482,11 +2509,11 @@
         "avg_r": -1.0
       },
       "USD/NOK": {
-        "trades": 12,
-        "wins": 3,
+        "trades": 13,
+        "wins": 4,
         "losses": 9,
-        "win_rate": 0.25,
-        "avg_r": -0.52
+        "win_rate": 0.308,
+        "avg_r": -0.35
       },
       "USD/JPY": {
         "trades": 2,
@@ -2554,8 +2581,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 79,
-        "win_rate": 0.354
+        "trades": 80,
+        "win_rate": 0.362
       },
       "Asian": {
         "trades": 13,
@@ -2564,8 +2591,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 74,
-        "win_rate": 0.459
+        "trades": 75,
+        "win_rate": 0.467
       },
       "11-12": {
         "trades": 18,
@@ -2578,8 +2605,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 45,
-        "win_rate": 0.422
+        "trades": 46,
+        "win_rate": 0.435
       },
       "BUY": {
         "trades": 47,
@@ -2588,8 +2615,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 87,
-        "win_rate": 0.333
+        "trades": 88,
+        "win_rate": 0.341
       },
       "FVG": {
         "trades": 5,
@@ -2624,7 +2651,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 37% across 92 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 38% across 93 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -2662,9 +2689,9 @@
       {
         "type": "pair_review",
         "param": "USD/NOK",
-        "win_rate": 0.25,
-        "trades": 12,
-        "reason": "USD/NOK win rate is 25% over 12 trades \u2014 consider removing or trading only with score \u226511.",
+        "win_rate": 0.308,
+        "trades": 13,
+        "reason": "USD/NOK win rate is 31% over 13 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "high"
       },
       {
@@ -3127,6 +3154,12 @@
         "ts": "2026-07-20T03:38:59.493436+00:00",
         "n_trades": 92,
         "win_rate": 0.37,
+        "suggestions_count": 11
+      },
+      {
+        "ts": "2026-07-20T07:06:01.336988+00:00",
+        "n_trades": 93,
+        "win_rate": 0.376,
         "suggestions_count": 11
       }
     ]
