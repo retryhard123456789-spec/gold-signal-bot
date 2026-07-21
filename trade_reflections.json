@@ -3329,14 +3329,40 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "GBPCAD-2026-07-20T15:11",
+      "ts_closed": "2026-07-21T13:45:52.711494+00:00",
+      "ts_signal": "2026-07-20T15:11:08.938744+00:00",
+      "symbol": "GBP/CAD",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 11,
+      "adx": 20.1,
+      "rsi": 55.1,
+      "rr": 1.8,
+      "w1_bias": "BULLISH",
+      "d1_bias": "BULLISH",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": 1,
+      "outcome": "SL",
+      "pnl_r": -1.0,
+      "reflection": "Outcome: \ud83d\uded1 Stop Loss\nWhat to learn:\n  \u2022 ADX 20.1 was below 22 \u2014 trend was weak, increasing whipsaw risk.\n  \u2022 H4 Supertrend was not aligned with BUY direction \u2014 entry was against H4 momentum.",
+      "warning_tags": [
+        "low_adx",
+        "h4_st_conflict"
+      ],
+      "positive_tags": []
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-21T13:45:35.305774+00:00",
-    "total_trades": 126,
-    "win_rate": 0.452,
+    "last_analysis": "2026-07-21T13:45:52.922301+00:00",
+    "total_trades": 127,
+    "win_rate": 0.449,
     "wins": 57,
-    "losses": 69,
+    "losses": 70,
     "avg_r_won": 1.59,
     "by_pair": {
       "XAG/USD": {
@@ -3410,9 +3436,9 @@
         "avg_r": -1.0
       },
       "GBP/CAD": {
-        "trades": 8,
+        "trades": 9,
         "wins": 0,
-        "losses": 8,
+        "losses": 9,
         "win_rate": 0.0,
         "avg_r": -1.0
       },
@@ -3461,8 +3487,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 113,
-        "win_rate": 0.451
+        "trades": 114,
+        "win_rate": 0.447
       },
       "Asian": {
         "trades": 13,
@@ -3475,8 +3501,8 @@
         "win_rate": 0.556
       },
       "11-12": {
-        "trades": 27,
-        "win_rate": 0.074
+        "trades": 28,
+        "win_rate": 0.071
       },
       "13+": {
         "trades": 0,
@@ -3489,14 +3515,14 @@
         "win_rate": 0.492
       },
       "BUY": {
-        "trades": 61,
-        "win_rate": 0.41
+        "trades": 62,
+        "win_rate": 0.403
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 121,
-        "win_rate": 0.43
+        "trades": 122,
+        "win_rate": 0.426
       },
       "FVG": {
         "trades": 5,
@@ -3514,11 +3540,11 @@
       ],
       [
         "low_adx",
-        18
+        19
       ],
       [
         "h4_st_conflict",
-        17
+        18
       ],
       [
         "h1_st_conflict",
@@ -3531,7 +3557,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 45% across 126 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 45% across 127 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3570,8 +3596,8 @@
         "type": "pair_review",
         "param": "GBP/CAD",
         "win_rate": 0.0,
-        "trades": 8,
-        "reason": "GBP/CAD win rate is 0% over 8 trades \u2014 consider removing or trading only with score \u226511.",
+        "trades": 9,
+        "reason": "GBP/CAD win rate is 0% over 9 trades \u2014 consider removing or trading only with score \u226511.",
         "confidence": "medium"
       },
       {
@@ -3593,7 +3619,7 @@
       {
         "type": "pattern",
         "tag": "low_score",
-        "frequency": 0.64,
+        "frequency": 0.63,
         "loss_count": 44,
         "reason": "Low score losses are recurring \u2014 raise min_score to 10 or 11.",
         "confidence": "high"
@@ -4230,6 +4256,12 @@
         "ts": "2026-07-21T13:45:35.305759+00:00",
         "n_trades": 126,
         "win_rate": 0.452,
+        "suggestions_count": 10
+      },
+      {
+        "ts": "2026-07-21T13:45:52.922286+00:00",
+        "n_trades": 127,
+        "win_rate": 0.449,
         "suggestions_count": 10
       }
     ]
