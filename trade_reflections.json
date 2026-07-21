@@ -3275,15 +3275,42 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "USDNOK-2026-07-15T19:35",
+      "ts_closed": "2026-07-21T13:36:41.995322+00:00",
+      "ts_signal": "2026-07-15T19:35:52.514992+00:00",
+      "symbol": "USD/NOK",
+      "direction": "SELL",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 24.6,
+      "rsi": 36.7,
+      "rr": 1.8,
+      "w1_bias": "NEUTRAL",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": -1,
+      "st_h1": -1,
+      "outcome": "TRAIL",
+      "pnl_r": 2.1,
+      "reflection": "Outcome: \ud83d\udcc9 Trail Stop\nWhat worked:\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-21T09:47:40.397437+00:00",
-    "total_trades": 124,
-    "win_rate": 0.444,
-    "wins": 55,
+    "last_analysis": "2026-07-21T13:36:42.322351+00:00",
+    "total_trades": 125,
+    "win_rate": 0.448,
+    "wins": 56,
     "losses": 69,
-    "avg_r_won": 1.57,
+    "avg_r_won": 1.58,
     "by_pair": {
       "XAG/USD": {
         "trades": 6,
@@ -3328,11 +3355,11 @@
         "avg_r": -1.0
       },
       "USD/NOK": {
-        "trades": 21,
-        "wins": 9,
+        "trades": 22,
+        "wins": 10,
         "losses": 12,
-        "win_rate": 0.429,
-        "avg_r": -0.01
+        "win_rate": 0.455,
+        "avg_r": 0.09
       },
       "USD/JPY": {
         "trades": 2,
@@ -3407,8 +3434,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 111,
-        "win_rate": 0.441
+        "trades": 112,
+        "win_rate": 0.446
       },
       "Asian": {
         "trades": 13,
@@ -3417,8 +3444,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 97,
-        "win_rate": 0.546
+        "trades": 98,
+        "win_rate": 0.551
       },
       "11-12": {
         "trades": 27,
@@ -3431,8 +3458,8 @@
     },
     "by_direction": {
       "SELL": {
-        "trades": 64,
-        "win_rate": 0.484
+        "trades": 65,
+        "win_rate": 0.492
       },
       "BUY": {
         "trades": 60,
@@ -3441,8 +3468,8 @@
     },
     "by_zone_type": {
       "OB": {
-        "trades": 119,
-        "win_rate": 0.42
+        "trades": 120,
+        "win_rate": 0.425
       },
       "FVG": {
         "trades": 5,
@@ -3477,7 +3504,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 44% across 124 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 45% across 125 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -4164,6 +4191,12 @@
         "ts": "2026-07-21T09:47:40.397421+00:00",
         "n_trades": 124,
         "win_rate": 0.444,
+        "suggestions_count": 10
+      },
+      {
+        "ts": "2026-07-21T13:36:42.322336+00:00",
+        "n_trades": 125,
+        "win_rate": 0.448,
         "suggestions_count": 10
       }
     ]
