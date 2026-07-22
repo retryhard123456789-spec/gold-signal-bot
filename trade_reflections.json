@@ -3731,13 +3731,40 @@
         "Order Block entry held well as support/resistance.",
         "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
       ]
+    },
+    {
+      "id": "AUDJPY-2026-07-15T12:53",
+      "ts_closed": "2026-07-22T13:49:10.046757+00:00",
+      "ts_signal": "2026-07-15T12:53:58.564053+00:00",
+      "symbol": "AUD/JPY",
+      "direction": "BUY",
+      "session": "London/NY",
+      "zone_type": "OB",
+      "score": 9,
+      "adx": 21.5,
+      "rsi": 61.0,
+      "rr": 2.0,
+      "w1_bias": "BULLISH",
+      "d1_bias": "NEUTRAL",
+      "bb_squeeze": true,
+      "st_h4": 1,
+      "st_h1": 1,
+      "outcome": "TP2",
+      "pnl_r": 2.1,
+      "reflection": "Outcome: \ud83e\udd48 TP2\nWhat worked:\n  \u2022 BB squeeze was active \u2014 momentum explosion setup worked as expected.\n  \u2022 Order Block entry held well as support/resistance.\n  \u2022 Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation.",
+      "warning_tags": [],
+      "positive_tags": [
+        "BB squeeze was active \u2014 momentum explosion setup worked as expected.",
+        "Order Block entry held well as support/resistance.",
+        "Both H4 and H1 Supertrend aligned \u2014 full Supertrend stack confirmation."
+      ]
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-22T09:58:21.411383+00:00",
-    "total_trades": 141,
-    "win_rate": 0.489,
-    "wins": 69,
+    "last_analysis": "2026-07-22T13:49:10.553598+00:00",
+    "total_trades": 142,
+    "win_rate": 0.493,
+    "wins": 70,
     "losses": 72,
     "avg_r_won": 1.68,
     "by_pair": {
@@ -3826,11 +3853,11 @@
         "avg_r": -1.0
       },
       "AUD/JPY": {
-        "trades": 22,
-        "wins": 17,
+        "trades": 23,
+        "wins": 18,
         "losses": 5,
-        "win_rate": 0.773,
-        "avg_r": 1.26
+        "win_rate": 0.783,
+        "avg_r": 1.29
       },
       "EUR/CAD": {
         "trades": 2,
@@ -3863,8 +3890,8 @@
     },
     "by_session": {
       "London/NY": {
-        "trades": 128,
-        "win_rate": 0.492
+        "trades": 129,
+        "win_rate": 0.496
       },
       "Asian": {
         "trades": 13,
@@ -3873,8 +3900,8 @@
     },
     "by_score_bucket": {
       "9-10": {
-        "trades": 111,
-        "win_rate": 0.604
+        "trades": 112,
+        "win_rate": 0.607
       },
       "11-12": {
         "trades": 30,
@@ -3891,14 +3918,14 @@
         "win_rate": 0.542
       },
       "BUY": {
-        "trades": 69,
-        "win_rate": 0.435
+        "trades": 70,
+        "win_rate": 0.443
       }
     },
     "by_zone_type": {
       "OB": {
-        "trades": 136,
-        "win_rate": 0.471
+        "trades": 137,
+        "win_rate": 0.474
       },
       "FVG": {
         "trades": 5,
@@ -3933,7 +3960,7 @@
         "param": "min_score",
         "current": 9,
         "suggested": 10,
-        "reason": "Overall win rate is 49% across 141 trades \u2014 raising score threshold may improve quality.",
+        "reason": "Overall win rate is 49% across 142 trades \u2014 raising score threshold may improve quality.",
         "confidence": "medium"
       },
       {
@@ -3987,9 +4014,9 @@
       {
         "type": "pair_boost",
         "param": "AUD/JPY",
-        "win_rate": 0.773,
-        "trades": 22,
-        "reason": "AUD/JPY win rate is 77% \u2014 strong performer, consider increasing position size by 50%.",
+        "win_rate": 0.783,
+        "trades": 23,
+        "reason": "AUD/JPY win rate is 78% \u2014 strong performer, consider increasing position size by 50%.",
         "confidence": "medium"
       },
       {
@@ -4730,6 +4757,12 @@
         "ts": "2026-07-22T09:58:21.411370+00:00",
         "n_trades": 141,
         "win_rate": 0.489,
+        "suggestions_count": 11
+      },
+      {
+        "ts": "2026-07-22T13:49:10.553585+00:00",
+        "n_trades": 142,
+        "win_rate": 0.493,
         "suggestions_count": 11
       }
     ]
