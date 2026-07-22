@@ -3895,7 +3895,7 @@
     }
   ],
   "rl_state": {
-    "last_analysis": "2026-07-22T19:15:03.038573+00:00",
+    "last_analysis": "2026-07-22T19:34:46.507596+00:00",
     "total_trades": 147,
     "win_rate": 0.503,
     "wins": 74,
@@ -4925,10 +4925,10 @@
     },
     {
       "week": "2026-W30",
-      "generated": "2026-07-22T14:08:42.180607+00:00",
-      "trades_total": 146,
-      "win_rate": 0.5,
-      "avg_r_won": 1.68,
+      "generated": "2026-07-22T19:34:46.507624+00:00",
+      "trades_total": 147,
+      "win_rate": 0.503,
+      "avg_r_won": 1.69,
       "top_pair": "XAG/USD",
       "worst_pair": "XAU/USD",
       "suggestions_count": 10,
